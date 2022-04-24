@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  @apply bg-background;
+}
+
 @layer components {
   .btn {
     @apply rounded-full transition ease-in-out duration-200 hover:opacity-80;
