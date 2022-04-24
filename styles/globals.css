@@ -26,4 +26,20 @@ body {
   .btn-secondary {
     @apply btn bg-white text-black;
   }
+
+  .input {
+    @apply bg-white border border-black border-solid rounded-full px-6 py-3 outline-none w-full;
+  }
+
+  .input-disabled {
+    @apply opacity-50;
+  }
+
+  .input-error {
+    @apply border-red placeholder:text-red-400;
+  }
+
+  .input-textarea {
+    @apply rounded-2xl;
+  }
 }
