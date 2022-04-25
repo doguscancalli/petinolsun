@@ -8,7 +8,7 @@ body {
 
 @layer components {
   .btn {
-    @apply rounded-full transition ease-in-out duration-200 hover:opacity-80;
+    @apply rounded-full transition ease-in-out duration-200 hover:opacity-80 whitespace-nowrap;
   }
 
   .btn-large {
@@ -17,6 +17,14 @@ body {
 
   .btn-small {
     @apply px-4 py-2;
+  }
+
+  .btn-block {
+    @apply w-full;
+  }
+
+  .btn-grow {
+    @apply grow;
   }
 
   .btn-primary {
