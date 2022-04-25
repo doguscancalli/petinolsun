@@ -1,4 +1,4 @@
-const Button = ({ variant, size, children, ...rest }) => {
+const Button = ({ variant, size, grow, block, children, ...rest }) => {
   switch (variant) {
     case 'secondary':
       variant = 'btn-secondary'
@@ -19,7 +19,12 @@ const Button = ({ variant, size, children, ...rest }) => {
   }
 
   return (
-    <button className={`${variant} ${size}`} {...rest}>
+    <button
+      className={`${variant} ${size} ${grow && 'btn-grow'} ${
+        block && 'btn-block'
+      }`}
+      {...rest}
+    >
       {children}
     </button>
   )
