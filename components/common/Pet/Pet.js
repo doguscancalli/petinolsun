@@ -28,6 +28,7 @@ const Pet = ({ info, infoType }) => {
 
   const mockPet = {
     name: 'Kratos',
+    slug: 'kratos',
     location: 'Ankara, Etimesgut',
     image: '/images/waterfall-illustration.jpg',
   }
@@ -38,7 +39,7 @@ const Pet = ({ info, infoType }) => {
         <div
           className={`rounded-2xl overflow-hidden cursor-pointer flex items-start relative`}
           style={{ aspectRatio: '1 / 1.5' }}
-          onClick={() => router.push('/')}
+          onClick={() => router.push(`/ilan/${mockPet.slug}`)}
         >
           <Image
             src={mockPet.image}
