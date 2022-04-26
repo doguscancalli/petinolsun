@@ -4,7 +4,7 @@ import { Wrapper, Search } from '@components/ui'
 const Hero = () => {
   return (
     <div className='h-[70vh] p-2'>
-      <div className='bg-[url("/images/hero-bg.jpg")] bg-cover w-full h-full pt-8 rounded-3xl'>
+      <div className='bg-[url("/images/hero-bg.jpg")] bg-cover w-full h-full rounded-3xl overflow-auto'>
         <Wrapper>
           <Navbar />
           <div className='flex flex-col items-center'>
