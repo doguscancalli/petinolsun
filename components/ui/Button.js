@@ -1,4 +1,11 @@
+import { useState } from 'react'
+
 const Button = ({ variant, size, grow, block, children, ...rest }) => {
+  const isObject = typeof children === 'object'
+  const [childElement, setChildElement] = useState(
+    isObject ? children[0] : children
+  )
+
   switch (variant) {
     case 'secondary':
       variant = 'btn-secondary'
@@ -18,14 +25,26 @@ const Button = ({ variant, size, grow, block, children, ...rest }) => {
       break
   }
 
+  const handleHover = (e) => {
+    if (!isObject) return
+    if (e.type === 'mouseenter') {
+      setChildElement(children[1])
+    }
+    if (e.type === 'mouseleave') {
+      setChildElement(children[0])
+    }
+  }
+
   return (
     <button
       className={`${variant} ${size} ${grow && 'btn-grow'} ${
         block && 'btn-block'
       }`}
       {...rest}
+      onMouseEnter={handleHover}
+      onMouseLeave={handleHover}
     >
-      {children}
+      {childElement}
     </button>
   )
 }
