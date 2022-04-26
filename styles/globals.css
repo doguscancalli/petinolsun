@@ -5,6 +5,20 @@
 body {
   @apply bg-background;
 }
+/* Swiper */
+:root {
+  --swiper-navigation-color: white;
+}
+span.swiper-pagination-bullet.swiper-pagination-bullet {
+  background-color: white;
+  width: 16px;
+  height: 16px;
+  border-radius: 2rem;
+  transition: all 0.25s ease-in-out;
+}
+span.swiper-pagination-bullet.swiper-pagination-bullet-active {
+  width: 32px;
+}
 
 @layer components {
   .btn {
