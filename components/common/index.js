@@ -1,6 +1,4 @@
 export { default as Hero } from './Hero'
-export { default as PetDisplay } from './Pet/PetDisplay'
-export { default as Pets } from './Pet/Pets'
-export { default as Pet } from './Pet/Pet'
 export { default as Avatar } from './Avatar'
-export { default as PetView } from './Pet/PetView'
+export { default as StepProgress } from './StepProgress'
+export { Pets, Pet, PetView, PetDisplay, PetForm } from './Pet'

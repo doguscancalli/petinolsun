@@ -1,3 +1,5 @@
 export { default as PetDisplay } from './PetDisplay'
 export { default as Pets } from './Pets'
 export { default as Pet } from './Pet'
+export { default as PetView } from './PetView'
+export { PetForm } from './PetForm'
