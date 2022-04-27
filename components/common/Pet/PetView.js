@@ -1,8 +1,14 @@
 import { Button } from '@components/ui'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+
 import Avatar from '../Avatar'
 import PetImages from './PetImages'
 
 const PetView = () => {
+  const router = useRouter()
+  const { slug } = router.query
+
   return (
     <div className='mt-8 grid lg:grid-cols-2 gap-16'>
       <PetImages />
@@ -13,9 +19,9 @@ const PetView = () => {
             <span className='mx-4 text-black-500'>•</span>
             <p className='text-black-500'>Ankara, Etimesgut</p>
           </div>
-          <div>
+          <Link href={`/ilan/duzenle/${slug}`}>
             <Button>İlanı Düzenle</Button>
-          </div>
+          </Link>
         </div>
         <div className='flex gap-2 items-center mt-4'>
           <Avatar url='https://ui-avatars.com/api/?name=Clara+Oswald&background=000&color=fff' />
