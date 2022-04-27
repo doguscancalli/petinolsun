@@ -1,0 +1,40 @@
+import Link from 'next/link'
+
+import { Navbar } from '@components/shared'
+import { Button, Checkbox, Input, Wrapper } from '@components/ui'
+
+const Register = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    console.log('submitted')
+  }
+
+  return (
+    <Wrapper>
+      <Navbar />
+      <div className='bg-white max-w-lg w-full mx-auto mt-16 rounded-2xl px-5 md:px-16 py-8'>
+        <h2 className='text-2xl md:text-4xl font-bold text-center'>
+          Hesabını oluştur
+        </h2>
+        <form className='flex flex-col gap-4 mt-16' onSubmit={handleSubmit}>
+          <h2 className='text-base md:text-xl font-bold'>İsim</h2>
+          <Input placeholder='Ad soyad' name='name' />
+          <h2 className='text-base md:text-xl font-bold'>Eposta</h2>
+          <Input type='email' placeholder='mail@mail.com' />
+          <h2 className='text-base md:text-xl font-bold'>Şifre</h2>
+
+          <Input placeholder='••••••••' type='password' />
+          <Button>Hesabını oluştur</Button>
+        </form>
+        <p className='mt-4 text-center'>
+          Hesabın var mı?{' '}
+          <Link href='/giris' passHref>
+            <a className='underline'>Giriş yap</a>
+          </Link>
+        </p>
+      </div>
+    </Wrapper>
+  )
+}
+
+export default Register
