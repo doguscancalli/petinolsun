@@ -13,12 +13,12 @@ export const navLinks = [
   },
   {
     name: 'Kaydol',
-    url: '/',
+    url: '/kaydol',
     isButton: true,
   },
   {
     name: 'Giriş Yap',
-    url: '/',
+    url: '/giris',
     isButton: true,
   },
 ]
