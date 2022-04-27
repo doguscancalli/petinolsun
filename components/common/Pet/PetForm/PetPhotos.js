@@ -1,5 +1,4 @@
-import { Button } from '@components/ui'
-import ImageInput from './ImageInput'
+import { Button, ImageInput } from '@components/ui'
 
 const PetPhotos = ({ state, setState }) => {
   const handleClick = () => {

@@ -18,7 +18,7 @@ const PetImages = () => {
     <Swiper
       {...swiperOptions}
       className='w-full'
-      style={{ aspectRatio: '1 / 1.2' }}
+      style={{ aspectRatio: '1 / 1.5' }}
     >
       <SwiperSlide>
         <Image
