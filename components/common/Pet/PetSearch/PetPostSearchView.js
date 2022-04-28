@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import { useState } from 'react'
 
 import { Button } from '@components/ui'
@@ -28,14 +27,6 @@ const PetPostSearchView = () => {
           {toggleMap ? 'Listede göster' : 'Haritada göster'}
         </Button>
       </div>
-=======
-import SearchNav from './SearchNav'
-
-const PetPostSearchView = () => {
-  return (
-    <div>
-      <SearchNav />
->>>>>>> f1d5a559ede0ece2ff1afc3c8ce038e30043dd7e
     </div>
   )
 }
