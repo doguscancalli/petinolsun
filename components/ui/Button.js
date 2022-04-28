@@ -1,10 +1,14 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 const Button = ({ variant, size, grow, block, children, ...rest }) => {
   const isObject = typeof children === 'object'
   const [childElement, setChildElement] = useState(
     isObject ? children[0] : children
   )
+
+  useEffect(() => {
+    setChildElement(isObject ? children[0] : children)
+  }, [children])
 
   switch (variant) {
     case 'secondary':
