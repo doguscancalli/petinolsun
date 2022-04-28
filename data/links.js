@@ -22,3 +22,24 @@ export const navLinks = [
     isButton: true,
   },
 ]
+
+export const searchNavLinks = [
+  {
+    name: 'Köpek',
+  },
+  {
+    name: 'Kedi',
+  },
+  {
+    name: 'Kemirgen',
+  },
+  {
+    name: 'Balık',
+  },
+  {
+    name: 'Tavşan',
+  },
+  {
+    name: 'Diğer',
+  },
+]

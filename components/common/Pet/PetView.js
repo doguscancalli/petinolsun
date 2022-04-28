@@ -19,9 +19,10 @@ const PetView = () => {
             <span className='mx-4 text-black-500'>•</span>
             <p className='text-black-500'>Ankara, Etimesgut</p>
           </div>
-          <Link href={`/ilan/duzenle/${slug}`}>
+          {/* <Link href={`/ilan/duzenle/${slug}`}>
             <Button>İlanı Düzenle</Button>
-          </Link>
+          </Link> */}
+          <Button href={`/ilan/duzenle/${slug}`}>İlanı Düzenle</Button>
         </div>
         <div className='flex gap-2 items-center mt-4'>
           <Avatar url='https://ui-avatars.com/api/?name=Clara+Oswald&background=000&color=fff' />
