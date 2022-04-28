@@ -1,0 +1,46 @@
+# Type
+scalar Date
+type User {
+  id: ID!
+  name: String!
+  email: String!
+  isAdmin: Boolean!
+  token: String
+  resetPasswordToken: String
+  resetPasswordExpire: Date
+  createdAt: Date!
+  updatedAt: Date!
+}
+
+# Input
+input RegisterInput {
+  name: String!
+  email: String!
+  password: String!
+}
+input LoginInput {
+  email: String!
+  password: String!
+}
+input UpdateUserInput {
+  name: String
+  email: String
+}
+
+# Query
+type Query {
+  users: [User!]!
+  user(id: ID!): User!
+}
+
+# Mutation
+type Mutation {
+  registerUser(input: RegisterInput!): User!
+  loginUser(input: LoginInput!): User!
+  deleteUser(id: ID!): Boolean!
+  deleteAllUsers: Boolean!
+  updateUser(id: ID!, input: UpdateUserInput!): User!
+  forgotPassword(email: String!): Boolean!
+  resetPassword(token: String!, password: String!): Boolean!
+  updatePassword(password: String!, newPassword: String!): Boolean!
+}
