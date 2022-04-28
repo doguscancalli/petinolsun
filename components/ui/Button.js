@@ -1,6 +1,7 @@
+import Link from 'next/link'
 import { useState, useEffect } from 'react'
 
-const Button = ({ variant, size, grow, block, children, ...rest }) => {
+const Button = ({ href, variant, size, grow, block, children, ...rest }) => {
   const isObject = typeof children === 'object'
   const [childElement, setChildElement] = useState(
     isObject ? children[0] : children
@@ -38,6 +39,24 @@ const Button = ({ variant, size, grow, block, children, ...rest }) => {
       setChildElement(children[0])
     }
   }
+
+  if (href)
+    return (
+      <Link
+        href={href}
+        {...rest}
+        onMouseEnter={handleHover}
+        onMouseLeave={handleHover}
+      >
+        <a
+          className={`${variant} ${size} ${grow && 'btn-grow'} ${
+            block && 'btn-block'
+          }`}
+        >
+          {childElement}
+        </a>
+      </Link>
+    )
 
   return (
     <button
