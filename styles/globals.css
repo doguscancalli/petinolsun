@@ -5,6 +5,7 @@
 body {
   @apply bg-background;
 }
+
 /* Swiper */
 :root {
   --swiper-navigation-color: white;
@@ -18,6 +19,13 @@ span.swiper-pagination-bullet.swiper-pagination-bullet {
 }
 span.swiper-pagination-bullet.swiper-pagination-bullet-active {
   width: 32px;
+}
+
+/* Nice Dates */
+@media screen and (max-width: 768px) {
+  .nice-dates-popover {
+    right: 0;
+  }
 }
 
 @layer components {
