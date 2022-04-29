@@ -4,6 +4,7 @@ import isAuth from './isAuth'
 import isAdmin from './isAdmin'
 import sendEmail from './sendEmail'
 import { validateRegisterInput, validateLoginInput } from './validators'
+import advancedFiltering from './advancedFiltering'
 
 export {
   connectDb,
@@ -13,4 +14,5 @@ export {
   sendEmail,
   validateRegisterInput,
   validateLoginInput,
+  advancedFiltering,
 }
