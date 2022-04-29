@@ -97,7 +97,7 @@ export default {
       } = args
       const { id: authUserId, isAdmin } = context.isAuth(context)
       if (id !== authUserId && !isAdmin)
-        throw new Error('Bu kullancıyı güncelleyemezsiniz')
+        throw new Error('Sadece kendi hesabınızı güncelleyebilirsiniz')
       const user = await User.findByIdAndUpdate(
         id,
         { name, email },
