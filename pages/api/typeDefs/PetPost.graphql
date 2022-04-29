@@ -1,15 +1,37 @@
-# Type
+# Scalar
 scalar Date
 scalar UserSchema
+
+# Enum
+enum Animal {
+  dog
+  cat
+  rodent
+  fish
+  rabbit
+  other
+}
+enum Gender {
+  male
+  female
+}
+enum Age {
+  baby
+  young
+  adult
+  old
+}
+
+# Type
 type PetPost {
   id: ID!
   name: String!
   slug: String!
   postType: String!
   location: String!
-  animal: String!
-  age: String!
-  gender: String!
+  animal: Animal!
+  age: Age!
+  gender: Gender!
   description: String!
   photos: [String!]!
   contactNumber: String!
@@ -36,9 +58,9 @@ input CreatePetPostInput {
   name: String!
   postType: String!
   location: String!
-  animal: String!
-  age: String!
-  gender: String!
+  animal: Animal!
+  age: Age!
+  gender: Gender!
   description: String!
   photos: [String!]!
   contactNumber: String!
@@ -49,9 +71,9 @@ input UpdatePetPostInput {
   name: String
   postType: String
   location: String
-  animal: String
-  age: String
-  gender: String
+  animal: Animal
+  age: Age
+  gender: Gender
   description: String
   photos: [String!]
   contactNumber: String
@@ -63,10 +85,10 @@ input FilterPetPostsInput {
   page: Int
   date: String
   postType: String
-  animal: String
+  animal: Animal
   city: String
-  gender: String
-  age: String
+  gender: Gender
+  age: Age
 }
 
 # Query
