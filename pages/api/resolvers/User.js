@@ -26,6 +26,12 @@ export default {
       if (!user) throw new Error('Kullanıcı bulunamadı')
       return user
     },
+    me: async (_, __, context) => {
+      const { id } = context.isAuth(context)
+      const user = await User.findById(id)
+      if (!user) throw new Error('Kullanıcı bulunamadı')
+      return user
+    },
   },
   Mutation: {
     registerUser: async (_, args) => {
