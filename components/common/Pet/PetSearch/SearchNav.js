@@ -15,7 +15,7 @@ const SearchNav = () => {
           <AdvancedFilter setToggleAdvancedFilter={setToggleAdvancedFilter} />
         </Modal>
       )}
-      <div className='max-w-[150px] lg:max-w-[200px] w-full hidden lg:block'>
+      <div className='max-w-[150px] lg:max-w-[200px] w-full'>
         <Select />
       </div>
       <ul className='ml-6 gap-4 hidden lg:flex'>
@@ -25,10 +25,9 @@ const SearchNav = () => {
           </li>
         ))}
       </ul>
-      <div className='max-w-[150px] lg:max-w-[200px] w-full lg:ml-auto mr-auto lg:mr-2'>
-        <Select />
+      <div className='ml-auto'>
+        <Button onClick={() => setToggleAdvancedFilter(true)}>Filtere</Button>
       </div>
-      <Button onClick={() => setToggleAdvancedFilter(true)}>Filtere</Button>
     </div>
   )
 }
