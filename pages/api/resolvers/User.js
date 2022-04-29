@@ -103,6 +103,7 @@ export default {
         { name, email },
         { new: true }
       )
+      if (!user) throw new Error('Kullanıcı bulunamadı')
       return user
     },
     forgotPassword: async (_, args) => {
