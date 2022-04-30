@@ -5,7 +5,7 @@ import User from '../models/User'
 
 import {
   generateToken,
-  sendEmail,
+  // sendEmail,
   validateRegisterInput,
   validateLoginInput,
 } from '@utils'
@@ -122,11 +122,11 @@ export default {
       await user.save()
       const resetUrl = `${process.env.APP_BASE_URL}/sifre-sifirlama?token=${resetToken}`
       const message = `Bu epostayı, siz (veya bir başkası) şifrenizin sıfırlanmasını talep ettiği için alıyorsunuz. Şifrenizi sıfırlamak bu linke gidin:\n\n${resetUrl}`
-      await sendEmail({
-        email,
-        subject: 'Şifre Sıfırlama',
-        message,
-      })
+      // await sendEmail({
+      //   email,
+      //   subject: 'Şifre Sıfırlama',
+      //   message,
+      // })
       return true
     },
     resetPassword: async (_, args) => {
