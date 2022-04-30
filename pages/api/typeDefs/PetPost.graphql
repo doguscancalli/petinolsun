@@ -3,6 +3,12 @@ scalar Date
 scalar UserSchema
 
 # Enum
+enum PostType {
+  ADOPTION
+  OWNERSHIP
+  LOST
+  FOUND
+}
 enum Animal {
   DOG
   CAT
@@ -27,7 +33,7 @@ type PetPost {
   id: ID!
   name: String!
   slug: String!
-  postType: String!
+  postType: PostType!
   location: String!
   animal: Animal!
   age: Age!
@@ -56,7 +62,7 @@ type PetPosts {
 # Input
 input CreatePetPostInput {
   name: String!
-  postType: String!
+  postType: PostType!
   location: String!
   animal: Animal!
   age: Age!
@@ -69,7 +75,7 @@ input CreatePetPostInput {
 }
 input UpdatePetPostInput {
   name: String
-  postType: String
+  postType: PostType
   location: String
   animal: Animal
   age: Age
@@ -84,7 +90,7 @@ input FilterPetPostsInput {
   limit: Int
   page: Int
   date: String
-  postType: String
+  postType: PostType
   animal: Animal
   city: String
   gender: Gender
