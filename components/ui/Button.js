@@ -55,16 +55,13 @@ const Button = ({
 
   if (href)
     return (
-      <Link
-        href={href}
-        {...rest}
-        onMouseEnter={handleHover}
-        onMouseLeave={handleHover}
-      >
+      <Link href={href} {...rest}>
         <a
           className={`${variant} ${size} ${grow && 'btn-grow'} ${
             block && 'btn-block'
           }`}
+          onMouseEnter={handleHover}
+          onMouseLeave={handleHover}
           {...externalAtts}
         >
           {childElement}
