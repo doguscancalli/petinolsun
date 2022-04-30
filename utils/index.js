@@ -5,6 +5,7 @@ import isAdmin from './isAdmin'
 import sendEmail from './sendEmail'
 import { validateRegisterInput, validateLoginInput } from './validators'
 import advancedFiltering from './advancedFiltering'
+import apolloClient from './apolloClient'
 
 export {
   connectDb,
@@ -15,4 +16,5 @@ export {
   validateRegisterInput,
   validateLoginInput,
   advancedFiltering,
+  apolloClient,
 }
