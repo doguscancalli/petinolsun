@@ -1,7 +1,9 @@
 import { useRouter } from 'next/router'
 import Image from 'next/image'
 
-const Pet = ({ info, infoType }) => {
+const Pet = ({ info, infoType, post, totalDocs }) => {
+  const { slug, name, location, photos } = post || {}
+
   const router = useRouter()
 
   const handleInfoType = (type, count) => {
@@ -20,17 +22,10 @@ const Pet = ({ info, infoType }) => {
       },
       found: {
         text: `Bulunan ${count} hayvanı gör`,
-        image: `/images/waterfall-illustration.jpg`,
+        image: `/images/mountain-illustration.jpg`,
       },
     }
     return types[type]
-  }
-
-  const mockPet = {
-    name: 'Kratos',
-    slug: 'kratos',
-    location: 'Ankara, Etimesgut',
-    image: '/images/waterfall-illustration.jpg',
   }
 
   {
@@ -39,18 +34,18 @@ const Pet = ({ info, infoType }) => {
         <div
           className={`rounded-2xl overflow-hidden cursor-pointer flex items-start relative`}
           style={{ aspectRatio: '1 / 1.5' }}
-          onClick={() => router.push(`/ilan/${mockPet.slug}`)}
+          onClick={() => router.push(`/ilan/${slug}`)}
         >
           <Image
-            src={mockPet.image}
+            src={photos[0]}
             alt=''
             layout='fill'
             objectFit='cover'
             className='-z-10'
           />
           <div className='flex justify-between w-full p-4 bg-gradient-to-t from-black/50 to-black/0 text-white mt-auto z-0'>
-            <h2 className='text-base md:text-xl font-bold'>{mockPet.name}</h2>
-            <p className='text-black-300'>{mockPet.location}</p>
+            <h2 className='text-base md:text-xl font-bold'>{name}</h2>
+            <p className='text-black-300'>{location}</p>
           </div>
         </div>
       )
@@ -69,7 +64,7 @@ const Pet = ({ info, infoType }) => {
             className='-z-10'
           />
           <h2 className='text-xl md:text-2xl font-bold z-0'>
-            {handleInfoType(infoType, 842).text}
+            {handleInfoType(infoType, totalDocs).text}
           </h2>
         </li>
       )

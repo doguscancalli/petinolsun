@@ -1,12 +1,12 @@
 import { Wrapper } from '@components/ui'
 import Pets from './Pets'
 
-const PetDisplay = ({ title, infoType }) => {
+const PetDisplay = ({ title, infoType, posts }) => {
   return (
     <div className='mt-16'>
       <Wrapper>
         <h1 className='text-2xl md:text-4xl font-bold mb-8'>{title}</h1>
-        <Pets infoType={infoType} />
+        <Pets infoType={infoType} posts={posts} />
       </Wrapper>
     </div>
   )

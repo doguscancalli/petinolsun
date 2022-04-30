@@ -2,7 +2,7 @@ import Pet from './Pet'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 
-const Pets = ({ infoType }) => {
+const Pets = ({ infoType, posts }) => {
   const swiperOptions = {
     slidesPerView: 1.2,
     spaceBetween: 8,
@@ -19,18 +19,16 @@ const Pets = ({ infoType }) => {
 
   return (
     <Swiper {...swiperOptions}>
-      <SwiperSlide>
-        <Pet />
-      </SwiperSlide>
-      <SwiperSlide>
-        <Pet />
-      </SwiperSlide>
-      <SwiperSlide>
-        <Pet />
-      </SwiperSlide>
-      <SwiperSlide>
-        <Pet info infoType={infoType} />
-      </SwiperSlide>
+      {posts.docs.map((post) => (
+        <SwiperSlide key={post.id}>
+          <Pet post={post} />
+        </SwiperSlide>
+      ))}
+      {posts.docs.length === 3 && (
+        <SwiperSlide>
+          <Pet info infoType={infoType} totalDocs={posts.totalDocs} />
+        </SwiperSlide>
+      )}
     </Swiper>
   )
 }
