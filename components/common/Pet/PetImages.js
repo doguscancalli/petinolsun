@@ -5,7 +5,7 @@ import 'swiper/css'
 import 'swiper/css/pagination'
 import 'swiper/css/navigation'
 
-const PetImages = () => {
+const PetImages = ({ photos }) => {
   const swiperOptions = {
     modules: [Pagination, Navigation],
     pagination: { clickable: true },
@@ -20,33 +20,17 @@ const PetImages = () => {
       className='w-full'
       style={{ aspectRatio: '1 / 1.5' }}
     >
-      <SwiperSlide>
-        <Image
-          className='rounded-2xl'
-          src='/images/mountain-illustration.jpg'
-          alt=''
-          layout='fill'
-          objectFit='cover'
-        />
-      </SwiperSlide>
-      <SwiperSlide>
-        <Image
-          className='rounded-2xl'
-          src='/images/mountain-illustration.jpg'
-          alt=''
-          layout='fill'
-          objectFit='cover'
-        />
-      </SwiperSlide>
-      <SwiperSlide>
-        <Image
-          className='rounded-2xl'
-          src='/images/mountain-illustration.jpg'
-          alt=''
-          layout='fill'
-          objectFit='cover'
-        />
-      </SwiperSlide>
+      {photos.map((photo, index) => (
+        <SwiperSlide key={index}>
+          <Image
+            className='rounded-2xl'
+            src={photo}
+            alt=''
+            layout='fill'
+            objectFit='cover'
+          />
+        </SwiperSlide>
+      ))}
     </Swiper>
   )
 }

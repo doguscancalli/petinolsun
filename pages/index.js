@@ -49,7 +49,7 @@ export async function getServerSideProps() {
       input: {
         limit: 3,
         page: 1,
-        postType: 'adoption',
+        postType: 'ADOPTION',
       },
     },
   })
@@ -62,7 +62,7 @@ export async function getServerSideProps() {
       input: {
         limit: 3,
         page: 1,
-        postType: 'ownership',
+        postType: 'OWNERSHIP',
       },
     },
   })
@@ -75,7 +75,7 @@ export async function getServerSideProps() {
       input: {
         limit: 3,
         page: 1,
-        postType: 'lost',
+        postType: 'LOST',
       },
     },
   })
@@ -88,7 +88,7 @@ export async function getServerSideProps() {
       input: {
         limit: 3,
         page: 1,
-        postType: 'found',
+        postType: 'FOUND',
       },
     },
   })

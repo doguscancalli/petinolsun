@@ -32,3 +32,24 @@ export const GET_ALL_PET_POSTS = gql`
     }
   }
 `
+export const GET_PET_POST = gql`
+  query PetPost($slug: String!) {
+    petPost(slug: $slug) {
+      id
+      name
+      slug
+      postType
+      location
+      animal
+      age
+      gender
+      description
+      photos
+      contactNumber
+      whatsapp
+      user
+      createdAt
+      updatedAt
+    }
+  }
+`
