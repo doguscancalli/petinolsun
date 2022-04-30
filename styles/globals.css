@@ -31,7 +31,7 @@ span.swiper-pagination-bullet.swiper-pagination-bullet-active {
 
 @layer components {
   .btn {
-    @apply rounded-full transition ease-in-out duration-200 hover:opacity-80 whitespace-nowrap;
+    @apply rounded-full transition ease-in-out duration-200 hover:opacity-80 whitespace-nowrap text-center;
   }
 
   .btn-large {
