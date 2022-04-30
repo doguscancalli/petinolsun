@@ -5,7 +5,7 @@ import 'swiper/css'
 import 'swiper/css/pagination'
 import 'swiper/css/navigation'
 
-const PetImages = ({ photos }) => {
+const PetPhotos = ({ photos }) => {
   const swiperOptions = {
     modules: [Pagination, Navigation],
     pagination: { clickable: true },
@@ -35,4 +35,4 @@ const PetImages = ({ photos }) => {
   )
 }
 
-export default PetImages
+export default PetPhotos

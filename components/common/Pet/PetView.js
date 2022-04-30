@@ -2,10 +2,10 @@ import { Button } from '@components/ui'
 import { useRouter } from 'next/router'
 import Moment from 'react-moment'
 import 'moment/locale/tr'
-import { POST_TYPE, ANIMAL, GENDER, AGE } from '@data/constants'
+import { POST_TYPE, GENDER, AGE } from '@data/constants'
 
 import Avatar from '../Avatar'
-import PetImages from './PetImages'
+import PetPhotos from './PetPhotos'
 
 const PetView = ({ post }) => {
   const {
@@ -27,7 +27,7 @@ const PetView = ({ post }) => {
 
   return (
     <div className='mt-8 grid lg:grid-cols-2 gap-16'>
-      <PetImages photos={photos} />
+      <PetPhotos photos={photos} />
       <article>
         <div className='flex justify-between flex-col md:flex-row gap-2'>
           <div className='flex items-center'>
