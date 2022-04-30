@@ -4,22 +4,22 @@ scalar UserSchema
 
 # Enum
 enum Animal {
-  dog
-  cat
-  rodent
-  fish
-  rabbit
-  other
+  DOG
+  CAT
+  RODENT
+  FISH
+  RABBIT
+  OTHER
 }
 enum Gender {
-  male
-  female
+  MALE
+  FEMALE
 }
 enum Age {
-  baby
-  young
-  adult
-  old
+  BABY
+  YOUNG
+  ADULT
+  OLD
 }
 
 # Type
