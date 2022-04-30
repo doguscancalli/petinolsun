@@ -20,7 +20,6 @@ const PetPostSchema = new mongoose.Schema(
     },
     postType: {
       type: String,
-      enum: ['adoption', 'ownership', 'lost', 'found'],
       trim: true,
       required: true,
     },
