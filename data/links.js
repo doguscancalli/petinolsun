@@ -15,11 +15,13 @@ export const navLinks = [
     name: 'Kaydol',
     url: '/kaydol',
     isButton: true,
+    visibility: 'guest',
   },
   {
     name: 'Giriş Yap',
     url: '/giris',
     isButton: true,
+    visibility: 'guest',
   },
 ]
 
