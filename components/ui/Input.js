@@ -2,7 +2,7 @@ import { forwardRef } from 'react'
 
 const Input = ({ textarea, disabled, error, errorMessage, ...rest }, ref) => {
   return (
-    <>
+    <div>
       {textarea ? (
         <textarea
           ref={ref}
@@ -26,7 +26,7 @@ const Input = ({ textarea, disabled, error, errorMessage, ...rest }, ref) => {
       {errorMessage && (
         <p className='text-red text-xs px-6 pt-1'>{errorMessage}</p>
       )}
-    </>
+    </div>
   )
 }
 
