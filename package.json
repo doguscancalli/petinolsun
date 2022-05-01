@@ -13,6 +13,7 @@
     "@graphql-tools/load-files": "^6.5.3",
     "@graphql-tools/merge": "^8.2.10",
     "@graphql-yoga/node": "^2.3.0",
+    "@reduxjs/toolkit": "^1.8.1",
     "bcryptjs": "^2.4.3",
     "date-fns": "^2.28.0",
     "graphql": "^16.4.0",
@@ -29,6 +30,7 @@
     "react-icons": "^4.3.1",
     "react-moment": "^1.1.2",
     "react-nice-dates": "^3.1.0",
+    "react-redux": "^8.0.1",
     "swiper": "^8.1.4",
     "use-file-picker": "^1.4.2"
   },

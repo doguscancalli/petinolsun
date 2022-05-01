@@ -1,11 +1,13 @@
 import { apolloClient } from '@utils'
 import { Hero, PetDisplay } from '@components/common'
 import { GET_ALL_PET_POSTS } from '@graphql/queries'
+import { store } from '../store'
+import { Provider } from 'react-redux'
 
 const Home = ({ petPosts }) => {
   const { adoptionPosts, ownershipPosts, lostPosts, foundPosts } = petPosts
   return (
-    <>
+    <Provider store={store}>
       <Hero />
       {adoptionPosts?.docs?.length > 0 && (
         <PetDisplay
@@ -36,7 +38,7 @@ const Home = ({ petPosts }) => {
           posts={foundPosts}
         />
       )}
-    </>
+    </Provider>
   )
 }
 
