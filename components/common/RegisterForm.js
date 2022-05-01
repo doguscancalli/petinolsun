@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import Link from 'next/link'
 import { Button, Input } from '@components/ui'
 import { useForm } from 'react-hook-form'
@@ -21,7 +22,16 @@ const RegisterForm = () => {
   } = useForm()
 
   useEffect(() => {
-    if (data) dispatch(login(data))
+    if (data) {
+      dispatch(
+        sendToast({
+          type: 'success',
+          message: 'Kayıt başarılı, yönlediriliyorsunuz',
+        })
+      )
+      dispatch(login(data))
+      router.push('/')
+    }
   }, [data])
 
   const onSubmit = async (fields) => {

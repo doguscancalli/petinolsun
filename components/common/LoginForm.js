@@ -7,9 +7,12 @@ import { LOGIN_USER } from '@graphql/mutations'
 import { useDispatch } from 'react-redux'
 import { sendToast } from '@features/ui/uiSlice'
 import { login } from 'features/auth/authSlice'
+import { useRouter } from 'next/router'
 
 const LoginForm = () => {
   const dispatch = useDispatch()
+
+  const router = useRouter()
 
   const [loginUser, { data, loading, error }] = useMutation(LOGIN_USER, {
     errorPolicy: 'all',
@@ -22,7 +25,16 @@ const LoginForm = () => {
   } = useForm()
 
   useEffect(() => {
-    if (data) dispatch(login(data))
+    if (data) {
+      dispatch(
+        sendToast({
+          type: 'success',
+          message: 'Giriş başarılı, yönlediriliyorsunuz',
+        })
+      )
+      dispatch(login(data))
+      router.push('/')
+    }
   }, [data])
 
   const validations = {
