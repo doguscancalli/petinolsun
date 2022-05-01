@@ -37,8 +37,7 @@ const RegisterForm = () => {
     }
   }, [data])
 
-  const onSubmit = async (fields) => {
-    await registerUser({ variables: { input: fields } })
+  useEffect(() => {
     if (error) {
       error.graphQLErrors.forEach((error) =>
         dispatch(
@@ -49,6 +48,10 @@ const RegisterForm = () => {
         )
       )
     }
+  }, [error])
+
+  const onSubmit = async (fields) => {
+    await registerUser({ variables: { input: fields } })
   }
 
   const validations = {

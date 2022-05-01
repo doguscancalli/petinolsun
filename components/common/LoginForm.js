@@ -37,6 +37,19 @@ const LoginForm = () => {
     }
   }, [data])
 
+  useEffect(() => {
+    if (error) {
+      error.graphQLErrors.forEach((error) =>
+        dispatch(
+          sendToast({
+            type: 'error',
+            message: error?.extensions?.originalError?.message,
+          })
+        )
+      )
+    }
+  }, [error])
+
   const validations = {
     email: {
       required: 'Eposta gerekli',
@@ -48,16 +61,6 @@ const LoginForm = () => {
 
   const onSubmit = async (fields) => {
     await loginUser({ variables: { input: fields } })
-    if (error) {
-      error.graphQLErrors.forEach((error) =>
-        dispatch(
-          sendToast({
-            type: 'error',
-            message: error?.extensions?.originalError?.message,
-          })
-        )
-      )
-    }
   }
 
   return (
