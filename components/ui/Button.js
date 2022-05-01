@@ -1,5 +1,6 @@
-import Link from 'next/link'
 import { useState, useEffect } from 'react'
+import Link from 'next/link'
+import PulseLoader from 'react-spinners/PulseLoader'
 
 const Button = ({
   href,
@@ -8,6 +9,8 @@ const Button = ({
   size,
   grow,
   block,
+  loading,
+  disabled,
   children,
   ...rest
 }) => {
@@ -59,12 +62,19 @@ const Button = ({
         <a
           className={`${variant} ${size} ${grow && 'btn-grow'} ${
             block && 'btn-block'
-          }`}
+          } ${disabled && 'opacity-50'}`}
           onMouseEnter={handleHover}
           onMouseLeave={handleHover}
+          disabled={loading || disabled}
           {...externalAtts}
         >
-          {childElement}
+          {loading ? (
+            <div className='w-9 h-6 flex items-center justify-center mx-auto'>
+              <PulseLoader color={'#ffffff'} loading={true} size={8} />
+            </div>
+          ) : (
+            childElement
+          )}
         </a>
       </Link>
     )
@@ -73,12 +83,19 @@ const Button = ({
     <button
       className={`${variant} ${size} ${grow && 'btn-grow'} ${
         block && 'btn-block'
-      }`}
-      {...rest}
+      } ${disabled && 'opacity-50'}`}
       onMouseEnter={handleHover}
       onMouseLeave={handleHover}
+      disabled={loading || disabled}
+      {...rest}
     >
-      {childElement}
+      {loading ? (
+        <div className='w-9 h-6 flex items-center justify-center mx-auto'>
+          <PulseLoader color={'#ffffff'} loading={loading} size={8} />
+        </div>
+      ) : (
+        childElement
+      )}
     </button>
   )
 }
