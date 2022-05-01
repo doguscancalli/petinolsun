@@ -15,6 +15,9 @@ export function validateRegisterInput(name, email, password) {
   if (password === '') {
     errors.password = 'Şifre gereklidir'
   }
+  if (password.length < 8) {
+    errors.password = 'Şifreniz en az 8 karakter olmalıdır'
+  }
 
   return {
     errors,
