@@ -50,7 +50,6 @@ const LoginForm = () => {
 
   return (
     <div className='bg-white max-w-lg w-full mx-auto mt-16 rounded-2xl px-5 md:px-16 py-8'>
-      {/* <ToastContainer position='top-center' /> */}
       <h2 className='text-2xl md:text-4xl font-bold text-center'>Oturum aç</h2>
       <form
         className='flex flex-col gap-4 mt-16'
