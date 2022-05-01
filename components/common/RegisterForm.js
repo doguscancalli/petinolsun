@@ -57,6 +57,14 @@ const RegisterForm = () => {
   const validations = {
     name: {
       required: 'İsim gerekli',
+      maxLength: {
+        value: 30,
+        message: 'İsim 30 karakterden fazla olamaz',
+      },
+      pattern: {
+        value: /[\p{L}-]+([^\s]+\s)+[^\s]+/gu,
+        message: 'Ad soyad en az 1 kelime ve harflerden oluşmalıdır',
+      },
     },
     email: {
       required: 'Eposta gerekli',

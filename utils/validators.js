@@ -1,7 +1,15 @@
 export function validateRegisterInput(name, email, password) {
   const errors = {}
-  if (name === '') {
+  if (name.trim() === '') {
     errors.name = 'İsim gereklidir'
+  } else {
+    const regEx = /[\p{L}-]+([^\s]+\s)+[^\s]+/gu
+    if (!name.match(regEx)) {
+      errors.name = 'Ad soyad en az 1 kelime ve harflerden oluşmalıdır'
+    }
+  }
+  if (name.length > 30) {
+    errors.name = 'İsim 30 karakterden fazla olamaz'
   }
   if (email.trim() === '') {
     errors.email = 'Eposta gereklidir'
