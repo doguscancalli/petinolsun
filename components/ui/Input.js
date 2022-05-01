@@ -1,8 +1,11 @@
-const Input = ({ textarea, disabled, error, errorMessage, ...rest }) => {
+import { forwardRef } from 'react'
+
+const Input = ({ textarea, disabled, error, errorMessage, ...rest }, ref) => {
   return (
     <>
       {textarea ? (
         <textarea
+          ref={ref}
           className={`input ${disabled && 'input-disabled'} ${
             error && 'input-error'
           } ${textarea && 'input-textarea'}`}
@@ -12,6 +15,7 @@ const Input = ({ textarea, disabled, error, errorMessage, ...rest }) => {
         />
       ) : (
         <input
+          ref={ref}
           className={`input ${disabled && 'input-disabled'} ${
             error && 'input-error'
           }`}
@@ -26,4 +30,4 @@ const Input = ({ textarea, disabled, error, errorMessage, ...rest }) => {
   )
 }
 
-export default Input
+export default forwardRef((props, ref) => Input(props, ref))
