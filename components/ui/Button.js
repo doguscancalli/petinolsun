@@ -62,7 +62,7 @@ const Button = ({
         <a
           className={`${variant} ${size} ${grow && 'btn-grow'} ${
             block && 'btn-block'
-          } ${disabled && 'opacity-50'}`}
+          } ${(disabled || loading) && 'btn-disabled'}`}
           onMouseEnter={handleHover}
           onMouseLeave={handleHover}
           disabled={loading || disabled}
@@ -83,7 +83,7 @@ const Button = ({
     <button
       className={`${variant} ${size} ${grow && 'btn-grow'} ${
         block && 'btn-block'
-      } ${disabled && 'opacity-50'}`}
+      } ${(disabled || loading) && 'btn-disabled'}`}
       onMouseEnter={handleHover}
       onMouseLeave={handleHover}
       disabled={loading || disabled}
