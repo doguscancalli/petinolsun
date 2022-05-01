@@ -1,5 +1,9 @@
-import { Navbar } from '@components/shared'
+import dynamic from 'next/dynamic'
 import { Wrapper, Search } from '@components/ui'
+
+const Navbar = dynamic(() => import('@components/shared/Navbar'), {
+  ssr: false,
+})
 
 const Hero = () => {
   return (

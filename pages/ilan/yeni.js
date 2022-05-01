@@ -1,6 +1,10 @@
+import dynamic from 'next/dynamic'
 import { PetForm, StepProgress } from '@components/common'
-import { Navbar } from '@components/shared'
 import { Wrapper } from '@components/ui'
+
+const Navbar = dynamic(() => import('@components/shared/Navbar'), {
+  ssr: false,
+})
 
 const NewPetPost = () => {
   return (

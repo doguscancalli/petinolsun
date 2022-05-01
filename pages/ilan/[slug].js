@@ -1,8 +1,12 @@
+import dynamic from 'next/dynamic'
 import { PetView } from '@components/common'
-import { Navbar } from '@components/shared'
 import { Wrapper } from '@components/ui'
 import { apolloClient } from '@utils'
 import { GET_PET_POST } from '@graphql/queries'
+
+const Navbar = dynamic(() => import('@components/shared/Navbar'), {
+  ssr: false,
+})
 
 const PetSlug = ({ petPost }) => {
   return (

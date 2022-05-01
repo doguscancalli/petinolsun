@@ -1,8 +1,11 @@
+import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
-
-import { Navbar } from '@components/shared'
 import { Button, Input, Wrapper } from '@components/ui'
+
+const Navbar = dynamic(() => import('@components/shared/Navbar'), {
+  ssr: false,
+})
 
 const ResetPassword = () => {
   const router = useRouter()

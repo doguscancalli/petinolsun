@@ -1,7 +1,10 @@
+import dynamic from 'next/dynamic'
 import Link from 'next/link'
+import { Button, Input, Wrapper } from '@components/ui'
 
-import { Navbar } from '@components/shared'
-import { Button, Checkbox, Input, Wrapper } from '@components/ui'
+const Navbar = dynamic(() => import('@components/shared/Navbar'), {
+  ssr: false,
+})
 
 const LostPassword = () => {
   const handleSubmit = (e) => {
