@@ -7,9 +7,12 @@ import { REGISTER_USER } from '@graphql/mutations'
 import { useDispatch } from 'react-redux'
 import { sendToast } from '@features/ui/uiSlice'
 import { login } from 'features/auth/authSlice'
+import { useRouter } from 'next/router'
 
 const RegisterForm = () => {
   const dispatch = useDispatch()
+
+  const router = useRouter()
 
   const [registerUser, { data, loading, error }] = useMutation(REGISTER_USER, {
     errorPolicy: 'all',
