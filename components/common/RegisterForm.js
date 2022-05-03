@@ -22,6 +22,7 @@ const RegisterForm = () => {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm()
 
   useEffect(() => {
@@ -32,6 +33,7 @@ const RegisterForm = () => {
           message: 'Kayıt başarılı, yönlediriliyorsunuz',
         })
       )
+      reset()
       dispatch(login(data))
       router.push('/')
     }

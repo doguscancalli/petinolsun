@@ -22,6 +22,7 @@ const LoginForm = () => {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm()
 
   useEffect(() => {
@@ -32,6 +33,7 @@ const LoginForm = () => {
           message: 'Giriş başarılı, yönlediriliyorsunuz',
         })
       )
+      reset()
       dispatch(login(data))
       router.push('/')
     }
@@ -73,7 +75,7 @@ const LoginForm = () => {
         <h2 className='text-base md:text-xl font-bold'>Eposta</h2>
         <Input
           type='email'
-          placeholder='mail@mail.com'
+          placeholder='eposta@gmail.com'
           error={errors?.email || error}
           errorMessage={errors?.email?.message}
           disabled={loading}
