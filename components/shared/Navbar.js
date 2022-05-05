@@ -46,6 +46,7 @@ const Navbar = () => {
         <ul className='hidden sm:flex items-center ml-auto'>
           {navLinks.map((link, index) => {
             if (link.visibility === 'guest' && auth.user) return null
+            if (link.visibility === 'user' && !auth.user) return null
             return <NavLinks link={link} key={index} />
           })}
         </ul>

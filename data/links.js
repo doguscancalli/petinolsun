@@ -1,7 +1,12 @@
 export const navLinks = [
   {
     name: 'İlanlar',
-    url: '/',
+    url: '/ilan/ara',
+  },
+  {
+    name: 'Yeni İlan',
+    url: '/ilan/yeni',
+    visibility: 'user',
   },
   {
     name: 'Gönderiler',
