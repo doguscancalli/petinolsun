@@ -1,10 +1,13 @@
-const Checkbox = ({ label, htmlFor, ...rest }) => {
+import { forwardRef } from 'react'
+
+const Checkbox = ({ label, htmlFor, ...rest }, ref) => {
   return (
     <div className='inline-block'>
       <input
         type='checkbox'
         className='cursor-pointer opacity-0 absolute peer'
         id={htmlFor}
+        ref={ref}
         {...rest}
       />
       <label
@@ -17,4 +20,4 @@ const Checkbox = ({ label, htmlFor, ...rest }) => {
   )
 }
 
-export default Checkbox
+export default forwardRef((props, ref) => Checkbox(props, ref))
