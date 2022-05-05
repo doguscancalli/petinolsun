@@ -70,7 +70,11 @@ const Button = ({
         >
           {loading ? (
             <div className='w-9 h-6 flex items-center justify-center mx-auto'>
-              <PulseLoader color={'#ffffff'} loading={true} size={8} />
+              <PulseLoader
+                color={variant === 'primary' ? '#ffffff' : '#000000'}
+                loading={loading}
+                size={8}
+              />
             </div>
           ) : (
             childElement
@@ -91,7 +95,11 @@ const Button = ({
     >
       {loading ? (
         <div className='w-9 h-6 flex items-center justify-center mx-auto'>
-          <PulseLoader color={'#ffffff'} loading={loading} size={8} />
+          <PulseLoader
+            color={variant === 'primary' ? '#ffffff' : '#000000'}
+            loading={loading}
+            size={8}
+          />
         </div>
       ) : (
         childElement
