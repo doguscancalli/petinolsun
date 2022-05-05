@@ -71,7 +71,7 @@ const Button = ({
           {loading ? (
             <div className='w-9 h-6 flex items-center justify-center mx-auto'>
               <PulseLoader
-                color={variant === 'primary' ? '#ffffff' : '#000000'}
+                color={variant === 'secondary' ? '#000000' : '#ffffff'}
                 loading={loading}
                 size={8}
               />
@@ -96,7 +96,7 @@ const Button = ({
       {loading ? (
         <div className='w-9 h-6 flex items-center justify-center mx-auto'>
           <PulseLoader
-            color={variant === 'primary' ? '#ffffff' : '#000000'}
+            color={variant === 'secondary' ? '#000000' : '#ffffff'}
             loading={loading}
             size={8}
           />
