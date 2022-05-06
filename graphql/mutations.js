@@ -22,3 +22,25 @@ export const REGISTER_USER = gql`
     }
   }
 `
+
+export const CREATE_PET_POST = gql`
+  mutation CreatePetPost($input: CreatePetPostInput!) {
+    createPetPost(input: $input) {
+      id
+      name
+      slug
+      postType
+      location
+      animal
+      age
+      gender
+      description
+      photos
+      contactNumber
+      whatsapp
+      user
+      createdAt
+      updatedAt
+    }
+  }
+`
