@@ -29,6 +29,36 @@ span.swiper-pagination-bullet.swiper-pagination-bullet-active {
   }
 }
 
+/* Phone Input */
+.react-tel-input {
+  width: 100%;
+}
+.react-tel-input input {
+  width: 100% !important;
+  border-radius: 999px !important;
+  font-size: 1rem !important;
+  height: 50px !important;
+  border-color: black !important;
+}
+.react-tel-input .flag-dropdown,
+.react-tel-input .selected-flag:hover,
+.react-tel-input .selected-flag:focus,
+.react-tel-input .selected-flag.open,
+.react-tel-input .selected-flag.open:hover,
+.react-tel-input .selected-flag.open:focus {
+  border-radius: 999px 0 0 999px !important;
+  background-color: transparent !important;
+  border-color: black !important;
+}
+.react-tel-input.error input,
+.react-tel-input.error .flag-dropdown,
+.react-tel-input.error .selected-flag {
+  border-color: #ff2771 !important;
+}
+.react-tel-input.error input::placeholder {
+  color: #f9a1bd !important;
+}
+
 @layer components {
   .btn {
     @apply rounded-full transition ease-in-out duration-200 hover:opacity-80 whitespace-nowrap text-center;
