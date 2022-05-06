@@ -17,6 +17,7 @@ export const ANIMAL = {
 export const GENDER = {
   MALE: 'Erkek',
   FEMALE: 'Dişi',
+  UNKNOWN: 'Cinsiyet Bilinmiyor',
 }
 
 export const AGE = {
@@ -24,4 +25,5 @@ export const AGE = {
   YOUNG: 'Genç',
   ADULT: 'Yetişkin',
   OLD: 'Yaşlı',
+  UNKNOWN: 'Yaş Bilinmiyor',
 }

@@ -20,12 +20,14 @@ enum Animal {
 enum Gender {
   MALE
   FEMALE
+  UNKNOWN
 }
 enum Age {
   BABY
   YOUNG
   ADULT
   OLD
+  UNKNOWN
 }
 
 # Type
