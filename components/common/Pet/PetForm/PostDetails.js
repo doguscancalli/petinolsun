@@ -38,7 +38,7 @@ const PostDetails = () => {
         onSubmit={handleSubmit(onSubmit)}
       >
         <h2 className='text-xl md:text-2xl font-bold'>
-          İlan hakkında daha bilgi verin
+          İlan hakkında daha fazla bilgi verin
         </h2>
         <Input
           placeholder='İlan açıklaması'
