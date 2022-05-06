@@ -1,38 +1,30 @@
 import { useState, useEffect } from 'react'
+import { useSelector } from 'react-redux'
 import petFormFlow from '@data/petFormFlow'
-
-import SelectPostType from './SelectPostType'
+import dynamic from 'next/dynamic'
+const SelectPostType = dynamic(() => import('./SelectPostType'), {
+  ssr: false,
+})
 
 const PetForm = () => {
-  const [state, setState] = useState({
-    petPostType: '',
-    petFormStep: -1,
-    petFormFlow: [],
-  })
+  const [flow, setFlow] = useState(null)
 
-  const Component =
-    state.petFormStep >= 0 ? (
-      state.petFormFlow[state.petFormStep].component
-    ) : (
-      <></>
-    )
+  const {
+    data: { postType },
+    formStep,
+  } = useSelector((state) => state.petPost)
 
   useEffect(() => {
-    if (state.petPostType !== '' && state.petFormStep === -1) {
-      console.log(state)
-      state.petFormStep = 0
-      state.petFormFlow = petFormFlow[state.petPostType]
-    }
-  }, [state.petPostType])
+    setFlow(petFormFlow[postType])
+  }, [postType])
+
+  const Component =
+    formStep >= 0 ? petFormFlow[postType][formStep].component : <></>
 
   return (
     <div className='mt-16'>
-      {state.petFormStep === -1 && (
-        <SelectPostType state={state} setState={setState} />
-      )}
-      {state.petFormStep >= 0 && (
-        <Component state={state} setState={setState} />
-      )}
+      {formStep === -1 && <SelectPostType />}
+      {formStep >= 0 && flow && <Component flow={flow} step={formStep} />}
     </div>
   )
 }

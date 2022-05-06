@@ -1,18 +1,50 @@
+import { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import {
+  decreaseFormStep,
+  increaseFormStep,
+  setData,
+} from '@features/petPost/petPostSlice'
 import { Button, ImageInput } from '@components/ui'
 
-const PetPhotos = ({ state, setState }) => {
+const PetPhotos = () => {
+  const [photos, setPhotos] = useState([])
+  const [error, setError] = useState(false)
+  const [errorMessage, setErrorMessage] = useState('')
+
+  const dispatch = useDispatch()
+
   const handleClick = () => {
-    setState({ ...state, petFormStep: state.petFormStep + 1 })
+    setError(false)
+    if (photos.length === 0) {
+      setErrorMessage('En az 1 fotoğraf eklemelisiniz')
+      setError(true)
+      return
+    }
+    const blops = photos.map((photo) => {
+      return window.URL.createObjectURL(photo)
+    })
+    dispatch(setData({ photos: blops }))
+    dispatch(increaseFormStep())
   }
 
   return (
     <div className='flex flex-col gap-4'>
       <h2 className='text-xl md:text-2xl font-bold'>Fotoğraf ekleyin</h2>
-      <ImageInput />
-      <Button onClick={handleClick} grow>
+      <ImageInput
+        setPlainContent={setPhotos}
+        error={error}
+        errorMessage={errorMessage}
+      />
+      <Button type='submit' onClick={handleClick} grow>
         Devam Et
       </Button>
-      <Button variant='secondary' grow>
+      <Button
+        type='button'
+        variant='secondary'
+        onClick={() => dispatch(decreaseFormStep())}
+        grow
+      >
         Geri
       </Button>
     </div>

@@ -5,7 +5,7 @@ import PetPhotos from '@components/common/Pet/PetForm/PetPhotos'
 import PostDetails from '@components/common/Pet/PetForm/PostDetails'
 
 export default {
-  adoption: [
+  ADOPTION: [
     {
       name: 'Location',
       component: Location,
@@ -35,7 +35,7 @@ export default {
       component: ContactInfo,
     },
   ],
-  ownership: [
+  OWNERSHIP: [
     {
       name: 'Location',
       component: Location,
@@ -61,7 +61,7 @@ export default {
       component: ContactInfo,
     },
   ],
-  lost: [
+  LOST: [
     {
       name: 'Location',
       component: Location,
@@ -91,7 +91,7 @@ export default {
       component: ContactInfo,
     },
   ],
-  found: [
+  FOUND: [
     {
       name: 'Location',
       component: Location,

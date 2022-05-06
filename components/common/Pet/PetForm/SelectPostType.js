@@ -1,22 +1,47 @@
 import { Button, Select } from '@components/ui'
+import { POST_TYPE } from '@data/constants'
+import { useForm } from 'react-hook-form'
+import { useSelector, useDispatch } from 'react-redux'
+import {
+  setData,
+  increaseFormStep,
+  setTotalSteps,
+} from '@features/petPost/petPostSlice'
+import petFormFlow from '@data/petFormFlow'
 
-const SelectPostType = ({ state, setState }) => {
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    setState({ ...state, petPostType: 'found' })
+const SelectPostType = () => {
+  const { register, handleSubmit } = useForm()
+
+  const { user } = useSelector((state) => state.auth)
+  const dispatch = useDispatch()
+
+  const onSubmit = ({ postType }) => {
+    dispatch(setData({ postType }))
+    dispatch(increaseFormStep())
+    dispatch(setTotalSteps(petFormFlow[postType].length))
   }
+
+  const options = Object.keys(POST_TYPE).map((key) => {
+    return {
+      name: POST_TYPE[key],
+      value: key,
+    }
+  })
 
   return (
     <>
       <h1 className='flex flex-col text-2xl md:text-4xl font-bold'>
-        <span>Merhaba, Clara!</span>
+        <span>Merhaba, {user?.name?.split(' ')[0]}</span>
         <span>Hadi ilanını oluşturalım.</span>
       </h1>
       <h2 className='text-xl md:text-2xl font-bold mt-16'>
         Oluşturmak istediğin ilan türünü seç
       </h2>
-      <form className='mt-4 flex flex-col gap-4' onSubmit={handleSubmit}>
-        <Select />
+      <form
+        className='mt-4 flex flex-col gap-4'
+        onSubmit={handleSubmit(onSubmit)}
+      >
+        <Select options={options} {...register('postType')} />
         <Button>Devam Et</Button>
       </form>
     </>

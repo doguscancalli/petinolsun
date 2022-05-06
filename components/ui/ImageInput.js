@@ -1,8 +1,9 @@
+import { useEffect } from 'react'
 import { useFilePicker } from 'use-file-picker'
 import { Button } from '@components/ui'
 import Image from 'next/image'
 
-const ImageInput = () => {
+const ImageInput = ({ setContent, setPlainContent, error, errorMessage }) => {
   const options = {
     readAs: 'DataURL',
     accept: 'image/*',
@@ -12,25 +13,30 @@ const ImageInput = () => {
     maxFileSize: 5, // in megabytes
   }
 
-  const [openFileSelector, { filesContent, loading, errors }] =
+  const [openFileSelector, { filesContent, plainFiles, loading, errors }] =
     useFilePicker(options)
 
   const errorType = errors.length > 0 ? Object.keys(errors[0])[0] : null
-  console.log(loading)
+
+  useEffect(() => {
+    if (setContent) setContent(filesContent)
+    if (setPlainContent) setPlainContent(plainFiles)
+  }, [filesContent])
 
   return (
     <>
       <div
         className={`border-2 border-dashed rounded-2xl flex items-center flex-col gap-2 p-10 ${
-          errors.length > 0 ? 'border-red-400' : 'border-black-500'
+          errors.length > 0 || error ? 'border-red-400' : 'border-black-500'
         }`}
         onClick={() => openFileSelector()}
       >
         <p className='text-center'>Fotoğrafları seçin</p>
-        <Button variant='secondary' size='small' loading={loading.toString()}>
+        <Button variant='secondary' size='small' loading={loading}>
           Gözat
         </Button>
       </div>
+      {error && <p className='text-red'>{errorMessage}</p>}
       {errorType === 'maxLimitExceeded' && (
         <p className='text-red'>
           {options.limitFilesConfig.max} adetten fazla fotoğraf yükleyemezsiniz

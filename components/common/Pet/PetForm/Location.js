@@ -1,24 +1,64 @@
+import { useDispatch } from 'react-redux'
+import {
+  increaseFormStep,
+  decreaseFormStep,
+  setData,
+} from '@features/petPost/petPostSlice'
+import { useForm } from 'react-hook-form'
 import { Button, Input } from '@components/ui'
 
-const Location = ({ state, setState }) => {
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    setState({ ...state, petFormStep: state.petFormStep + 1 })
+const Location = ({ flow, step }) => {
+  const dispatch = useDispatch()
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm()
+
+  const validations = {
+    location: {
+      required: 'Lokasyon gerekli',
+      maxLength: {
+        value: 100,
+        message: 'Lokasyon 100 karakterden fazla olamaz',
+      },
+    },
+  }
+
+  const onSubmit = (data) => {
+    dispatch(setData(data))
+    dispatch(increaseFormStep())
   }
 
   return (
     <>
       <h2 className='text-xl md:text-2xl font-bold'>
-        {state.petFormFlow[state.petFormStep].form.location}
+        {flow[step].form.location}
       </h2>
       <p className='mt-4 text-black-500'>
-        Tam adres yerine semt, mahalle gibi belirli bir alan girin
+        Güvenliğiniz açısından şehir, ilçe/semt girmeniz önerilir
       </p>
-      <form className='mt-4 flex flex-col gap-4' onSubmit={handleSubmit}>
-        <Input placeholder='Şehir, semt, mahalle' />
+      <form
+        className='mt-4 flex flex-col gap-4'
+        onSubmit={handleSubmit(onSubmit)}
+      >
+        <Input
+          placeholder='Şehir, ilçe/semt'
+          error={errors?.location}
+          errorMessage={errors?.location?.message}
+          {...register('location', { ...validations.location })}
+        />
         <div className='flex flex-col gap-2'>
-          <Button grow>Devam Et</Button>
-          <Button variant='secondary' grow>
+          <Button type='submit' grow>
+            Devam Et
+          </Button>
+          <Button
+            type='button'
+            variant='secondary'
+            onClick={() => dispatch(decreaseFormStep())}
+            grow
+          >
             Geri
           </Button>
         </div>
