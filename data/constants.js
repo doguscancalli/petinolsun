@@ -11,6 +11,7 @@ export const ANIMAL = {
   RODENT: 'Kemirgen',
   FISH: 'Balık',
   RABBIT: 'Tavşan',
+  BIRD: 'Kuş',
   OTHER: 'Diğer',
 }
 

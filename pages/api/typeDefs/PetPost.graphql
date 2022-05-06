@@ -15,6 +15,7 @@ enum Animal {
   RODENT
   FISH
   RABBIT
+  BIRD
   OTHER
 }
 enum Gender {
@@ -73,7 +74,6 @@ input CreatePetPostInput {
   photos: [String!]!
   contactNumber: String!
   whatsapp: Boolean = false
-  user: UserSchema!
 }
 input UpdatePetPostInput {
   name: String
