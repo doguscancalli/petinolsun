@@ -18,17 +18,13 @@ const Home = ({ petPosts }) => {
       )}
 
       {ownershipPosts?.docs?.length > 0 && (
-        <PetDisplay
-          title='Kayıp ilanları'
-          infoType='lost'
-          posts={ownershipPosts}
-        />
+        <PetDisplay title='Kayıp ilanları' infoType='lost' posts={lostPosts} />
       )}
       {lostPosts?.docs?.length > 0 && (
         <PetDisplay
           title='Sahiplenme ilanları'
           infoType='ownership'
-          posts={lostPosts}
+          posts={ownershipPosts}
         />
       )}
       {foundPosts?.docs?.length > 0 && (
