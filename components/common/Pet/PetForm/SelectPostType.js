@@ -8,6 +8,7 @@ import {
   setTotalSteps,
 } from '@features/petPost/petPostSlice'
 import petFormFlow from '@data/petFormFlow'
+import { objectToArray } from '@utils'
 
 const SelectPostType = () => {
   const { register, handleSubmit } = useForm()
@@ -21,12 +22,7 @@ const SelectPostType = () => {
     dispatch(setTotalSteps(petFormFlow[postType].length))
   }
 
-  const options = Object.keys(POST_TYPE).map((key) => {
-    return {
-      name: POST_TYPE[key],
-      value: key,
-    }
-  })
+  const options = objectToArray(POST_TYPE)
 
   return (
     <>
