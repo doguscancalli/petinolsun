@@ -14,6 +14,11 @@ export const petPostSlice = createSlice({
         ...action.payload,
       }
     },
+    clearData: (state) => {
+      state.data = {}
+      state.formStep = -1
+      state.totalSteps = 0
+    },
     increaseFormStep: (state) => {
       state.formStep += 1
     },
@@ -26,7 +31,12 @@ export const petPostSlice = createSlice({
   },
 })
 
-export const { setData, increaseFormStep, decreaseFormStep, setTotalSteps } =
-  petPostSlice.actions
+export const {
+  setData,
+  clearData,
+  increaseFormStep,
+  decreaseFormStep,
+  setTotalSteps,
+} = petPostSlice.actions
 
 export default petPostSlice.reducer
