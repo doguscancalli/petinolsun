@@ -18,7 +18,7 @@ const PetPhotos = ({ photos }) => {
     <Swiper
       {...swiperOptions}
       className='w-full'
-      style={{ aspectRatio: '1 / 1.5' }}
+      style={{ aspectRatio: '1 / 1.2' }}
     >
       {photos.map((photo, index) => (
         <SwiperSlide key={index}>
