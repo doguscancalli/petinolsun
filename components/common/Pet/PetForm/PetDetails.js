@@ -50,7 +50,7 @@ const PetDetails = ({ flow, step }) => {
         onSubmit={handleSubmit(onSubmit)}
       >
         <h2 className='text-xl md:text-2xl font-bold'>{flow[step].form.pet}</h2>
-        <Select options={animalOptions} {...register('pet')} />
+        <Select options={animalOptions} {...register('animal')} />
         <h2 className='text-xl md:text-2xl font-bold'>{flow[step].form.age}</h2>
         <Select options={ageOptions} {...register('age')} />
         <h2 className='text-xl md:text-2xl font-bold'>
