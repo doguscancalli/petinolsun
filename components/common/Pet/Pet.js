@@ -1,8 +1,10 @@
 import { useRouter } from 'next/router'
 import Image from 'next/image'
+import Moment from 'react-moment'
+import 'moment/locale/tr'
 
 const Pet = ({ info, infoType, post, totalDocs }) => {
-  const { slug, name, location, photos } = post || {}
+  const { postType, slug, name, location, photos, createdAt } = post || {}
 
   const router = useRouter()
 
@@ -43,9 +45,16 @@ const Pet = ({ info, infoType, post, totalDocs }) => {
             objectFit='cover'
             className='-z-10'
           />
-          <div className='flex justify-between w-full p-4 bg-gradient-to-t from-black/50 to-black/0 text-white mt-auto z-0'>
+          <div className='w-full p-4 pt-6 bg-gradient-to-t from-black/60 to-black/0 text-white mt-auto z-0'>
             <h2 className='text-base md:text-xl font-bold'>{name}</h2>
-            <p className='text-black-300'>{location}</p>
+            <div className='flex justify-between mt-2'>
+              <p className='text-black-200'>{location}</p>
+              <p className='text-black-200'>
+                <Moment locale='tr' fromNow>
+                  {createdAt}
+                </Moment>
+              </p>
+            </div>
           </div>
         </div>
       )
