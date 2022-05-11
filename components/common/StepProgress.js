@@ -5,7 +5,7 @@ const StepProgress = ({ step }) => {
   return (
     <div className='w-full h-8 rounded-full bg-white'>
       <div
-        className='bg-black rounded-full h-full'
+        className='bg-black rounded-full h-full transition-all duration-500 ease-in-out'
         style={{
           width: `${(currentStep / totalStep) * 100}%`,
         }}
