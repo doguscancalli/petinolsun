@@ -17,6 +17,7 @@ span.swiper-pagination-bullet.swiper-pagination-bullet {
   height: 16px;
   border-radius: 2rem;
   transition: all 0.25s ease-in-out;
+  box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.3);
 }
 span.swiper-pagination-bullet.swiper-pagination-bullet-active {
   width: 32px;
