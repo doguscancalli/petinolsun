@@ -8,15 +8,12 @@ const ImageInput = ({ setContent, setPlainContent, error, errorMessage }) => {
     readAs: 'DataURL',
     accept: 'image/*',
     multiple: true,
-    limitFilesConfig: { max: 5 },
-    // minFileSize: 1,
+    limitFilesConfig: { min: 1, max: 5 },
     maxFileSize: 5, // in megabytes
   }
 
   const [openFileSelector, { filesContent, plainFiles, loading, errors }] =
     useFilePicker(options)
-
-  const errorType = errors.length > 0 ? Object.keys(errors[0])[0] : null
 
   useEffect(() => {
     if (setContent) setContent(filesContent)
@@ -37,14 +34,14 @@ const ImageInput = ({ setContent, setPlainContent, error, errorMessage }) => {
         </Button>
       </div>
       {error && <p className='text-red'>{errorMessage}</p>}
-      {errorType === 'maxLimitExceeded' && (
+      {errors.length > 0 && (
         <p className='text-red'>
-          {options.limitFilesConfig.max} adetten fazla fotoğraf yükleyemezsiniz
-        </p>
-      )}
-      {errorType === 'fileSizeToolarge' && (
-        <p className='text-red'>
-          Fotoğraf boyutu {options.maxFileSize}mb'dan büyük olamaz
+          {errors[0].fileSizeTooSmall && 'Dosya boyutu çok küçük'}
+          {errors[0].fileSizeToolarge && `Fotoğraf boyutu 5mb'dan büyük olamaz`}
+          {errors[0].readerError && 'Fotoğraf eklenirken bir hata oluştu'}
+          {errors[0].maxLimitExceeded &&
+            '5 adetten fazla fotoğraf yükleyemezsiniz'}
+          {errors[0].minLimitNotReached && 'En az 1 fotoğraf eklemelisiniz'}
         </p>
       )}
       <ul className='grid grid-cols-5 gap-2'>
