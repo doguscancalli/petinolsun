@@ -1,4 +1,5 @@
 import { advancedFiltering } from '@utils'
+import { validatePetPostInput } from '@utils/validators'
 import PetPost from '../models/PetPost'
 
 export default {
@@ -34,6 +35,8 @@ export default {
     createPetPost: async (_, args, context) => {
       const { input } = args
       const { id } = context.isAuth(context)
+      const { valid, errors } = validatePetPostInput(input)
+      if (!valid) throw new Error(Object.values(errors))
       const petPost = await PetPost.create({ ...input, user: id })
       return petPost
     },
