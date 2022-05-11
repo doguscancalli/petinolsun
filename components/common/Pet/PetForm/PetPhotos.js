@@ -7,24 +7,19 @@ import {
 } from '@features/petPost/petPostSlice'
 import { Button, ImageInput } from '@components/ui'
 
-const PetPhotos = () => {
-  const [photos, setPhotos] = useState([])
+const PetPhotos = ({ photos, setPhotos }) => {
   const [error, setError] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')
 
   const dispatch = useDispatch()
-
-  const handleClick = () => {
+  const handleClick = async () => {
     setError(false)
     if (photos.length === 0) {
       setErrorMessage('En az 1 fotoğraf eklemelisiniz')
       setError(true)
       return
     }
-    const blops = photos.map((photo) => {
-      return window.URL.createObjectURL(photo)
-    })
-    dispatch(setData({ photos: blops }))
+    setPhotos(photos)
     dispatch(increaseFormStep())
   }
 
