@@ -9,7 +9,7 @@ const Select = ({ options, ...rest }, ref) => {
         ref={ref}
         {...rest}
       >
-        {options.map(({ name, value }) => (
+        {options?.map(({ name, value }) => (
           <option value={value} key={value}>
             {name}
           </option>
