@@ -6,6 +6,7 @@ import isAdmin from './isAdmin'
 import { validateRegisterInput, validateLoginInput } from './validators'
 import advancedFiltering from './advancedFiltering'
 import apolloClient from './apolloClient'
+import imageUpload from './imageUpload'
 
 export {
   connectDb,
@@ -17,4 +18,5 @@ export {
   validateLoginInput,
   advancedFiltering,
   apolloClient,
+  imageUpload,
 }
