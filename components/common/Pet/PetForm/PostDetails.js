@@ -20,8 +20,8 @@ const PostDetails = ({ flow, step }) => {
     name: {
       required: `${flow[step].form.nameType} gerekli`,
       maxLength: {
-        value: 100,
-        message: `${flow[step].form.nameType} 100 karakterden fazla olamaz`,
+        value: 50,
+        message: `${flow[step].form.nameType} 50 karakterden fazla olamaz`,
       },
     },
     description: {
