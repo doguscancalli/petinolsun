@@ -20,8 +20,8 @@ const Location = ({ flow, step }) => {
     location: {
       required: 'Lokasyon gerekli',
       maxLength: {
-        value: 100,
-        message: 'Lokasyon 100 karakterden fazla olamaz',
+        value: 30,
+        message: 'Lokasyon 30 karakterden fazla olamaz',
       },
     },
   }
