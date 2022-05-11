@@ -10,7 +10,6 @@ const PetPostSchema = new mongoose.Schema(
       type: String,
       trim: true,
       required: true,
-      maxlength: 20,
     },
     slug: {
       type: String,
@@ -42,7 +41,6 @@ const PetPostSchema = new mongoose.Schema(
     },
     description: {
       type: String,
-      maxlength: 5000,
       trim: true,
       required: true,
     },
