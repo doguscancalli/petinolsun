@@ -25,6 +25,11 @@ export default {
     {
       name: 'PostDetails',
       component: PostDetails,
+      form: {
+        name: 'Hayvanınızın adı nedir?',
+        namePlaceholder: 'Tardis',
+        nameType: 'İsim',
+      },
     },
     {
       name: 'PetPhotos',
@@ -55,6 +60,15 @@ export default {
     {
       name: 'PostDetails',
       component: PostDetails,
+      form: {
+        name: 'İlanınızın başlığı nedir?',
+        namePlaceholder: 'Köpek sahiplenmek istiyorum',
+        nameType: 'Başlık',
+      },
+    },
+    {
+      name: 'PetPhotos',
+      component: PetPhotos,
     },
     {
       name: 'ContactInfo',
@@ -81,6 +95,11 @@ export default {
     {
       name: 'PostDetails',
       component: PostDetails,
+      form: {
+        name: 'Hayvanınızın adı neydi?',
+        namePlaceholder: 'Tardis',
+        nameType: 'İsim',
+      },
     },
     {
       name: 'PetPhotos',
@@ -111,6 +130,11 @@ export default {
     {
       name: 'PostDetails',
       component: PostDetails,
+      form: {
+        name: 'İlanınızın başlığı nedir?',
+        namePlaceholder: 'Köpek buldum',
+        nameType: 'Başlık',
+      },
     },
     {
       name: 'PetPhotos',
