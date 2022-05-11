@@ -30,7 +30,7 @@ const LoginForm = () => {
       dispatch(
         sendToast({
           type: 'success',
-          message: 'Giriş başarılı, yönlediriliyorsunuz',
+          message: 'Giriş başarılı, yönlendiriliyorsunuz',
         })
       )
       reset()
