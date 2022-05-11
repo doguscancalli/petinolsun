@@ -5,6 +5,7 @@
       "@components/*": ["components/*"],
       "@data/*": ["data/*"],
       "@utils": ["utils"],
+      "@utils/*": ["utils/*"],
       "@graphql/*": ["graphql/*"],
       "@features/*": ["features/*"],
     }
