@@ -30,7 +30,7 @@ const RegisterForm = () => {
       dispatch(
         sendToast({
           type: 'success',
-          message: 'Kayıt başarılı, yönlediriliyorsunuz',
+          message: 'Kayıt başarılı, yönlendiriliyorsunuz',
         })
       )
       reset()
@@ -100,6 +100,7 @@ const RegisterForm = () => {
           name='name'
           error={errors?.name || error}
           errorMessage={errors?.name?.message}
+          disabled={loading}
           {...register('name', { ...validations.name })}
         />
         <h2 className='text-base md:text-xl font-bold'>Eposta</h2>
@@ -108,6 +109,7 @@ const RegisterForm = () => {
           placeholder='mail@mail.com'
           error={errors?.email || error}
           errorMessage={errors?.email?.message}
+          disabled={loading}
           {...register('email', { ...validations.email })}
         />
         <h2 className='text-base md:text-xl font-bold'>Şifre</h2>
@@ -117,6 +119,7 @@ const RegisterForm = () => {
           type='password'
           error={errors?.password || error}
           errorMessage={errors?.password?.message}
+          disabled={loading}
           {...register('password', { ...validations.password })}
         />
         <Button loading={loading}>Hesabını oluştur</Button>
