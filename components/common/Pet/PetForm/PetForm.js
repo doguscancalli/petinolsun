@@ -2,12 +2,15 @@ import { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import petFormFlow from '@data/petFormFlow'
 import dynamic from 'next/dynamic'
+import { ClientOnly } from '@components/shared'
+import ContactInfo from './ContactInfo'
 const SelectPostType = dynamic(() => import('./SelectPostType'), {
   ssr: false,
 })
 
 const PetForm = () => {
   const [flow, setFlow] = useState(null)
+  const [photos, setPhotos] = useState(null)
 
   const {
     data: { postType },
@@ -23,8 +26,17 @@ const PetForm = () => {
 
   return (
     <div className='mt-16'>
-      {formStep === -1 && <SelectPostType />}
-      {formStep >= 0 && flow && <Component flow={flow} step={formStep} />}
+      <ClientOnly>
+        {formStep === -1 && <SelectPostType />}
+        {formStep >= 0 && flow && (
+          <Component
+            flow={flow}
+            step={formStep}
+            photos={photos}
+            setPhotos={setPhotos}
+          />
+        )}
+      </ClientOnly>
     </div>
   )
 }

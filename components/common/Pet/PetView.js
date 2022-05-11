@@ -3,9 +3,10 @@ import { useRouter } from 'next/router'
 import Moment from 'react-moment'
 import 'moment/locale/tr'
 import { POST_TYPE, GENDER, AGE } from '@data/constants'
-
+import { useSelector } from 'react-redux'
 import Avatar from '../Avatar'
 import PetPhotos from './PetPhotos'
+import { useEffect, useState } from 'react'
 
 const PetView = ({ post }) => {
   const {
@@ -22,21 +23,35 @@ const PetView = ({ post }) => {
     createdAt,
   } = post
 
+  const { user: authUser } = useSelector((state) => state.auth)
+
   const router = useRouter()
   const { slug } = router.query
+
+  const [isPostOwner, setIsPostOwner] = useState(null)
+  useEffect(() => {
+    setIsPostOwner(user?._id === authUser?.id || authUser?.isAdmin)
+  }, [])
+  useEffect(() => {
+    setIsPostOwner(user?._id === authUser?.id || authUser?.isAdmin)
+  }, [authUser])
 
   return (
     <div className='mt-8 grid lg:grid-cols-2 gap-16'>
       <PetPhotos photos={photos} />
       <article>
-        <div className='flex justify-between flex-col md:flex-row gap-2'>
+        <div className='flex justify-between flex-col md:flex-row gap-2 items-center'>
           <div className='flex items-center'>
             <h1 className='text-3xl md:text-4xl font-bold'>{name}</h1>
             <span className='mx-4 text-black-500'>•</span>
             <p className='text-black-500'>{location}</p>
           </div>
-          <Button href={`/ilan/duzenle/${slug}`}>İlanı Düzenle</Button>
         </div>
+        {isPostOwner && (
+          <div className='my-6'>
+            <Button href={`/ilan/duzenle/${slug}`}>İlanı Düzenle</Button>
+          </div>
+        )}
         <div className='flex gap-2 items-center mt-4'>
           <Avatar
             url={`https://ui-avatars.com/api/?name=${user.name.replace(
@@ -76,7 +91,7 @@ const PetView = ({ post }) => {
             <span className='mx-4 text-black-500'>•</span>
             <p className='text-black-500'>{`${POST_TYPE[postType]}, ${AGE[age]}, ${GENDER[gender]}`}</p>
           </div>
-          <p className='mt-4 text-black-500'>{description}</p>
+          <p className='mt-4 text-black-500 break-words'>{description}</p>
         </div>
         <div className='mt-16'>
           <h2 className='text-xl md:text-2xl font-bold'>Haritada Gör</h2>
