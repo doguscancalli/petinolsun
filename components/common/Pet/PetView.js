@@ -19,6 +19,7 @@ const PetView = ({ post }) => {
     photos,
     contactNumber,
     whatsapp,
+    listing,
     user,
     createdAt,
   } = post
@@ -40,6 +41,11 @@ const PetView = ({ post }) => {
     <div className='mt-8 grid lg:grid-cols-2 gap-16'>
       <PetPhotos photos={photos} />
       <article>
+        {!listing && (
+          <span className='inline-flex bg-black text-white px-4 py-2 rounded-full mb-4'>
+            Bu ilan aktif değil
+          </span>
+        )}
         <div className='flex justify-between flex-col md:flex-row gap-2 items-center'>
           <div className='flex items-center'>
             <h1 className='text-3xl md:text-4xl font-bold'>{name}</h1>
