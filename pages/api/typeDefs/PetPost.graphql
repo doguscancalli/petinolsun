@@ -48,6 +48,7 @@ type PetPost {
   user: UserSchema!
   createdAt: Date!
   updatedAt: Date!
+  listing: Boolean!
 }
 type PetPosts {
   docs: [PetPost!]!
@@ -74,6 +75,7 @@ input CreatePetPostInput {
   photos: [String!]!
   contactNumber: String!
   whatsapp: Boolean = false
+  listing: Boolean = true
 }
 input UpdatePetPostInput {
   name: String
@@ -86,6 +88,7 @@ input UpdatePetPostInput {
   photos: [String!]
   contactNumber: String
   whatsapp: Boolean = false
+  listing: Boolean
   user: UserSchema
 }
 input FilterPetPostsInput {
@@ -97,6 +100,7 @@ input FilterPetPostsInput {
   city: String
   gender: Gender
   age: Age
+  listing: Boolean
 }
 
 # Query

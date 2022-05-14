@@ -16,6 +16,7 @@ export const GET_ALL_PET_POSTS = gql`
         photos
         contactNumber
         whatsapp
+        listing
         user
         createdAt
         updatedAt
@@ -47,6 +48,7 @@ export const GET_PET_POST = gql`
       photos
       contactNumber
       whatsapp
+      listing
       user
       createdAt
       updatedAt

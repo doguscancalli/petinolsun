@@ -1,5 +1,5 @@
 export default (input) => {
-  const { date, postType, animal, city, gender, age } = input
+  const { date, postType, animal, city, gender, age, listing } = input
 
   let filter = {}
 
@@ -17,6 +17,7 @@ export default (input) => {
       }
     }
   }
+  if (listing) filter.listing = listing
 
   return filter
 }
