@@ -8,6 +8,7 @@ import advancedFiltering from './advancedFiltering'
 import apolloClient from './apolloClient'
 import imageUpload from './imageUpload'
 import objectToArray from './objectToArray'
+import isObjectEmpty from './isObjectEmpty'
 
 export {
   connectDb,
@@ -21,4 +22,5 @@ export {
   apolloClient,
   imageUpload,
   objectToArray,
+  isObjectEmpty,
 }
