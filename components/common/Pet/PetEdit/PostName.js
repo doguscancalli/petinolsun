@@ -1,15 +1,15 @@
-import { Button, Select } from '@components/ui'
-import { ANIMAL } from '@data/constants'
-import { objectToArray } from '@utils'
+import { Button, Input } from '@components/ui'
 import { useForm } from 'react-hook-form'
+import { useMutation } from '@apollo/client'
+import { UPDATE_PET_POST } from '@graphql/mutations'
 import { useDispatch } from 'react-redux'
 import { sendToast } from '@features/ui/uiSlice'
 import { setEditData } from '@features/petPost/petPostSlice'
-import { useMutation } from '@apollo/client'
-import { UPDATE_PET_POST } from '@graphql/mutations'
 import { useEffect } from 'react'
+import { useRouter } from 'next/router'
 
-const PostPet = ({ id, data, setSelectedField }) => {
+const PostName = ({ id, data, setSelectedField }) => {
+  const router = useRouter()
   const dispatch = useDispatch()
 
   const {
@@ -26,8 +26,34 @@ const PostPet = ({ id, data, setSelectedField }) => {
     }
   )
 
+  const onSubmit = async (fields) => {
+    await updateFields({
+      variables: {
+        id,
+        input: {
+          ...fields,
+        },
+      },
+    })
+  }
+
+  const validations = {
+    name: {
+      required: `İsim/Başlık gerekli`,
+      maxLength: {
+        value: 50,
+        message: `İsim/Başlık 50 karakterden fazla olamaz`,
+      },
+    },
+  }
+
   useEffect(() => {
     if (updatedData) {
+      const {
+        updatePetPost: { slug },
+      } = updatedData
+      dispatch(setEditData({ slug }))
+      router.replace(`/ilan/duzenle/${slug}`)
       dispatch(
         sendToast({
           type: 'success',
@@ -52,27 +78,15 @@ const PostPet = ({ id, data, setSelectedField }) => {
     }
   }, [error])
 
-  const onSubmit = async (fields) => {
-    await updateFields({
-      variables: {
-        id,
-        input: {
-          ...fields,
-        },
-      },
-    })
-  }
-
-  const options = objectToArray(ANIMAL)
-
   return (
     <form className='flex flex-col gap-4' onSubmit={handleSubmit(onSubmit)}>
-      <h2 className='text-lg md:text-2xl font-bold'>Hayvan</h2>
-      <Select
-        options={options}
+      <h2 className='text-lg md:text-2xl font-bold'>İsim/Başlık</h2>
+      <Input
+        placeholder='Tardis'
         defaultValue={data}
-        disabled={loading}
-        {...register('animal')}
+        error={errors?.name}
+        errorMessage={errors?.name?.message}
+        {...register('name', { ...validations.name })}
       />
       <Button loading={loading}>Güncelle</Button>
       <Button
@@ -86,4 +100,4 @@ const PostPet = ({ id, data, setSelectedField }) => {
   )
 }
 
-export default PostPet
+export default PostName

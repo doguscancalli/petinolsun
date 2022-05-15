@@ -6,52 +6,75 @@ import PostGender from '@components/common/Pet/PetEdit/PostGender'
 import PostDetails from '@components/common/Pet/PetEdit/PostDetails'
 import PostContactInfo from '@components/common/Pet/PetEdit/PostContactInfo'
 import PostPhotos from '@components/common/Pet/PetEdit/PostPhotos'
+import PostName from '@components/common/Pet/PetEdit/PostName'
+import PostWhatsapp from '@components/common/Pet/PetEdit/PostWhatsapp'
+import { AGE, ANIMAL, GENDER, PET_POST_STATE } from './constants'
 
 export default [
   {
     name: 'İlan durumu',
     component: PostState,
-    content: 'Sahiplendirilmeyi bekliyor',
+    valueType: 'constant',
+    value: 'listing',
+    constant: PET_POST_STATE,
+  },
+  {
+    name: 'İsim/Başlık',
+    component: PostName,
+    valueType: 'content',
+    value: 'name',
   },
   {
     name: 'Lokasyon bilgisi',
     component: PostLocation,
     content: 'Ankara, Etimesgut',
+    valueType: 'content',
+    value: 'location',
   },
   {
     name: 'Hayvan',
     component: PostPet,
-    content: 'Ankara, Etimesgut',
+    valueType: 'constant',
+    value: 'animal',
+    constant: ANIMAL,
   },
   {
     name: 'Yaş',
     component: PostAge,
-    content: 'Yavru',
+    valueType: 'constant',
+    value: 'age',
+    constant: AGE,
   },
   {
     name: 'Cinsiyet',
     component: PostGender,
-    content: 'Erkek',
+    valueType: 'constant',
+    value: 'gender',
+    constant: GENDER,
   },
   {
-    name: 'Detaylar',
+    name: 'Açıklama',
     component: PostDetails,
-    content: 'Zombie ipsum reversus ab viral inferno...',
+    valueType: 'content',
+    value: 'description',
   },
   {
     name: 'İletişim',
     component: PostContactInfo,
-    content: '555 555 55 55',
+    valueType: 'content',
+    value: 'contactNumber',
+  },
+  {
+    name: 'Whatsapp',
+    component: PostWhatsapp,
+    valueType: 'constant',
+    value: 'whatsapp',
+    constant: PET_POST_STATE,
   },
   {
     name: 'Fotoğraflar',
     component: PostPhotos,
-    content: [
-      '/images/mountain-illustration.jpg',
-      '/images/traveler-illustration.jpg',
-      '/images/waterfall-illustration.jpg',
-      '/images/alien-planet-illustration.jpg',
-      '/images/cave-illustration.jpg',
-    ],
+    valueType: 'photo',
+    value: 'photos',
   },
 ]

@@ -4,6 +4,7 @@ export const petPostSlice = createSlice({
   name: 'petPost',
   initialState: {
     data: {},
+    editData: {},
     formStep: -1,
     totalSteps: 0,
   },
@@ -11,6 +12,12 @@ export const petPostSlice = createSlice({
     setData: (state, action) => {
       state.data = {
         ...state.data,
+        ...action.payload,
+      }
+    },
+    setEditData: (state, action) => {
+      state.editData = {
+        ...state.editData,
         ...action.payload,
       }
     },
@@ -33,6 +40,7 @@ export const petPostSlice = createSlice({
 
 export const {
   setData,
+  setEditData,
   clearData,
   increaseFormStep,
   decreaseFormStep,
