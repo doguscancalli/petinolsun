@@ -48,7 +48,9 @@ export async function getServerSideProps() {
         limit: 3,
         page: 1,
         postType: 'ADOPTION',
+        listing: true,
       },
+      fetchPolicy: 'no-cache',
     },
   })
 
@@ -61,7 +63,9 @@ export async function getServerSideProps() {
         limit: 3,
         page: 1,
         postType: 'OWNERSHIP',
+        listing: true,
       },
+      fetchPolicy: 'no-cache',
     },
   })
 
@@ -74,7 +78,9 @@ export async function getServerSideProps() {
         limit: 3,
         page: 1,
         postType: 'LOST',
+        listing: true,
       },
+      fetchPolicy: 'no-cache',
     },
   })
 
@@ -87,7 +93,9 @@ export async function getServerSideProps() {
         limit: 3,
         page: 1,
         postType: 'FOUND',
+        listing: true,
       },
+      fetchPolicy: 'no-cache',
     },
   })
 
