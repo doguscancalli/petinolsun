@@ -44,3 +44,26 @@ export const CREATE_PET_POST = gql`
     }
   }
 `
+
+export const UPDATE_PET_POST = gql`
+  mutation UpdatePetPost($id: ID!, $input: UpdatePetPostInput!) {
+    updatePetPost(id: $id, input: $input) {
+      id
+      name
+      slug
+      postType
+      location
+      animal
+      age
+      gender
+      description
+      photos
+      contactNumber
+      whatsapp
+      listing
+      user
+      createdAt
+      updatedAt
+    }
+  }
+`
