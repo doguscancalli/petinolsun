@@ -123,7 +123,7 @@ const ContactInfo = ({ photos }) => {
         />
         <Checkbox
           label='Whatsapp üzerinden mesaj atabilirler'
-          htmlFor='phoneNumber'
+          htmlFor='whatsapp'
           disabled={loading || isImageUploading}
           {...register('whatsapp')}
         />
