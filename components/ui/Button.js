@@ -3,6 +3,7 @@ import Link from 'next/link'
 import PulseLoader from 'react-spinners/PulseLoader'
 
 const Button = ({
+  className,
   href,
   external,
   variant,
@@ -62,7 +63,7 @@ const Button = ({
         <a
           className={`${variant} ${size} ${grow && 'btn-grow'} ${
             block && 'btn-block'
-          } ${(disabled || loading) && 'btn-disabled'}`}
+          } ${(disabled || loading) && 'btn-disabled'} ${className}`}
           onMouseEnter={handleHover}
           onMouseLeave={handleHover}
           disabled={loading || disabled}
@@ -87,7 +88,7 @@ const Button = ({
     <button
       className={`${variant} ${size} ${grow && 'btn-grow'} ${
         block && 'btn-block'
-      } ${(disabled || loading) && 'btn-disabled'}`}
+      } ${(disabled || loading) && 'btn-disabled'} ${className}`}
       onMouseEnter={handleHover}
       onMouseLeave={handleHover}
       disabled={loading || disabled}
