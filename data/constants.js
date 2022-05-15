@@ -28,3 +28,8 @@ export const AGE = {
   OLD: 'Yaşlı',
   UNKNOWN: 'Yaş Bilinmiyor',
 }
+
+export const PET_POST_STATE = {
+  true: 'Aktif',
+  false: 'Pasif',
+}
