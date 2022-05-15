@@ -3,12 +3,20 @@ import { useFilePicker } from 'use-file-picker'
 import { Button } from '@components/ui'
 import Image from 'next/image'
 
-const ImageInput = ({ setContent, setPlainContent, error, errorMessage }) => {
+const ImageInput = ({
+  setContent,
+  setPlainContent,
+  error,
+  errorMessage,
+  minFile,
+  maxFile,
+  disabled,
+}) => {
   const options = {
     readAs: 'DataURL',
     accept: 'image/*',
     multiple: true,
-    limitFilesConfig: { min: 1, max: 5 },
+    limitFilesConfig: { min: minFile ?? 1, max: maxFile ?? 5 },
     maxFileSize: 5, // in megabytes
   }
 
@@ -21,15 +29,23 @@ const ImageInput = ({ setContent, setPlainContent, error, errorMessage }) => {
   }, [filesContent])
 
   return (
-    <>
+    <div>
       <div
         className={`border-2 border-dashed rounded-2xl flex items-center flex-col gap-2 p-10 ${
           errors.length > 0 || error ? 'border-red-400' : 'border-black-500'
         }`}
-        onClick={() => openFileSelector()}
+        onClick={() => {
+          if (disabled || loading) return
+          openFileSelector()
+        }}
       >
         <p className='text-center'>Fotoğrafları seçin</p>
-        <Button variant='secondary' size='small' loading={loading}>
+        <Button
+          variant='secondary'
+          size='small'
+          loading={loading}
+          disabled={disabled || loading}
+        >
           Gözat
         </Button>
       </div>
@@ -40,11 +56,12 @@ const ImageInput = ({ setContent, setPlainContent, error, errorMessage }) => {
           {errors[0].fileSizeToolarge && `Fotoğraf boyutu 5mb'dan büyük olamaz`}
           {errors[0].readerError && 'Fotoğraf eklenirken bir hata oluştu'}
           {errors[0].maxLimitExceeded &&
-            '5 adetten fazla fotoğraf yükleyemezsiniz'}
-          {errors[0].minLimitNotReached && 'En az 1 fotoğraf eklemelisiniz'}
+            `${maxFile || 5} adetten fazla fotoğraf yükleyemezsiniz`}
+          {errors[0].minLimitNotReached &&
+            `En az ${minFile || 1} fotoğraf eklemelisiniz`}
         </p>
       )}
-      <ul className='grid grid-cols-5 gap-2'>
+      <ul className='grid grid-cols-5 gap-2 mt-4'>
         {filesContent.map((file, index) => (
           <li
             className='relative group'
@@ -63,7 +80,7 @@ const ImageInput = ({ setContent, setPlainContent, error, errorMessage }) => {
           </li>
         ))}
       </ul>
-    </>
+    </div>
   )
 }
 
