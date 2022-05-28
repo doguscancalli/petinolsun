@@ -10,21 +10,25 @@ const Pet = ({ info, infoType, post, totalDocs }) => {
 
   const handleInfoType = (type, count) => {
     const types = {
-      adoption: {
+      ADOPTION: {
         text: `Sahiplendirilmeyi bekleyen ${count} hayvanı gör`,
         image: '/images/cave-illustration.jpg',
+        url: '/ilan/ara?postType=ADOPTION&page=1',
       },
-      lost: {
+      LOST: {
         text: `Bulunmayı bekleyen ${count} hayvanı gör`,
         image: '/images/traveler-illustration.jpg',
+        url: '/ilan/ara?postType=LOST&page=1',
       },
-      ownership: {
+      OWNERSHIP: {
         text: `Sahiplenilmek istenen ${count} hayvanı gör`,
         image: '/images/waterfall-illustration.jpg',
+        url: '/ilan/ara?postType=OWNERSHIP&page=1',
       },
-      found: {
+      FOUND: {
         text: `Bulunan ${count} hayvanı gör`,
         image: `/images/mountain-illustration.jpg`,
+        url: '/ilan/ara?postType=FOUND&page=1',
       },
     }
     return types[type]
@@ -63,7 +67,7 @@ const Pet = ({ info, infoType, post, totalDocs }) => {
         <li
           className={`rounded-2xl overflow-hidden cursor-pointer flex items-center justify-center text-center p-4 relative`}
           style={{ aspectRatio: '1 / 1.5' }}
-          onClick={() => router.push('/')}
+          onClick={() => router.push(handleInfoType(infoType).url)}
         >
           <Image
             src={handleInfoType(infoType).image}

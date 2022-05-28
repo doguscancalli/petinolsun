@@ -12,25 +12,25 @@ const Home = ({ petPosts }) => {
       {adoptionPosts?.docs?.length > 0 && (
         <PetDisplay
           title='Sahiplendirme ilanları'
-          infoType='adoption'
+          infoType='ADOPTION'
           posts={adoptionPosts}
         />
       )}
 
       {ownershipPosts?.docs?.length > 0 && (
-        <PetDisplay title='Kayıp ilanları' infoType='lost' posts={lostPosts} />
+        <PetDisplay title='Kayıp ilanları' infoType='LOST' posts={lostPosts} />
       )}
       {lostPosts?.docs?.length > 0 && (
         <PetDisplay
           title='Sahiplenme ilanları'
-          infoType='ownership'
+          infoType='OWNERSHIP'
           posts={ownershipPosts}
         />
       )}
       {foundPosts?.docs?.length > 0 && (
         <PetDisplay
           title='Bulunma ilanları'
-          infoType='found'
+          infoType='FOUND'
           posts={foundPosts}
         />
       )}
