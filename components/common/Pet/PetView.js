@@ -48,12 +48,10 @@ const PetView = ({ post }) => {
             Bu ilan aktif değil
           </span>
         )}
-        <div className='flex justify-between flex-col md:flex-row gap-2 items-center'>
-          <div className='flex items-center'>
-            <h1 className='text-3xl md:text-4xl font-bold'>{name}</h1>
-            <span className='mx-4 text-black-500'>•</span>
-            <p className='text-black-500'>{`${city}, ${district}`}</p>
-          </div>
+        <div className='flex flex-col md:flex-row gap-4 items-start md:items-center'>
+          <h1 className='text-3xl md:text-4xl font-bold'>{name}</h1>
+          <span className='text-black-500 hidden md:block'>•</span>
+          <p className='text-black-500'>{`${city}, ${district}`}</p>
         </div>
         {isPostOwner && (
           <div className='my-6'>
@@ -62,7 +60,7 @@ const PetView = ({ post }) => {
         )}
         <div className='flex gap-2 items-center mt-4'>
           <Avatar
-            url={`https://ui-avatars.com/api/?name=${user.name.replace(
+            url={`https://ui-avatars.com/api/?name=${user?.name?.replace(
               /\s+/g,
               '-'
             )}&background=000&color=fff`}
