@@ -1,4 +1,4 @@
-import { Button } from '@components/ui'
+import { Button, ShareButtons } from '@components/ui'
 import { useRouter } from 'next/router'
 import Moment from 'react-moment'
 import 'moment/locale/tr'
@@ -90,8 +90,8 @@ const PetView = ({ post }) => {
               Whatsapp
             </Button>
           )}
-          <Button grow>Paylaş</Button>
           <Button grow>Şikayet Et</Button>
+          <ShareButtons postType={postType} />
         </div>
         <div className='mt-8'>
           <div className='flex items-center'>
