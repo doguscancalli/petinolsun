@@ -28,8 +28,8 @@ export default [
     name: 'Lokasyon bilgisi',
     component: PostLocation,
     content: 'Ankara, Etimesgut',
-    valueType: 'content',
-    value: 'location',
+    valueType: 'multiContent',
+    value: 'city,district',
   },
   {
     name: 'Hayvan',

@@ -24,7 +24,16 @@ const PetEdit = ({ data }) => {
 
   const handleClick = (name) => {
     const filteredField = fields.find((field) => field.name === name)
+    if (filteredField.valueType === 'multiContent') {
+    }
     setSelectedField(filteredField)
+  }
+
+  const handleComponentData = () => {
+    if (selectedField.valueType === 'multiContent') {
+      return selectedField.value.split(',').map((value) => editData[value])
+    }
+    return editData[selectedField.value]
   }
 
   if (isObjectEmpty(editData)) return <PulseLoader size={8} />
@@ -35,7 +44,7 @@ const PetEdit = ({ data }) => {
         <Modal>
           <Component
             id={id}
-            data={editData[selectedField.value]}
+            data={handleComponentData()}
             setSelectedField={setSelectedField}
           />
         </Modal>
@@ -60,6 +69,14 @@ const PetEdit = ({ data }) => {
             )}
             {valueType === 'content' && (
               <p className='text-black-500'>{editData[value]}</p>
+            )}
+            {valueType === 'multiContent' && (
+              <p className='text-black-500'>
+                {value
+                  .split(',')
+                  .map((field) => editData[field])
+                  .join(', ')}
+              </p>
             )}
             {valueType === 'photo' && (
               <ul className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2'>

@@ -1,21 +1,23 @@
-import { Button, Input } from '@components/ui'
-import { useForm } from 'react-hook-form'
+import { Button, Select } from '@components/ui'
 import { useMutation } from '@apollo/client'
 import { UPDATE_PET_POST } from '@graphql/mutations'
 import { useDispatch } from 'react-redux'
 import { sendToast } from '@features/ui/uiSlice'
 import { setEditData } from '@features/petPost/petPostSlice'
 import { useEffect } from 'react'
+import useTurkeyCities from 'use-turkey-cities'
+import { formatLocationOptions } from '@utils'
 
 const PostLocation = ({ id, data, setSelectedField }) => {
   const dispatch = useDispatch()
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    getValues,
-  } = useForm()
+  const { cities, city, setCity, districts, district, setDistrict } =
+    useTurkeyCities()
+
+  useEffect(() => {
+    setCity(data[0])
+    setDistrict(data[1])
+  }, [])
 
   const [updateFields, { data: updatedData, loading, error }] = useMutation(
     UPDATE_PET_POST,
@@ -24,22 +26,14 @@ const PostLocation = ({ id, data, setSelectedField }) => {
     }
   )
 
-  const validations = {
-    location: {
-      required: 'Lokasyon gerekli',
-      maxLength: {
-        value: 30,
-        message: 'Lokasyon 30 karakterden fazla olamaz',
-      },
-    },
-  }
-
-  const onSubmit = async (fields) => {
+  const handleSubmit = async (e) => {
+    e.preventDefault()
     await updateFields({
       variables: {
         id,
         input: {
-          ...fields,
+          city,
+          district,
         },
       },
     })
@@ -53,7 +47,7 @@ const PostLocation = ({ id, data, setSelectedField }) => {
           message: 'İlan güncellendi',
         })
       )
-      dispatch(setEditData(getValues()))
+      dispatch(setEditData({ city, district }))
       setSelectedField('')
     }
   }, [updatedData])
@@ -72,17 +66,29 @@ const PostLocation = ({ id, data, setSelectedField }) => {
   }, [error])
 
   return (
-    <form className='flex flex-col gap-4' onSubmit={handleSubmit(onSubmit)}>
+    <form className='flex flex-col gap-4' onSubmit={handleSubmit}>
       <h2 className='text-lg md:text-2xl font-bold'>Lokasyon</h2>
-      <Input
-        placeholder='Şehir, ilçe/semt'
-        defaultValue={data}
-        error={errors?.location}
-        errorMessage={errors?.location?.message}
-        {...register('location', { ...validations.location })}
+      <h2 className='text-lg md:text-2xl font-bold'>Şehir</h2>
+      <Select
+        onChange={(e) => {
+          setCity(e.target.value)
+        }}
+        value={city}
+        options={formatLocationOptions(cities)}
       />
-      <Button loading={loading}>Güncelle</Button>
+      <h2 className='text-lg md:text-2xl font-bold'>İlçe/Semt</h2>
+      <Select
+        onChange={(e) => {
+          setDistrict(e.target.value)
+        }}
+        value={district}
+        options={formatLocationOptions(districts)}
+      />
+      <Button type='submit' loading={loading}>
+        Güncelle
+      </Button>
       <Button
+        type='button'
         variant='secondary'
         disabled={loading}
         onClick={() => setSelectedField('')}
