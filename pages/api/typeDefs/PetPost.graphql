@@ -37,7 +37,8 @@ type PetPost {
   name: String!
   slug: String!
   postType: PostType!
-  location: String!
+  city: String!
+  district: String!
   animal: Animal!
   age: Age!
   gender: Gender!
@@ -56,9 +57,6 @@ type PetPosts {
   limit: Int
   totalPages: Int
   page: Int
-  pagingCounter: Int
-  hasPrevPage: Boolean
-  hasNextPage: Boolean
   prevPage: Int
   nextPage: Int
 }
@@ -67,7 +65,8 @@ type PetPosts {
 input CreatePetPostInput {
   name: String!
   postType: PostType!
-  location: String!
+  city: String!
+  district: String!
   animal: Animal!
   age: Age!
   gender: Gender!
@@ -80,7 +79,8 @@ input CreatePetPostInput {
 input UpdatePetPostInput {
   name: String
   postType: PostType
-  location: String
+  city: String
+  district: String
   animal: Animal
   age: Age
   gender: Gender
@@ -92,15 +92,17 @@ input UpdatePetPostInput {
   user: UserSchema
 }
 input FilterPetPostsInput {
-  limit: Int
-  page: Int
-  date: String
-  postType: PostType
-  animal: Animal
+  limit: String
+  page: String
+  createdAt: String
+  postType: String
+  animal: String
   city: String
-  gender: Gender
-  age: Age
+  district: String
+  gender: String
+  age: String
   listing: Boolean
+  sort: String
 }
 
 # Query

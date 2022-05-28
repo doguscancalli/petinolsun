@@ -30,7 +30,8 @@ export const CREATE_PET_POST = gql`
       name
       slug
       postType
-      location
+      city
+      district
       animal
       age
       gender

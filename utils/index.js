@@ -9,6 +9,7 @@ import apolloClient from './apolloClient'
 import imageUpload from './imageUpload'
 import objectToArray from './objectToArray'
 import isObjectEmpty from './isObjectEmpty'
+import formatLocationOptions from './formatLocationOptions'
 
 export {
   connectDb,
@@ -23,4 +24,5 @@ export {
   imageUpload,
   objectToArray,
   isObjectEmpty,
+  formatLocationOptions,
 }

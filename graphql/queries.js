@@ -8,7 +8,8 @@ export const GET_ALL_PET_POSTS = gql`
         name
         slug
         postType
-        location
+        city
+        district
         animal
         age
         gender
@@ -25,9 +26,6 @@ export const GET_ALL_PET_POSTS = gql`
       limit
       totalPages
       page
-      pagingCounter
-      hasPrevPage
-      hasNextPage
       prevPage
       nextPage
     }
@@ -40,7 +38,8 @@ export const GET_PET_POST = gql`
       name
       slug
       postType
-      location
+      city
+      district
       animal
       age
       gender

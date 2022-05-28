@@ -45,8 +45,8 @@ export async function getServerSideProps() {
     query: GET_ALL_PET_POSTS,
     variables: {
       input: {
-        limit: 3,
-        page: 1,
+        limit: '3',
+        page: '1',
         postType: 'ADOPTION',
         listing: true,
       },
@@ -60,8 +60,8 @@ export async function getServerSideProps() {
     query: GET_ALL_PET_POSTS,
     variables: {
       input: {
-        limit: 3,
-        page: 1,
+        limit: '3',
+        page: '1',
         postType: 'OWNERSHIP',
         listing: true,
       },
@@ -75,8 +75,8 @@ export async function getServerSideProps() {
     query: GET_ALL_PET_POSTS,
     variables: {
       input: {
-        limit: 3,
-        page: 1,
+        limit: '3',
+        page: '1',
         postType: 'LOST',
         listing: true,
       },
@@ -90,8 +90,8 @@ export async function getServerSideProps() {
     query: GET_ALL_PET_POSTS,
     variables: {
       input: {
-        limit: 3,
-        page: 1,
+        limit: '3',
+        page: '1',
         postType: 'FOUND',
         listing: true,
       },

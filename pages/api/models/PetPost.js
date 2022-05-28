@@ -1,6 +1,5 @@
 import mongoose from 'mongoose'
 import slug from 'mongoose-slug-updater'
-import mongoosePaginate from 'mongoose-paginate-v2'
 
 mongoose.plugin(slug)
 
@@ -22,7 +21,12 @@ const PetPostSchema = new mongoose.Schema(
       trim: true,
       required: true,
     },
-    location: {
+    city: {
+      type: String,
+      trim: true,
+      required: true,
+    },
+    district: {
       type: String,
       trim: true,
       required: true,
@@ -70,8 +74,6 @@ const PetPostSchema = new mongoose.Schema(
     timestamps: true,
   }
 )
-
-PetPostSchema.plugin(mongoosePaginate)
 
 export default mongoose.models.PetPost ||
   mongoose.model('PetPost', PetPostSchema)

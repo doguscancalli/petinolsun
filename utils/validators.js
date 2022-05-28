@@ -49,13 +49,10 @@ export function validateLoginInput(email, password) {
 }
 
 export function validatePetPostInput(input) {
-  const { name, location, description } = input
+  const { name, description } = input
   const errors = {}
   if (name.length > 50) {
     errors.name = 'İsim/Başlık 50 karakterden fazla olamaz'
-  }
-  if (location.length > 30) {
-    errors.location = 'Lokasyon 30 karakterden fazla olamaz'
   }
   if (description.length <= 20) {
     errors.description = 'Açıklama en az 20 karakterden oluşmalıdır'

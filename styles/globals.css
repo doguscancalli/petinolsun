@@ -60,6 +60,26 @@ span.swiper-pagination-bullet.swiper-pagination-bullet-active {
   color: #f9a1bd !important;
 }
 
+/* Pagination */
+.pagination {
+  @apply flex gap-2 flex-wrap;
+}
+.pagination li {
+  @apply select-none;
+}
+.pagination li:not(.break) a {
+  @apply bg-white px-4 py-2  md:px-6 md:py-3 rounded-md transition ease-in-out duration-200 hover:opacity-80 whitespace-nowrap inline-flex;
+}
+.pagination li.selected a,
+.pagination li.previous a,
+.pagination li.next a {
+  @apply bg-black text-white;
+}
+.pagination li.previous.disabled a,
+.pagination li.next.disabled a {
+  @apply opacity-50 hover:opacity-50 !important;
+}
+
 @layer components {
   .btn {
     @apply rounded-full transition ease-in-out duration-200 hover:opacity-80 whitespace-nowrap text-center;

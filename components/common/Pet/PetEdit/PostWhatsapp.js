@@ -32,7 +32,6 @@ const PostWhatsapp = ({ id, data, setSelectedField }) => {
           message: 'İlan güncellendi',
         })
       )
-      console.log(getValues())
       const { whatsapp } = getValues()
       dispatch(setEditData({ whatsapp: !!whatsapp }))
       setSelectedField('')

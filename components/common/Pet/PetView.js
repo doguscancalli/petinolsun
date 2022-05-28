@@ -2,7 +2,7 @@ import { Button } from '@components/ui'
 import { useRouter } from 'next/router'
 import Moment from 'react-moment'
 import 'moment/locale/tr'
-import { POST_TYPE, GENDER, AGE } from '@data/constants'
+import { POST_TYPE, GENDER, AGE, ANIMAL } from '@data/constants'
 import { useSelector } from 'react-redux'
 import Avatar from '../Avatar'
 import PetPhotos from './PetPhotos'
@@ -12,7 +12,9 @@ const PetView = ({ post }) => {
   const {
     name,
     postType,
-    location,
+    city,
+    district,
+    animal,
     age,
     gender,
     description,
@@ -50,7 +52,7 @@ const PetView = ({ post }) => {
           <div className='flex items-center'>
             <h1 className='text-3xl md:text-4xl font-bold'>{name}</h1>
             <span className='mx-4 text-black-500'>•</span>
-            <p className='text-black-500'>{location}</p>
+            <p className='text-black-500'>{`${city},${district}`}</p>
           </div>
         </div>
         {isPostOwner && (
@@ -74,7 +76,7 @@ const PetView = ({ post }) => {
           </p>
         </div>
         <div className='flex gap-2 mt-8 flex-wrap'>
-          <Button grow>Soru Sor</Button>
+          {/* <Button grow>Soru Sor</Button> */}
           <Button href={`tel:${contactNumber.replace(/\D+/g, '')}`} grow>
             <span>Ara</span>
             <span>{contactNumber}</span>
@@ -95,12 +97,9 @@ const PetView = ({ post }) => {
           <div className='flex items-center'>
             <h2 className='text-xl md:text-2xl font-bold'>Detaylar</h2>
             <span className='mx-4 text-black-500'>•</span>
-            <p className='text-black-500'>{`${POST_TYPE[postType]}, ${AGE[age]}, ${GENDER[gender]}`}</p>
+            <p className='text-black-500'>{`${ANIMAL[animal]}, ${POST_TYPE[postType]}, ${AGE[age]}, ${GENDER[gender]}`}</p>
           </div>
           <p className='mt-4 text-black-500 break-words'>{description}</p>
-        </div>
-        <div className='mt-16'>
-          <h2 className='text-xl md:text-2xl font-bold'>Haritada Gör</h2>
         </div>
       </article>
     </div>

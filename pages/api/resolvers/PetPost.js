@@ -6,19 +6,7 @@ export default {
   Query: {
     petPosts: async (_, args) => {
       const { input } = args
-      const { limit, page } = input
-
-      const filter = advancedFiltering(input)
-
-      const petPost = await PetPost.paginate(filter, {
-        limit,
-        page,
-        sort: { createdAt: -1 },
-        populate: {
-          path: 'user',
-          select: 'name',
-        },
-      })
+      const petPost = await advancedFiltering(PetPost, input)
       return petPost
     },
     petPost: async (_, args) => {

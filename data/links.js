@@ -29,24 +29,3 @@ export const navLinks = [
     visibility: 'guest',
   },
 ]
-
-export const searchNavLinks = [
-  {
-    name: 'Köpek',
-  },
-  {
-    name: 'Kedi',
-  },
-  {
-    name: 'Kemirgen',
-  },
-  {
-    name: 'Balık',
-  },
-  {
-    name: 'Tavşan',
-  },
-  {
-    name: 'Diğer',
-  },
-]
