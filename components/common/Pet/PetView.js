@@ -52,7 +52,7 @@ const PetView = ({ post }) => {
           <div className='flex items-center'>
             <h1 className='text-3xl md:text-4xl font-bold'>{name}</h1>
             <span className='mx-4 text-black-500'>•</span>
-            <p className='text-black-500'>{`${city},${district}`}</p>
+            <p className='text-black-500'>{`${city}, ${district}`}</p>
           </div>
         </div>
         {isPostOwner && (
