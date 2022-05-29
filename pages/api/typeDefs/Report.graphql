@@ -1,0 +1,29 @@
+# Type
+type Report {
+  id: ID!
+  reportedBy: String!
+  reportedTopic: String!
+  reportedTopicId: String!
+  createdAt: Date!
+  updatedAt: Date!
+}
+
+# Input
+input CreateReportInput {
+  reportedBy: String!
+  reportedTopic: String!
+  reportedTopicId: String!
+}
+
+# Query
+type Query {
+  reports: [Report!]!
+}
+
+# Mutation
+type Mutation {
+  createReport(input: CreateReportInput!): Report!
+  deleteReport(id: String!): Boolean!
+  deleteReport(id: ID!): Boolean!
+  deleteAllReports: Boolean!
+}
