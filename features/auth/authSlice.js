@@ -32,9 +32,15 @@ export const authSlice = createSlice({
       removeCookies('token')
       state.user = null
     },
+    setUser: (state, action) => {
+      state.user = {
+        ...state.user,
+        ...action.payload,
+      }
+    },
   },
 })
 
-export const { login, logout } = authSlice.actions
+export const { login, logout, setUser } = authSlice.actions
 
 export default authSlice.reducer

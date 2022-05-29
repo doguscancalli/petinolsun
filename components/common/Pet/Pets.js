@@ -12,7 +12,7 @@ const Pets = ({ infoType, posts }) => {
         spaceBetween: 16,
       },
       1024: {
-        slidesPerView: 4,
+        slidesPerView: posts.docs.length > 4 ? 4.2 : 4,
       },
     },
   }

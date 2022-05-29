@@ -12,3 +12,4 @@ export {
 } from './Pet'
 export { default as LoginForm } from './LoginForm'
 export { default as RegisterForm } from './RegisterForm'
+export { ProfileView, SettingsView } from './Profile'

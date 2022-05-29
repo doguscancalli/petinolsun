@@ -1,5 +1,21 @@
 import { gql } from '@apollo/client'
 
+export const ME = gql`
+  query Me {
+    me {
+      id
+      name
+      email
+      isAdmin
+      token
+      resetPasswordToken
+      resetPasswordExpire
+      createdAt
+      updatedAt
+    }
+  }
+`
+
 export const GET_ALL_PET_POSTS = gql`
   query PetPosts($input: FilterPetPostsInput!) {
     petPosts(input: $input) {

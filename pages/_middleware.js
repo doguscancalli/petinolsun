@@ -6,7 +6,7 @@ export default function middleware(req) {
   const { token } = cookies
   const domain = req.nextUrl.clone()
 
-  const authRoutes = ['/ilan/yeni']
+  const authRoutes = ['/ilan/yeni', '/profil']
 
   if (authRoutes.some((r) => url.includes(r))) {
     if (!token) {

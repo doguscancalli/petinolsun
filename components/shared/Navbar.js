@@ -51,19 +51,23 @@ const Navbar = () => {
           })}
         </ul>
         {auth?.user && (
-          <div className='flex items-center gap-2 ml-8'>
-            <Avatar
-              url={`https://ui-avatars.com/api/?name=${auth?.user?.name.replace(
-                /\s+/g,
-                '-'
-              )}&background=000&color=fff`}
-            />
-            <p>{auth?.user?.name}</p>
+          <>
+            <Link href='/profil' passHref>
+              <a className='flex items-center gap-2 ml-8'>
+                <Avatar
+                  url={`https://ui-avatars.com/api/?name=${auth?.user?.name.replace(
+                    /\s+/g,
+                    '-'
+                  )}&background=000&color=fff`}
+                />
+                <p>{auth?.user?.name}</p>
+              </a>
+            </Link>
             <FiLogOut
               className='ml-4 cursor-pointer'
               onClick={() => dispatch(logout())}
             />
-          </div>
+          </>
         )}
         <button
           className='sm:hidden rounded-full bg-black p-[10px]'

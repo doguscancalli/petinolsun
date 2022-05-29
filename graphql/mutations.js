@@ -23,6 +23,28 @@ export const REGISTER_USER = gql`
   }
 `
 
+export const UPDATE_USER = gql`
+  mutation UpdateUser($id: ID!, $input: UpdateUserInput!) {
+    updateUser(id: $id, input: $input) {
+      id
+      name
+      email
+      isAdmin
+      token
+      resetPasswordToken
+      resetPasswordExpire
+      createdAt
+      updatedAt
+    }
+  }
+`
+
+export const UPDATE_PASSWORD = gql`
+  mutation UpdatePassword($password: String!, $newPassword: String!) {
+    updatePassword(password: $password, newPassword: $newPassword)
+  }
+`
+
 export const CREATE_PET_POST = gql`
   mutation CreatePetPost($input: CreatePetPostInput!) {
     createPetPost(input: $input) {

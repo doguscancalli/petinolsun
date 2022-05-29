@@ -1,36 +1,36 @@
-import dynamic from 'next/dynamic'
-import { PetEdit } from '@components/common'
+import { SettingsView } from '@components/common'
+import { ClientOnly } from '@components/shared'
 import { Wrapper } from '@components/ui'
-import { GET_PET_POST } from '@graphql/queries'
+import { ME } from '@graphql/queries'
+import dynamic from 'next/dynamic'
 import { apolloClient } from '@utils'
 import { verify } from 'jsonwebtoken'
-import { ClientOnly } from '@components/shared'
 
 const Navbar = dynamic(() => import('@components/shared/Navbar'), {
   ssr: false,
 })
 
-const EditPetPost = ({ data }) => {
+const Settings = ({ data }) => {
   return (
     <Wrapper>
       <Navbar />
       <ClientOnly>
-        <PetEdit data={data} />
+        <SettingsView />
       </ClientOnly>
     </Wrapper>
   )
 }
 
 export async function getServerSideProps(context) {
-  const { slug } = context.query
   const token = context?.req?.headers?.cookie?.split('token=')[1]
 
   const { data } = await apolloClient.query({
-    context: { headers: { authorization: `Bearer ${token}` } },
-    query: GET_PET_POST,
-    variables: {
-      slug,
+    context: {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
     },
+    query: ME,
     errorPolicy: 'all',
     fetchPolicy: 'no-cache',
   })
@@ -43,9 +43,10 @@ export async function getServerSideProps(context) {
       },
     }
   }
+
   try {
     const { id, isAdmin } = verify(token, process.env.JWT_SECRET)
-    if (data.petPost.user._id !== id && !isAdmin) {
+    if (data._id !== id && !isAdmin) {
       return {
         redirect: {
           permanent: false,
@@ -62,13 +63,13 @@ export async function getServerSideProps(context) {
     }
   }
 
-  const { petPost } = data
+  const { me } = data
 
   return {
     props: {
-      data: petPost,
+      data: me,
     },
   }
 }
 
-export default EditPetPost
+export default Settings
