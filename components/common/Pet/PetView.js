@@ -3,10 +3,13 @@ import { useRouter } from 'next/router'
 import Moment from 'react-moment'
 import 'moment/locale/tr'
 import { POST_TYPE, GENDER, AGE, ANIMAL } from '@data/constants'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import Avatar from '../Avatar'
 import PetPhotos from './PetPhotos'
 import { useEffect, useState } from 'react'
+import { useMutation } from '@apollo/client'
+import { CREATE_REPORT } from '@graphql/mutations'
+import { sendToast } from '@features/ui/uiSlice'
 
 const PetView = ({ post }) => {
   const {
@@ -31,13 +34,65 @@ const PetView = ({ post }) => {
   const router = useRouter()
   const { slug } = router.query
 
+  const [createReport, { data, loading, error }] = useMutation(CREATE_REPORT, {
+    errorPolicy: 'all',
+  })
+
+  const dispatch = useDispatch()
+
   const [isPostOwner, setIsPostOwner] = useState(null)
   useEffect(() => {
     setIsPostOwner(user?._id === authUser?.id || authUser?.isAdmin)
   }, [])
+
   useEffect(() => {
     setIsPostOwner(user?._id === authUser?.id || authUser?.isAdmin)
   }, [authUser])
+
+  useEffect(() => {
+    if (data) {
+      dispatch(
+        sendToast({
+          type: 'success',
+          message: 'Rapor oluşturuldu',
+        })
+      )
+    }
+  }, [data])
+
+  useEffect(() => {
+    if (error) {
+      console.log(error)
+      error.graphQLErrors.forEach((error) =>
+        dispatch(
+          sendToast({
+            type: 'error',
+            message: error?.extensions?.originalError?.message,
+          })
+        )
+      )
+    }
+  }, [error])
+
+  const handleReport = () => {
+    if (!authUser) {
+      return dispatch(
+        sendToast({
+          type: 'error',
+          message: 'Rapor oluşturmak için giriş yapmalısınız',
+        })
+      )
+    }
+    createReport({
+      variables: {
+        input: {
+          reportedBy: authUser?.id,
+          reportedTopic: 'petPost',
+          reportedTopicId: post?.id,
+        },
+      },
+    })
+  }
 
   return (
     <div className='mt-8 grid lg:grid-cols-2 gap-16'>
@@ -88,7 +143,9 @@ const PetView = ({ post }) => {
               Whatsapp
             </Button>
           )}
-          <Button grow>Şikayet Et</Button>
+          <Button onClick={handleReport} loading={loading} grow>
+            Şikayet Et
+          </Button>
           <ShareButtons postType={postType} />
         </div>
         <div className='mt-8'>

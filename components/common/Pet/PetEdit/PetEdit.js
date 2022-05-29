@@ -7,16 +7,29 @@ import { Button, Modal } from '@components/ui'
 import { POST_TYPE } from '@data/constants'
 import { setEditData } from '@features/petPost/petPostSlice'
 import { isObjectEmpty } from '@utils'
+import { DELETE_PET_POST } from '@graphql/mutations'
+import { useMutation } from '@apollo/client'
+import { useRouter } from 'next/router'
+import { sendToast } from '@features/ui/uiSlice'
 
 const PetEdit = ({ data }) => {
+  const { id, name, postType } = data
+
   const { editData } = useSelector((state) => state.petPost)
   const dispatch = useDispatch()
+
+  const router = useRouter()
+
+  const [deletePetPost, { data: deletedData, loading, error }] = useMutation(
+    DELETE_PET_POST,
+    {
+      errorPolicy: 'all',
+    }
+  )
 
   useEffect(() => {
     dispatch(setEditData(data))
   }, [])
-
-  const { id, name, postType } = data
 
   const [selectedField, setSelectedField] = useState('')
 
@@ -35,6 +48,43 @@ const PetEdit = ({ data }) => {
     }
     return editData[selectedField.value]
   }
+
+  const handleDelete = () => {
+    var result = confirm('İlanı silmek istediğinize emin misiniz?')
+    if (result) {
+      deletePetPost({
+        variables: {
+          id,
+        },
+      })
+    }
+  }
+
+  useEffect(() => {
+    if (deletedData) {
+      dispatch(
+        sendToast({
+          type: 'success',
+          message: 'İlan silindi, yönlendiriliyorsunuz',
+        })
+      )
+      router.push('/')
+    }
+  }, [deletedData])
+
+  useEffect(() => {
+    if (error) {
+      console.log(error)
+      error.graphQLErrors.forEach((error) =>
+        dispatch(
+          sendToast({
+            type: 'error',
+            message: error?.extensions?.originalError?.message,
+          })
+        )
+      )
+    }
+  }, [error])
 
   if (isObjectEmpty(editData)) return <PulseLoader size={8} />
 
@@ -102,6 +152,9 @@ const PetEdit = ({ data }) => {
           </li>
         ))}
       </ul>
+      <button className='text-red mt-6 cursor-pointer' onClick={handleDelete}>
+        İlanı sil
+      </button>
     </div>
   )
 }

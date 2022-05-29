@@ -91,3 +91,21 @@ export const UPDATE_PET_POST = gql`
     }
   }
 `
+
+export const DELETE_PET_POST = gql`
+  mutation DeletePetPost($id: ID!) {
+    deletePetPost(id: $id)
+  }
+`
+export const CREATE_REPORT = gql`
+  mutation CreateReport($input: CreateReportInput!) {
+    createReport(input: $input) {
+      id
+      reportedBy
+      reportedTopic
+      reportedTopicId
+      createdAt
+      updatedAt
+    }
+  }
+`
