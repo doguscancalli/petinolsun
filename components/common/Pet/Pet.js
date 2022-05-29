@@ -57,7 +57,7 @@ const Pet = ({ info, infoType, post, totalDocs }) => {
     if (!info) {
       return (
         <div
-          className={`rounded-2xl overflow-hidden cursor-pointer flex items-start relative`}
+          className={`rounded-2xl overflow-hidden cursor-pointer flex items-start relative group`}
           style={{ aspectRatio: '1 / 1.5' }}
           onClick={() => router.push(`/ilan/${slug}`)}
           onMouseEnter={onMouseEnter}
@@ -68,7 +68,7 @@ const Pet = ({ info, infoType, post, totalDocs }) => {
             alt=''
             layout='fill'
             objectFit='cover'
-            className='-z-10'
+            className='-z-10 group-hover:scale-110 transition cubic-bezier(.7,1,1,1) duration-[8s]'
           />
           <div className='w-full p-4 pt-6 bg-gradient-to-t from-black/60 to-black/0 text-white mt-auto z-0'>
             <div
