@@ -37,8 +37,6 @@ const PetEdit = ({ data }) => {
 
   const handleClick = (name) => {
     const filteredField = fields.find((field) => field.name === name)
-    if (filteredField.valueType === 'multiContent') {
-    }
     setSelectedField(filteredField)
   }
 
