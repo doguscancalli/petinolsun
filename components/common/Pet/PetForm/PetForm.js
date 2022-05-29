@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux'
 import petFormFlow from '@data/petFormFlow'
 import dynamic from 'next/dynamic'
 import { ClientOnly } from '@components/shared'
-import ContactInfo from './ContactInfo'
 const SelectPostType = dynamic(() => import('./SelectPostType'), {
   ssr: false,
 })

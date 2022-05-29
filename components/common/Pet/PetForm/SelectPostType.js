@@ -6,6 +6,7 @@ import {
   setData,
   increaseFormStep,
   setTotalSteps,
+  clearData,
 } from '@features/petPost/petPostSlice'
 import petFormFlow from '@data/petFormFlow'
 import { objectToArray } from '@utils'
@@ -17,6 +18,7 @@ const SelectPostType = () => {
   const dispatch = useDispatch()
 
   const onSubmit = ({ postType }) => {
+    dispatch(clearData())
     dispatch(setData({ postType }))
     dispatch(increaseFormStep())
     dispatch(setTotalSteps(petFormFlow[postType].length))
