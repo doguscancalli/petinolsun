@@ -12,6 +12,12 @@ export default {
   Mutation: {
     createReport: async (_, args) => {
       const { input } = args
+      const isDuplicate = await Report.findOne({
+        reportedBy: input.reportedBy,
+        reportedTopic: input.reportedTopic,
+        reportedTopicId: input.reportedTopicId,
+      })
+      if (isDuplicate) throw new Error('Zaten rapor edilmiş')
       const report = await Report.create(input)
       return report
     },
