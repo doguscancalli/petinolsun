@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import Link from 'next/link'
-import { Button, Checkbox, Input } from '@components/ui'
+import { Button, Input } from '@components/ui'
 import { useForm } from 'react-hook-form'
 import { useMutation } from '@apollo/client'
 import { LOGIN_USER } from '@graphql/mutations'
