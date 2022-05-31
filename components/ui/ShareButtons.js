@@ -14,7 +14,7 @@ const ShareButton = ({ children, ...rest }) => {
   )
 }
 
-const ShareButtons = ({ postType }) => {
+const ShareButtons = ({ type, postType }) => {
   const [isOpen, setIsOpen] = useState(false)
   const [postUrl, setPostUrl] = useState(undefined)
 
@@ -53,14 +53,26 @@ const ShareButtons = ({ postType }) => {
   const telegramShareUrl = (postUrl, content) =>
     `https://t.me/share/url?url=${postUrl}&text=${content}`
 
+  const handleContent = (type) => {
+    if (type === 'post') {
+      return `Bu gönderiye bir göz atın.`
+    }
+    if (type === 'petPost') {
+      return `${POST_TYPE[postType]} ilanına göz atın.`
+    }
+  }
+
   const handleShare = (platform) => {
-    const content = `${POST_TYPE[postType]} ilanına göz atın.`
     window
       .open(
-        (platform === 'facebook' && facebookShareUrl(postUrl, content)) ||
-          (platform === 'twitter' && twitterShareUrl(postUrl, content)) ||
-          (platform === 'whatsapp' && whatsappShareUrl(postUrl, content)) ||
-          (platform === 'telegram' && telegramShareUrl(postUrl, content)),
+        (platform === 'facebook' &&
+          facebookShareUrl(postUrl, handleContent(type))) ||
+          (platform === 'twitter' &&
+            twitterShareUrl(postUrl, handleContent(type))) ||
+          (platform === 'whatsapp' &&
+            whatsappShareUrl(postUrl, handleContent(type))) ||
+          (platform === 'telegram' &&
+            telegramShareUrl(postUrl, handleContent(type))),
         'postWindow',
         'width=800,height=800'
       )
