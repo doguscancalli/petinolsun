@@ -108,11 +108,6 @@ const PetView = ({ post }) => {
           <span className='text-black-500 hidden md:block'>•</span>
           <p className='text-black-500'>{`${city}, ${district}`}</p>
         </div>
-        {isPostOwner && (
-          <div className='my-6'>
-            <Button href={`/ilan/duzenle/${slug}`}>İlanı Düzenle</Button>
-          </div>
-        )}
         <div className='flex gap-2 items-center mt-4'>
           <Avatar
             url={`https://ui-avatars.com/api/?name=${user?.name?.replace(
@@ -130,6 +125,9 @@ const PetView = ({ post }) => {
         </div>
         <div className='flex gap-2 mt-8 flex-wrap'>
           {/* <Button grow>Soru Sor</Button> */}
+          {isPostOwner && (
+            <Button href={`/ilan/duzenle/${slug}`}>İlanı Düzenle</Button>
+          )}
           <Button href={`tel:${contactNumber.replace(/\D+/g, '')}`} grow>
             <span>Ara</span>
             <span>{contactNumber}</span>
