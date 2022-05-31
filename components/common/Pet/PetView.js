@@ -147,7 +147,7 @@ const PetView = ({ post }) => {
           <Button onClick={handleReport} loading={loading} grow>
             Şikayet Et
           </Button>
-          <ShareButtons postType={postType} />
+          <ShareButtons type='petPost' postType={postType} />
         </div>
         <div className='mt-8'>
           <div className='flex items-center'>
