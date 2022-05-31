@@ -1,3 +1,6 @@
+# Scalar
+scalar Date
+
 # Type
 type Report {
   id: ID!
