@@ -39,7 +39,7 @@ export async function getServerSideProps(context) {
     return {
       redirect: {
         permanent: false,
-        destination: '/giris',
+        destination: '/404',
       },
     }
   }
@@ -49,7 +49,7 @@ export async function getServerSideProps(context) {
       return {
         redirect: {
           permanent: false,
-          destination: '/giris',
+          destination: '/404',
         },
       }
     }
@@ -57,7 +57,7 @@ export async function getServerSideProps(context) {
     return {
       redirect: {
         permanent: false,
-        destination: '/giris',
+        destination: '/404',
       },
     }
   }
