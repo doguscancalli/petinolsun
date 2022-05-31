@@ -22,17 +22,28 @@ const PetSlug = ({ petPost }) => {
 export async function getServerSideProps(context) {
   const { slug } = context.params
 
-  const {
-    data: { petPost },
-  } = await apolloClient.query({
+  const { data } = await apolloClient.query({
     query: GET_PET_POST,
     variables: {
       slug,
     },
+    errorPolicy: 'all',
+    fetchPolicy: 'no-cache',
   })
 
+  if (!data) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: '/404',
+      },
+    }
+  }
+
   return {
-    props: { petPost },
+    props: {
+      petPost: data.petPost,
+    },
   }
 }
 
