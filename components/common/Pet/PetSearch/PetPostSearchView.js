@@ -26,7 +26,6 @@ const PetPostSearchView = () => {
     variables: {
       input: {
         limit: '12',
-        page: '1',
         listing: true,
         ...filter,
       },
