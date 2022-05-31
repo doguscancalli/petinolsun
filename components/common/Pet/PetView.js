@@ -1,7 +1,5 @@
 import { Button, ShareButtons } from '@components/ui'
 import { useRouter } from 'next/router'
-import Moment from 'react-moment'
-import 'moment/locale/tr'
 import { POST_TYPE, GENDER, AGE, ANIMAL } from '@data/constants'
 import { useDispatch, useSelector } from 'react-redux'
 import Avatar from '../Avatar'
@@ -10,6 +8,11 @@ import { useEffect, useState } from 'react'
 import { useMutation } from '@apollo/client'
 import { CREATE_REPORT } from '@graphql/mutations'
 import { sendToast } from '@features/ui/uiSlice'
+import dynamic from 'next/dynamic'
+
+const Moment = dynamic(() => import('react-moment'), {
+  ssr: false,
+})
 
 const PetView = ({ post }) => {
   const {

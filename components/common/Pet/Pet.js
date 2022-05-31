@@ -1,8 +1,11 @@
 import { useRef } from 'react'
-import { useRouter, withRouter } from 'next/router'
+import { useRouter } from 'next/router'
 import Image from 'next/image'
-import Moment from 'react-moment'
-import 'moment/locale/tr'
+import dynamic from 'next/dynamic'
+
+const Moment = dynamic(() => import('react-moment'), {
+  ssr: false,
+})
 
 const Pet = ({ info, infoType, post, totalDocs }) => {
   const { slug, name, city, district, photos, createdAt } = post || {}
