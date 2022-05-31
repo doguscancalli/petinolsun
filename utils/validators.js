@@ -57,6 +57,9 @@ export function validatePetPostInput(input) {
   if (description.length <= 20) {
     errors.description = 'Açıklama en az 20 karakterden oluşmalıdır'
   }
+  if (description.length > 500) {
+    errors.description = 'Açıklama 500 karakterden fazla olamaz'
+  }
 
   return {
     errors,

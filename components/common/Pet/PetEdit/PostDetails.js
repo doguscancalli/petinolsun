@@ -31,6 +31,10 @@ const PostDetails = ({ id, data, setSelectedField }) => {
         value: 20,
         message: 'Açıklama en az 20 karakterden oluşmalıdır',
       },
+      maxLength: {
+        value: 500,
+        message: 'Açıklama 500 karakterden fazla olamaz',
+      },
     },
   }
 
