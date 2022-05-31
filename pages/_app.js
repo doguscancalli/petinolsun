@@ -5,6 +5,7 @@ import { store } from '../store'
 import { Provider } from 'react-redux'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import 'moment/locale/tr'
 
 function MyApp({ Component, pageProps }) {
   return (
