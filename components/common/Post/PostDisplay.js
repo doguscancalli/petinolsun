@@ -9,7 +9,7 @@ import { isObjectEmpty } from '@utils'
 import { useSelector, useDispatch } from 'react-redux'
 import { setSearchData } from '@features/post/postSlice'
 
-const PostDisplay = ({ className }) => {
+const PostDisplay = ({ className, filters, title }) => {
   const [filter, setFilter] = useState('')
 
   const { searchData } = useSelector((state) => state.post)
@@ -23,6 +23,7 @@ const PostDisplay = ({ className }) => {
       input: {
         limit: '6',
         ...filter,
+        ...filters,
       },
     },
     errorPolicy: 'all',
@@ -68,6 +69,9 @@ const PostDisplay = ({ className }) => {
   return (
     <div className={className}>
       {loading && <PulseLoader size={8} />}
+      {title && (
+        <h1 className='text-2xl md:text-4xl font-bold mb-8'>{title}</h1>
+      )}
       {searchData && !loading && <Posts posts={searchData.docs} />}
       {searchData?.totalPages > 1 && !loading && (
         <Pagination
