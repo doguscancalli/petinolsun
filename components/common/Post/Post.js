@@ -36,11 +36,11 @@ const Post = ({ post }) => {
             </Moment>
           </p>
         </div>
-        <div className='flex gap-2'>
+        {/* <div className='flex gap-2'>
           <p className='text-xs'>8 yanıt</p>
           <span className='text-xs text-black-500'>•</span>
           <p className='text-xs'>263 görüntülenme</p>
-        </div>
+        </div> */}
       </div>
     </li>
   )

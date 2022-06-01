@@ -102,11 +102,11 @@ const PostView = ({ post }) => {
             </p>
           </div>
         </div>
-        <div className='text-left md:text-right flex gap-2 md:flex-col md:gap-0 mt-4 md:mt-0'>
+        {/* <div className='text-left md:text-right flex gap-2 md:flex-col md:gap-0 mt-4 md:mt-0'>
           <p className='text-sm text-black-500'>8 yanıt</p>
           <p className='text-sm text-black-500 md:hidden'>•</p>
           <p className='text-sm text-black-500'>263 görüntülenme</p>
-        </div>
+        </div> */}
       </div>
       <p className='mt-6 break-words'>{description}</p>
       <div className='flex gap-2 mt-6 flex-wrap'>
