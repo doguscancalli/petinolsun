@@ -4,6 +4,7 @@ import fields from '@data/postEditFields'
 import { setEditData } from '@features/post/postSlice'
 import { sendToast } from '@features/ui/uiSlice'
 import { DELETE_POST } from '@graphql/mutations'
+import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -14,6 +15,8 @@ const PostEdit = ({ data }) => {
 
   const { editData } = useSelector((state) => state.post)
   const dispatch = useDispatch()
+
+  const router = useRouter()
 
   const [deletePost, { data: deletedData, loading, error }] = useMutation(
     DELETE_POST,
@@ -30,7 +33,7 @@ const PostEdit = ({ data }) => {
           message: 'Gönderi başarıyla silindi, yönlendiriliyorsunuz',
         })
       )
-      router.push('/')
+      router.push('/gonderi')
     }
   }, [deletedData])
 
