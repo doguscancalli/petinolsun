@@ -150,7 +150,11 @@ const PetEdit = ({ data }) => {
           </li>
         ))}
       </ul>
-      <button className='text-red mt-6 cursor-pointer' onClick={handleDelete}>
+      <button
+        className='text-red mt-6 cursor-pointer'
+        onClick={handleDelete}
+        disabled={loading}
+      >
         İlanı sil
       </button>
     </div>

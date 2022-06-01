@@ -10,7 +10,7 @@ export const navLinks = [
   },
   {
     name: 'Gönderiler',
-    url: '/',
+    url: '/gonderi',
   },
   {
     name: 'Hakkımızda',

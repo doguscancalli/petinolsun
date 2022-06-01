@@ -109,3 +109,80 @@ export const CREATE_REPORT = gql`
     }
   }
 `
+
+export const CREATE_POST = gql`
+  mutation CreatePost($input: CreatePostInput!) {
+    createPost(input: $input) {
+      id
+      title
+      description
+      slug
+      user
+      createdAt
+      updatedAt
+    }
+  }
+`
+export const UPDATE_POST = gql`
+  mutation UpdatePost($id: ID!, $input: UpdatePostInput!) {
+    updatePost(id: $id, input: $input) {
+      id
+      title
+      slug
+      description
+      user
+      createdAt
+      updatedAt
+    }
+  }
+`
+
+export const DELTE_ALL_POSTS = gql`
+  mutation Mutation {
+    deleteAllPosts
+  }
+`
+
+export const DELETE_POST = gql`
+  mutation DeletePost($id: ID!) {
+    deletePost(id: $id)
+  }
+`
+
+export const CREATE_COMMENT = gql`
+  mutation CreateComment($input: CreateCommentInput!) {
+    createComment(input: $input) {
+      id
+      comment
+      user
+      post
+      createdAt
+      updatedAt
+    }
+  }
+`
+
+export const UPDATE_COMMENT = gql`
+  mutation UpdateComment($id: ID!, $input: UpdateCommentInput!) {
+    updateComment(id: $id, input: $input) {
+      id
+      comment
+      user
+      post
+      createdAt
+      updatedAt
+    }
+  }
+`
+
+export const DELETE_COMMENT = gql`
+  mutation DeleteComment($id: ID!) {
+    deleteComment(id: $id)
+  }
+`
+
+export const DELETE_ALL_COMMENTS = gql`
+  mutation Mutation {
+    deleteAllComments
+  }
+`

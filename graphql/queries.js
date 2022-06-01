@@ -70,3 +70,60 @@ export const GET_PET_POST = gql`
     }
   }
 `
+
+export const GET_ALL_POSTS = gql`
+  query Posts($input: FilterPostsInput!) {
+    posts(input: $input) {
+      docs {
+        id
+        title
+        slug
+        description
+        user
+        createdAt
+        updatedAt
+      }
+      totalDocs
+      limit
+      totalPages
+      page
+      prevPage
+      nextPage
+    }
+  }
+`
+
+export const GET_POST = gql`
+  query Post($slug: String!) {
+    post(slug: $slug) {
+      id
+      title
+      slug
+      description
+      user
+      createdAt
+      updatedAt
+    }
+  }
+`
+
+export const GET_ALL_COMMENTS = gql`
+  query Comments($input: FilterCommentsInput!) {
+    comments(input: $input) {
+      docs {
+        id
+        comment
+        user
+        post
+        createdAt
+        updatedAt
+      }
+      totalDocs
+      limit
+      totalPages
+      page
+      prevPage
+      nextPage
+    }
+  }
+`

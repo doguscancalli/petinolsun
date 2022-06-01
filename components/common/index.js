@@ -13,3 +13,4 @@ export {
 export { default as LoginForm } from './LoginForm'
 export { default as RegisterForm } from './RegisterForm'
 export { ProfileView, SettingsView } from './Profile'
+export { PostView, PostDisplay, Posts, Post, PostEdit, NewPost } from './Post'

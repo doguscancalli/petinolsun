@@ -66,3 +66,35 @@ export function validatePetPostInput(input) {
     valid: Object.keys(errors).length < 1,
   }
 }
+
+export function validatePostInput(input) {
+  const { title, description } = input
+  const errors = {}
+  if (title.length > 100) {
+    errors.name = 'Başlık 100 karakterden fazla olamaz'
+  }
+  if (description.length <= 20) {
+    errors.description = 'Açıklama en az 20 karakterden oluşmalıdır'
+  }
+  if (description.length > 500) {
+    errors.description = 'Açıklama 500 karakterden fazla olamaz'
+  }
+
+  return {
+    errors,
+    valid: Object.keys(errors).length < 1,
+  }
+}
+
+export function validateCommentInput(input) {
+  const { comment } = input
+  const errors = {}
+  if (comment.length > 300) {
+    errors.comment = 'Yorum 300 karakterden fazla olamaz'
+  }
+
+  return {
+    errors,
+    valid: Object.keys(errors).length < 1,
+  }
+}
