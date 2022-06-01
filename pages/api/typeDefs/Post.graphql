@@ -36,7 +36,7 @@ input FilterPostsInput {
   page: String
   createdAt: String
   sort: String
-  user: String
+  user: UserSchema
 }
 
 # Query
