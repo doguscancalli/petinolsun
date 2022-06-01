@@ -69,7 +69,7 @@ const PostDisplay = ({ className, filters, title }) => {
   return (
     <div className={className}>
       {loading && <PulseLoader size={8} />}
-      {title && (
+      {title && !loading && (
         <h1 className='text-2xl md:text-4xl font-bold mb-8'>{title}</h1>
       )}
       {searchData && !loading && <Posts posts={searchData.docs} />}
