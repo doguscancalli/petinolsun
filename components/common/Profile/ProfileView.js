@@ -1,20 +1,28 @@
 import { useEffect } from 'react'
 import { FiSettings } from 'react-icons/fi'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useQuery } from '@apollo/client'
-import { GET_ALL_PET_POSTS } from '@graphql/queries'
-import { Avatar, PetDisplay } from '@components/common'
+import { GET_ALL_PET_POSTS, GET_ALL_POSTS } from '@graphql/queries'
+import { Avatar, PetDisplay, PostDisplay } from '@components/common'
 import Link from 'next/link'
+import { PulseLoader } from 'react-spinners'
+import { sendToast } from '@features/ui/uiSlice'
 
 const ProfileView = () => {
   const { user } = useSelector((state) => state.auth)
+  const dispatch = useDispatch()
 
-  const { data, loading, error } = useQuery(GET_ALL_PET_POSTS, {
+  const {
+    data: petPostsData,
+    loading: petPostsLoading,
+    error: petPostsError,
+  } = useQuery(GET_ALL_PET_POSTS, {
     variables: {
       input: {
         limit: '100',
         page: '1',
         user: user?.id,
+        postType: 'ADOPTION,OWNERSHIP,LOST,FOUND',
       },
     },
     errorPolicy: 'all',
@@ -22,8 +30,8 @@ const ProfileView = () => {
   })
 
   useEffect(() => {
-    if (error) {
-      error.graphQLErrors.forEach((error) =>
+    if (petPostsError) {
+      petPostsError.graphQLErrors.forEach((error) =>
         dispatch(
           sendToast({
             type: 'error',
@@ -32,7 +40,38 @@ const ProfileView = () => {
         )
       )
     }
-  }, [error])
+  }, [petPostsError])
+
+  // const {
+  //   data: postsData,
+  //   loading: postsLoading,
+  //   error: postsError,
+  // } = useQuery(GET_ALL_POSTS, {
+  //   variables: {
+  //     input: {
+  //       limit: '100',
+  //       page: '1',
+  //       user: {
+  //         _id: user.id,
+  //       },
+  //     },
+  //   },
+  //   errorPolicy: 'all',
+  //   fetchPolicy: 'no-cache',
+  // })
+
+  // useEffect(() => {
+  //   if (postsError) {
+  //     postsError.graphQLErrors.forEach((error) =>
+  //       dispatch(
+  //         sendToast({
+  //           type: 'error',
+  //           message: error?.extensions?.originalError?.message,
+  //         })
+  //       )
+  //     )
+  //   }
+  // }, [postsError])
 
   return (
     <>
@@ -53,7 +92,18 @@ const ProfileView = () => {
           </Link>
         </div>
       </div>
-      {data?.petPosts && <PetDisplay title='İlanlarım' posts={data.petPosts} />}
+      {petPostsLoading && <PulseLoader size={8} />}
+      {petPostsData?.petPosts && !petPostsLoading && (
+        <PetDisplay title='İlanlarım' posts={petPostsData.petPosts} />
+      )}
+      {/* {postsLoading && <PulseLoader size={8} />} */}
+      {/* {postsData?.posts && !postsLoading && ( */}
+      <PostDisplay
+        className='mt-16'
+        title='Gönderilerim'
+        filters={{ user: { _id: user.id } }}
+      />
+      {/* )} */}
     </>
   )
 }
