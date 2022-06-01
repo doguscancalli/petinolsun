@@ -1,4 +1,4 @@
-export default async (model, fields) => {
+export default async (model, fields, populate) => {
   const reqQuery = { ...fields }
   let query
   let queryStr
@@ -31,21 +31,36 @@ export default async (model, fields) => {
   query = model.find(queryStr).collation({ locale: 'tr', strength: 2 })
 
   // Sort
-  if (fields.sort) {
+  if (fields?.sort) {
     query = query.sort(fields.sort)
   } else {
     query = query.sort('-createdAt')
   }
 
   // Pagination
-  const page = parseInt(fields.page, 10) || 1
-  const limit = parseInt(fields.limit, 10) || 10
+  const page = parseInt(fields?.page, 10) || 1
+  const limit = parseInt(fields?.limit, 10) || 10
   const startIndex = (page - 1) * limit
   const endIndex = page * limit
   const totalDocs = await model.countDocuments(queryStr)
   const totalPages = Math.ceil(totalDocs / limit)
 
   query = query.skip(startIndex).limit(limit)
+
+  // Populate
+  // if (fields?.populate) {
+  //   const removeSelectFields = ['email', 'password']
+  //   let selectFields = fields.populate.select.split(' ')
+  //   selectFields = selectFields.filter((field) => !field.startsWith('+'))
+  //   selectFields = selectFields.filter(
+  //     (field) => !removeSelectFields.includes(field)
+  //   )
+  //   fields.populate.select = selectFields.join(' ')
+  //   query = query.populate(fields.populate)
+  // }
+  if (populate) {
+    query = query.populate(populate)
+  }
 
   // Executing query
   const results = await query
