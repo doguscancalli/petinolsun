@@ -21,8 +21,8 @@ const PostPage = () => {
               <NewPost setToggleModal={setToggleModal} />
             </Modal>
           )}
-          <div className='flex justify-between items-center'>
-            <h2 className='text-base md:text-xl font-bold'>Son gönderiler</h2>
+          <div className='flex justify-between items-center mb-8'>
+            <h1 className='text-2xl md:text-4xl font-bold'>Son gönderiler</h1>
             <Button onClick={() => setToggleModal(true)}>Yeni Gönderi</Button>
           </div>
           <ClientOnly>
