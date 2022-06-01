@@ -32,4 +32,10 @@ const PostSchema = new mongoose.Schema(
   }
 )
 
+// Cascade delete comments when a post is deleted
+PostSchema.pre('remove', async function (next) {
+  await this.model('Comment').deleteMany({ post: this._id })
+  next()
+})
+
 export default mongoose.models.Post || mongoose.model('Post', PostSchema)
