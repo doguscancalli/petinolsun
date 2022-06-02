@@ -1,14 +1,10 @@
-import { apolloClient } from '@utils'
 import { Hero, PetDisplay, PostDisplay } from '@components/common'
-import { GET_ALL_PET_POSTS } from '@graphql/queries'
 import { store } from '../store'
 import { Provider } from 'react-redux'
 import { ClientOnly } from '@components/shared'
 import { Wrapper } from '@components/ui'
 
 const Home = () => {
-  // const Home = ({ petPosts }) => {
-  // const { adoptionPosts, ownershipPosts, lostPosts, foundPosts } = petPosts
   return (
     <Provider store={store}>
       <Hero />
