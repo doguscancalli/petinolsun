@@ -13,7 +13,7 @@ const PetPostFooter = ({ postType }) => {
       </Link>
       <ul className='flex flex-col gap-2'>
         {animals.map(({ value }) => (
-          <li className='text-black-500 hover:text-black-200'>
+          <li className='text-black-500 hover:text-black-200' key={value}>
             <Link
               href={`/ilan/ara?postType=${postType}&animal=${value}&page=1`}
             >
@@ -47,7 +47,7 @@ const Footer = () => {
           </ul>
         </div>
         {postTypes.map(({ value }) => (
-          <PetPostFooter postType={value} />
+          <PetPostFooter postType={value} key={value} />
         ))}
       </Wrapper>
       <p className='text-center mt-16 text-black-500'>
