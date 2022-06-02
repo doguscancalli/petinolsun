@@ -103,7 +103,7 @@ input FilterPetPostsInput {
   age: String
   listing: Boolean
   sort: String
-  user: String
+  user: UserSchema
 }
 
 # Query
