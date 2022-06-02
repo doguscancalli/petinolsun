@@ -9,7 +9,7 @@ import { isObjectEmpty } from '@utils'
 import { useSelector, useDispatch } from 'react-redux'
 import { setSearchData } from '@features/post/postSlice'
 
-const PostDisplay = ({ className, filters, title }) => {
+const PostDisplay = ({ className, filters, title, horizontal }) => {
   const [filter, setFilter] = useState('')
 
   const { searchData } = useSelector((state) => state.post)
@@ -72,8 +72,10 @@ const PostDisplay = ({ className, filters, title }) => {
       {title && !loading && (
         <h1 className='text-2xl md:text-4xl font-bold mb-8'>{title}</h1>
       )}
-      {searchData && !loading && <Posts posts={searchData.docs} />}
-      {searchData?.totalPages > 1 && !loading && (
+      {searchData?.docs && !loading && (
+        <Posts posts={searchData.docs} horizontal={horizontal} />
+      )}
+      {!horizontal && searchData?.totalPages > 1 && !loading && (
         <Pagination
           className='mt-4 justify-center'
           onPageChange={onPageChange}

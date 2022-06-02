@@ -6,9 +6,38 @@ const Moment = dynamic(() => import('react-moment'), {
   ssr: false,
 })
 
-const Post = ({ post }) => {
+const HorizontalPost = ({ post }) => {
   const { id, title, slug, description, user, createdAt } = post
+  const router = useRouter()
 
+  return (
+    <li
+      className='flex flex-col items-start bg-white p-6 rounded-2xl cursor-pointer h-full justify-between'
+      onClick={() => router.push(`/gonderi/${slug}`)}
+    >
+      <p className='break-all'>{description.slice(0, 100)}...</p>
+      <div className='flex justify-between items-center w-full mt-8'>
+        <div className='flex items-center gap-2'>
+          <Avatar
+            url={`https://ui-avatars.com/api/?name=${user?.name?.replace(
+              /\s+/g,
+              '-'
+            )}&background=000&color=fff`}
+          />
+          <p className='text-sm font-bold'>{user?.name}</p>
+        </div>
+        <p className='text-sm'>
+          <Moment locale='tr' fromNow>
+            {createdAt}
+          </Moment>
+        </p>
+      </div>
+    </li>
+  )
+}
+
+const VerticalPost = ({ post }) => {
+  const { id, title, slug, description, user, createdAt } = post
   const router = useRouter()
 
   return (
@@ -37,12 +66,20 @@ const Post = ({ post }) => {
           </p>
         </div>
         {/* <div className='flex gap-2'>
-          <p className='text-xs'>8 yanıt</p>
-          <span className='text-xs text-black-500'>•</span>
-          <p className='text-xs'>263 görüntülenme</p>
-        </div> */}
+        <p className='text-xs'>8 yanıt</p>
+        <span className='text-xs text-black-500'>•</span>
+        <p className='text-xs'>263 görüntülenme</p>
+      </div> */}
       </div>
     </li>
+  )
+}
+
+const Post = ({ post, horizontal }) => {
+  return horizontal ? (
+    <HorizontalPost post={post} />
+  ) : (
+    <VerticalPost post={post} />
   )
 }
 
