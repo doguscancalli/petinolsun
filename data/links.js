@@ -29,3 +29,14 @@ export const navLinks = [
     visibility: 'guest',
   },
 ]
+
+export const socialMediaLinks = [
+  {
+    name: 'Instagram',
+    url: 'https://www.instagram.com/petinolsun',
+  },
+  {
+    name: 'Twitter',
+    url: 'https://twitter.com/petinolsun',
+  },
+]
