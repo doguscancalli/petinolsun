@@ -99,11 +99,11 @@ const Search = () => {
       />
 
       <div className='md:border md:border-black md:border-solid md:border-l-0 rounded-full md:rounded-l-none md:rounded-r-full flex flex-wrap md:flex-nowrap gap-1 justify-center items-center pt-2 md:py-1 md:pr-1'>
-        <Button size='small' value='CAT' grow>
-          Kedi Bul
-        </Button>
         <Button size='small' value='DOG' grow>
           Köpek Bul
+        </Button>
+        <Button size='small' value='CAT' grow>
+          Kedi Bul
         </Button>
         <Button size='small' grow>
           Hepsini Gör
