@@ -75,7 +75,7 @@ const LoginForm = () => {
         <h2 className='text-base md:text-xl font-bold'>Eposta</h2>
         <Input
           type='email'
-          placeholder='eposta@gmail.com'
+          placeholder='mail@mail.com'
           error={errors?.email || error}
           errorMessage={errors?.email?.message}
           disabled={loading}
