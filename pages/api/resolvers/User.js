@@ -102,6 +102,8 @@ export default {
       const { id: authUserId, isAdmin } = context.isAuth(context)
       if (id !== authUserId && !isAdmin)
         throw new Error('Sadece kendi hesabınızı güncelleyebilirsiniz')
+      const isEmailExist = await User.findOne({ email })
+      if (isEmailExist) throw new Error('Bu eposta kullanılıyor')
       let user = await User.findByIdAndUpdate(
         id,
         { name, email },
