@@ -85,7 +85,7 @@ const UserEmail = ({ id, data, setSelectedField }) => {
     <form className='flex flex-col gap-4' onSubmit={handleSubmit(onSubmit)}>
       <h2 className='text-lg md:text-2xl font-bold'>Eposta</h2>
       <Input
-        placeholder='eposta@gmail.com'
+        placeholder='mail@mail.com'
         defaultValue={data}
         error={errors?.email}
         errorMessage={errors?.email?.message}
