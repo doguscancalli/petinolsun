@@ -1,21 +1,13 @@
-import dynamic from 'next/dynamic'
-import { PetView } from '@components/common'
+import { DefaultLayout, PetView } from '@components/common'
 import { Wrapper } from '@components/ui'
 import { apolloClient } from '@utils'
 import { GET_PET_POST } from '@graphql/queries'
 
-const Navbar = dynamic(() => import('@components/shared/Navbar'), {
-  ssr: false,
-})
-
 const PetSlug = ({ petPost }) => {
   return (
-    <>
-      <Wrapper>
-        <Navbar />
-        <PetView post={petPost} />
-      </Wrapper>
-    </>
+    <Wrapper>
+      <PetView post={petPost} />
+    </Wrapper>
   )
 }
 
@@ -47,4 +39,5 @@ export async function getServerSideProps(context) {
   }
 }
 
+PetSlug.Layout = DefaultLayout
 export default PetSlug

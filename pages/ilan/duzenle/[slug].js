@@ -1,19 +1,13 @@
-import dynamic from 'next/dynamic'
-import { PetEdit } from '@components/common'
+import { DefaultLayout, PetEdit } from '@components/common'
 import { Wrapper } from '@components/ui'
 import { GET_PET_POST } from '@graphql/queries'
 import { apolloClient } from '@utils'
 import { verify } from 'jsonwebtoken'
 import { ClientOnly } from '@components/shared'
 
-const Navbar = dynamic(() => import('@components/shared/Navbar'), {
-  ssr: false,
-})
-
 const EditPetPost = ({ data }) => {
   return (
     <Wrapper>
-      <Navbar />
       <ClientOnly>
         <PetEdit data={data} />
       </ClientOnly>
@@ -71,4 +65,5 @@ export async function getServerSideProps(context) {
   }
 }
 
+EditPetPost.Layout = DefaultLayout
 export default EditPetPost

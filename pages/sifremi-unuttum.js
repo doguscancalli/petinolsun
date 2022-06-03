@@ -1,4 +1,3 @@
-import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import { Button, Input, Wrapper } from '@components/ui'
 import { useForm } from 'react-hook-form'
@@ -7,10 +6,7 @@ import { useDispatch } from 'react-redux'
 import { sendToast } from '@features/ui/uiSlice'
 import { useMutation } from '@apollo/client'
 import { useEffect } from 'react'
-
-const Navbar = dynamic(() => import('@components/shared/Navbar'), {
-  ssr: false,
-})
+import { DefaultLayout } from '@components/common'
 
 const LostPassword = () => {
   const dispatch = useDispatch()
@@ -71,7 +67,6 @@ const LostPassword = () => {
 
   return (
     <Wrapper>
-      <Navbar />
       <div className='bg-white max-w-lg w-full mx-auto mt-16 rounded-2xl px-5 md:px-16 py-8'>
         <h2 className='text-2xl md:text-4xl font-bold text-center'>
           Şifreni sıfırla
@@ -101,4 +96,5 @@ const LostPassword = () => {
   )
 }
 
+LostPassword.Layout = DefaultLayout
 export default LostPassword

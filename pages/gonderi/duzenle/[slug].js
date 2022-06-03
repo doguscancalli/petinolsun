@@ -1,19 +1,13 @@
-import dynamic from 'next/dynamic'
-import { PostEdit } from '@components/common'
+import { DefaultLayout, PostEdit } from '@components/common'
 import { Wrapper } from '@components/ui'
 import { apolloClient } from '@utils'
 import { verify } from 'jsonwebtoken'
 import { ClientOnly } from '@components/shared'
 import { GET_POST } from '@graphql/queries'
 
-const Navbar = dynamic(() => import('@components/shared/Navbar'), {
-  ssr: false,
-})
-
 const EditPost = ({ data }) => {
   return (
     <Wrapper>
-      <Navbar />
       <ClientOnly>
         <PostEdit data={data} />
       </ClientOnly>
@@ -71,4 +65,5 @@ export async function getServerSideProps(context) {
   }
 }
 
+EditPost.Layout = DefaultLayout
 export default EditPost

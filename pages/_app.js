@@ -6,18 +6,20 @@ import { Provider } from 'react-redux'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import 'moment/locale/tr'
-import { Footer } from '@components/shared'
+
+const Noop = ({ children }) => <>{children}</>
 
 function MyApp({ Component, pageProps }) {
+  const Layout = Component.Layout ?? Noop
+
   return (
     <Provider store={store}>
       <ApolloProvider client={apolloClient}>
         <ToastContainer position='top-center' />
-        <main style={{ minHeight: '100vh' }}>
+        <Layout>
           <Component {...pageProps} />
-        </main>
+        </Layout>
       </ApolloProvider>
-      <Footer />
     </Provider>
   )
 }

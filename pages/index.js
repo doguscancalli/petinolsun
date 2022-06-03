@@ -3,6 +3,7 @@ import { store } from '../store'
 import { Provider } from 'react-redux'
 import { ClientOnly } from '@components/shared'
 import { Wrapper } from '@components/ui'
+import { HomeLayout } from '@components/common'
 
 const Home = () => {
   return (
@@ -57,4 +58,5 @@ const Home = () => {
   )
 }
 
+Home.Layout = HomeLayout
 export default Home

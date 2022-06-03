@@ -1,21 +1,13 @@
-import dynamic from 'next/dynamic'
 import { Wrapper } from '@components/ui'
 import { apolloClient } from '@utils'
-import { PostView } from '@components/common'
+import { DefaultLayout, PostView } from '@components/common'
 import { GET_POST } from '@graphql/queries'
-
-const Navbar = dynamic(() => import('@components/shared/Navbar'), {
-  ssr: false,
-})
 
 const PostSlug = ({ post }) => {
   return (
-    <>
-      <Wrapper>
-        <Navbar />
-        <PostView post={post} />
-      </Wrapper>
-    </>
+    <Wrapper>
+      <PostView post={post} />
+    </Wrapper>
   )
 }
 
@@ -47,4 +39,5 @@ export async function getServerSideProps(context) {
   }
 }
 
+PostSlug.Layout = DefaultLayout
 export default PostSlug

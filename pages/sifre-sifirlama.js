@@ -1,4 +1,3 @@
-import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import { Button, Input, Wrapper } from '@components/ui'
@@ -8,10 +7,7 @@ import { sendToast } from '@features/ui/uiSlice'
 import { useMutation } from '@apollo/client'
 import { useEffect } from 'react'
 import { RESET_PASSWORD } from '@graphql/mutations'
-
-const Navbar = dynamic(() => import('@components/shared/Navbar'), {
-  ssr: false,
-})
+import { DefaultLayout } from '@components/common'
 
 const ResetPassword = () => {
   const router = useRouter()
@@ -75,7 +71,6 @@ const ResetPassword = () => {
 
   return (
     <Wrapper>
-      <Navbar />
       <div className='bg-white max-w-lg w-full mx-auto mt-16 rounded-2xl px-5 md:px-16 py-8'>
         <h2 className='text-2xl md:text-4xl font-bold text-center'>
           Yeni şifreni gir
@@ -105,4 +100,5 @@ const ResetPassword = () => {
   )
 }
 
+ResetPassword.Layout = DefaultLayout
 export default ResetPassword

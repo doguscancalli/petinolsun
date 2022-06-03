@@ -1,19 +1,13 @@
-import { SettingsView } from '@components/common'
+import { DefaultLayout, SettingsView } from '@components/common'
 import { ClientOnly } from '@components/shared'
 import { Wrapper } from '@components/ui'
 import { ME } from '@graphql/queries'
-import dynamic from 'next/dynamic'
 import { apolloClient } from '@utils'
 import { verify } from 'jsonwebtoken'
-
-const Navbar = dynamic(() => import('@components/shared/Navbar'), {
-  ssr: false,
-})
 
 const Settings = ({ data }) => {
   return (
     <Wrapper>
-      <Navbar />
       <ClientOnly>
         <SettingsView />
       </ClientOnly>
@@ -73,4 +67,5 @@ export async function getServerSideProps(context) {
   }
 }
 
+Settings.Layout = DefaultLayout
 export default Settings
