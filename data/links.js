@@ -40,3 +40,28 @@ export const socialMediaLinks = [
     url: 'https://twitter.com/petinolsun',
   },
 ]
+
+import { FiGrid, FiUsers, FiColumns, FiSquare } from 'react-icons/fi'
+
+export const adminNavLinks = [
+  {
+    name: 'Genel',
+    url: '/admin',
+    icon: FiGrid,
+  },
+  {
+    name: 'İlanlar',
+    url: '/admin/ilan',
+    icon: FiColumns,
+  },
+  {
+    name: 'Gönderiler',
+    url: '/admin/gonderi',
+    icon: FiSquare,
+  },
+  {
+    name: 'Kullanıcılar',
+    url: '/admin/kullanici',
+    icon: FiUsers,
+  },
+]
