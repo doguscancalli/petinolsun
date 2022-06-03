@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
-import { verify } from '@tsndr/cloudflare-worker-jwt'
+import jwt from '@tsndr/cloudflare-worker-jwt'
 
-export default function middleware(req) {
+export default async function middleware(req) {
   const { cookies, url } = req
   const { token } = cookies
   const domain = req.nextUrl.clone()
@@ -13,10 +13,8 @@ export default function middleware(req) {
       domain.pathname = '/giris'
       return NextResponse.redirect(domain)
     }
-    try {
-      verify(token, process.env.JWT_SECRET)
-      return NextResponse.next()
-    } catch (e) {
+    const isValid = await jwt.verify(token, process.env.JWT_SECRET)
+    if (!isValid) {
       domain.pathname = '/giris'
       return NextResponse.redirect(domain)
     }
