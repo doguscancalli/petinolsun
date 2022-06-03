@@ -35,7 +35,7 @@ export async function getServerSideProps(context) {
     fetchPolicy: 'no-cache',
   })
 
-  if (!data) {
+  if (!data?.me) {
     return {
       redirect: {
         permanent: false,
@@ -46,7 +46,7 @@ export async function getServerSideProps(context) {
 
   try {
     const { id, isAdmin } = verify(token, process.env.JWT_SECRET)
-    if (data._id !== id && !isAdmin) {
+    if (data.me.id !== id && !isAdmin) {
       return {
         redirect: {
           permanent: false,
@@ -54,7 +54,8 @@ export async function getServerSideProps(context) {
         },
       }
     }
-  } catch (e) {
+  } catch (err) {
+    console.log(err)
     return {
       redirect: {
         permanent: false,
