@@ -1,11 +1,9 @@
 import bcrypt from 'bcryptjs'
 import { nanoid } from 'nanoid'
-
+import mail from '@sendgrid/mail'
 import User from '../models/User'
-
 import {
   generateToken,
-  // sendEmail,
   validateRegisterInput,
   validateLoginInput,
 } from '@utils'
@@ -116,19 +114,26 @@ export default {
     },
     forgotPassword: async (_, args) => {
       const { email } = args
+      mail.setApiKey(process.env.SENDGRID_API_KEY)
       const user = await User.findOne({ email })
       if (!user) throw new Error('Kullanıcı bulunamadı')
       const resetToken = nanoid(64)
       user.resetPasswordToken = resetToken
       user.resetPasswordExpire = Date.now() + 10 * 60 * 1000
       await user.save()
-      const resetUrl = `${process.env.APP_BASE_URL}/sifre-sifirlama?token=${resetToken}`
-      const message = `Bu epostayı, siz (veya bir başkası) şifrenizin sıfırlanmasını talep ettiği için alıyorsunuz. Şifrenizi sıfırlamak bu linke gidin:\n\n${resetUrl}`
-      // await sendEmail({
-      //   email,
-      //   subject: 'Şifre Sıfırlama',
-      //   message,
-      // })
+      const resetUrl = `${process.env.NEXT_PUBLIC_APP_BASE_URL}/sifre-sifirlama?token=${resetToken}`
+      const text = `Bu epostayı, siz (veya bir başkası) şifrenizin sıfırlanmasını talep ettiği için alıyorsunuz. Şifrenizi sıfırlamak bu linke gidin:\n\n${resetUrl}`
+      const data = {
+        to: email,
+        from: 'destek@petinolsun.com',
+        subject: 'Şifre Sıfırlama',
+        text,
+      }
+      try {
+        await mail.send(data)
+      } catch (err) {
+        throw new Error(err)
+      }
       return true
     },
     resetPassword: async (_, args) => {

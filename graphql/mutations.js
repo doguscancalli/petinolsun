@@ -45,6 +45,18 @@ export const UPDATE_PASSWORD = gql`
   }
 `
 
+export const FORGOT_PASSWORD = gql`
+  mutation ForgotPassword($resetEmail: String!) {
+    forgotPassword(email: $resetEmail)
+  }
+`
+
+export const RESET_PASSWORD = gql`
+  mutation ResetPassword($resetToken: String!, $password: String!) {
+    resetPassword(token: $resetToken, password: $password)
+  }
+`
+
 export const CREATE_PET_POST = gql`
   mutation CreatePetPost($input: CreatePetPostInput!) {
     createPetPost(input: $input) {
