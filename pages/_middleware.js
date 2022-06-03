@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { verify } from 'jsonwebtoken'
+import { verify } from '@tsndr/cloudflare-worker-jwt'
 
 export default function middleware(req) {
   const { cookies, url } = req
