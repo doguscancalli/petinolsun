@@ -27,7 +27,7 @@ export default {
       return user
     },
     me: async (_, __, context) => {
-      const { id } = context.isAuth(context)
+      const { id } = await context.isAuth(context)
       const user = await User.findById(id)
       if (!user) throw new Error('Kullanıcı bulunamadı')
       return user
@@ -101,7 +101,7 @@ export default {
         id,
         input: { name, email },
       } = args
-      const { id: authUserId, isAdmin } = context.isAuth(context)
+      const { id: authUserId, isAdmin } = await context.isAuth(context)
       if (id !== authUserId && !isAdmin)
         throw new Error('Sadece kendi hesabınızı güncelleyebilirsiniz')
       const isEmailExist = await User.findOne({ email })
@@ -156,7 +156,7 @@ export default {
     },
     updatePassword: async (_, args, context) => {
       const { password, newPassword } = args
-      const { id } = context.isAuth(context)
+      const { id } = await context.isAuth(context)
       const user = await User.findById(id).select('+password')
       if (!user) throw new Error('Kullanıcı bulunamadı')
       if (!(await bcrypt.compare(password, user.password)))

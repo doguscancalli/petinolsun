@@ -1,5 +1,5 @@
 import { verify } from 'jsonwebtoken'
-export default (context) => {
+export default async (context) => {
   const authHeader = context.req.headers.authorization
   const authCookie = context.req.cookies.token
   let token
@@ -22,5 +22,7 @@ export default (context) => {
   } else {
     throw new Error('Authorization header must be provided')
   }
+  const isUserExists = await context.User.exists({ _id: user.id })
+  if (!isUserExists) throw new Error('Kullanıcı bulunamadı')
   return user
 }

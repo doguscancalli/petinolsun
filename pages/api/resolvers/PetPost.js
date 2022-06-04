@@ -22,7 +22,7 @@ export default {
   Mutation: {
     createPetPost: async (_, args, context) => {
       const { input } = args
-      const { id } = context.isAuth(context)
+      const { id } = await context.isAuth(context)
       const { valid, errors } = validatePetPostInput(input)
       if (!valid) throw new Error(Object.values(errors))
       const petPost = await PetPost.create({ ...input, user: id })
@@ -30,7 +30,7 @@ export default {
     },
     updatePetPost: async (_, args, context) => {
       const { id, input } = args
-      const { id: authUserId, isAdmin } = context.isAuth(context)
+      const { id: authUserId, isAdmin } = await context.isAuth(context)
       const petPost = await PetPost.findById(id)
       if (!petPost) throw new Error('İlan bulunamadı')
       if (petPost.user.toString() !== authUserId && !isAdmin)
@@ -42,7 +42,7 @@ export default {
     },
     deletePetPost: async (_, args, context) => {
       const { id } = args
-      const { id: authUserId, isAdmin } = context.isAuth(context)
+      const { id: authUserId, isAdmin } = await context.isAuth(context)
       const petPost = await PetPost.findById(id)
       if (!petPost) throw new Error('İlan bulunamadı')
       if (petPost.user.toString() !== authUserId && !isAdmin)

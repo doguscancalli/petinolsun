@@ -26,7 +26,7 @@ export default {
   Mutation: {
     createPost: async (_, args, context) => {
       const { input } = args
-      const { id } = context.isAuth(context)
+      const { id } = await context.isAuth(context)
       const { valid, errors } = validatePostInput(input)
       if (!valid) throw new Error(Object.values(errors))
       let post = await Post.create({ ...input, user: id })
@@ -38,7 +38,7 @@ export default {
     },
     updatePost: async (_, args, context) => {
       const { id, input } = args
-      const { id: authUserId, isAdmin } = context.isAuth(context)
+      const { id: authUserId, isAdmin } = await context.isAuth(context)
       const post = await Post.findById(id)
       if (!post) throw new Error('Gönderi bulunamadı')
       if (post.createdAt.getTime() + 1800000 < new Date().getTime() && !isAdmin)
@@ -54,7 +54,7 @@ export default {
     },
     deletePost: async (_, args, context) => {
       const { id } = args
-      const { id: authUserId, isAdmin } = context.isAuth(context)
+      const { id: authUserId, isAdmin } = await context.isAuth(context)
       const post = await Post.findById(id)
       if (!post) throw new Error('Gönderi bulunamadı')
       if (post.user.toString() !== authUserId && !isAdmin)

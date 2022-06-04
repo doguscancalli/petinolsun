@@ -17,7 +17,7 @@ export default {
   Mutation: {
     createComment: async (_, args, context) => {
       const { input } = args
-      const { id } = context.isAuth(context)
+      const { id } = await context.isAuth(context)
       const { valid, errors } = validateCommentInput(input)
       if (!valid) throw new Error(Object.values(errors))
       let comment = await Comment.create({ ...input, user: id })
@@ -29,7 +29,7 @@ export default {
     },
     updateComment: async (_, args, context) => {
       const { id, input } = args
-      const { id: authUserId, isAdmin } = context.isAuth(context)
+      const { id: authUserId, isAdmin } = await context.isAuth(context)
       const comment = await Comment.findById(id)
       if (!comment) throw new Error('Yoruum bulunamadı')
       if (
@@ -46,7 +46,7 @@ export default {
     },
     deleteComment: async (_, args, context) => {
       const { id } = args
-      const { id: authUserId, isAdmin } = context.isAuth(context)
+      const { id: authUserId, isAdmin } = await context.isAuth(context)
       const comment = await Comment.findById(id)
       if (!comment) throw new Error('Yorum bulunamadı')
       if (comment.user.toString() !== authUserId && !isAdmin)
