@@ -14,4 +14,12 @@ const UserSchema = new mongoose.Schema(
   }
 )
 
+// Cascade delete pet posts, posts and comments when a user is deleted
+UserSchema.pre('remove', async function (next) {
+  await this.model('PetPost').deleteMany({ user: this._id })
+  await this.model('Post').deleteMany({ user: this._id })
+  await this.model('Comment').deleteMany({ user: this._id })
+  next()
+})
+
 export default mongoose.models.User || mongoose.model('User', UserSchema)
