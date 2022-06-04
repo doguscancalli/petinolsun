@@ -9,6 +9,7 @@ export {
   PetForm,
   PetEdit,
   PetPostSearchView,
+  PetDataTable,
 } from './Pet'
 export { default as LoginForm } from './LoginForm'
 export { default as RegisterForm } from './RegisterForm'

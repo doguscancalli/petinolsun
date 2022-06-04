@@ -49,16 +49,16 @@ export const adminNavLinks = [
     url: '/admin',
     icon: FiGrid,
   },
-  {
-    name: 'İlanlar',
-    url: '/admin/ilan',
-    icon: FiColumns,
-  },
-  {
-    name: 'Gönderiler',
-    url: '/admin/gonderi',
-    icon: FiSquare,
-  },
+  // {
+  //   name: 'İlanlar',
+  //   url: '/admin/ilan',
+  //   icon: FiColumns,
+  // },
+  // {
+  //   name: 'Gönderiler',
+  //   url: '/admin/gonderi',
+  //   icon: FiSquare,
+  // },
   {
     name: 'Kullanıcılar',
     url: '/admin/kullanici',
