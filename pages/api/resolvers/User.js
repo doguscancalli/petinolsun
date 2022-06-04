@@ -13,7 +13,7 @@ export default {
   Query: {
     users: async (_, args, context) => {
       const { input } = args
-      context.isAuth(context)
+      await context.isAuth(context)
       context.isAdmin(context)
       const users = await advancedFiltering(User, input)
       return users
@@ -83,7 +83,7 @@ export default {
     },
     deleteUser: async (_, args, context) => {
       const { id } = args
-      context.isAuth(context)
+      await context.isAuth(context)
       context.isAdmin(context)
       const user = await User.findById(id)
       if (!user) throw new Error('Kullanıcı bulunamadı')
@@ -91,7 +91,7 @@ export default {
       return true
     },
     deleteAllUsers: async (_, __, context) => {
-      context.isAuth(context)
+      await context.isAuth(context)
       context.isAdmin(context)
       await User.deleteMany({})
       return true

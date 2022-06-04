@@ -63,7 +63,7 @@ export default {
       return true
     },
     deleteAllPosts: async (_, __, context) => {
-      context.isAuth(context)
+      await context.isAuth(context)
       context.isAdmin(context)
       await Post.deleteMany({})
       return true

@@ -55,7 +55,7 @@ export default {
       return true
     },
     deleteAllComments: async (_, __, context) => {
-      context.isAuth(context)
+      await context.isAuth(context)
       context.isAdmin(context)
       await Comment.deleteMany({})
       return true

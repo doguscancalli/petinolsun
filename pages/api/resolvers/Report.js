@@ -3,7 +3,7 @@ import Report from '../models/Report'
 export default {
   Query: {
     reports: async (_, __, context) => {
-      context.isAuth(context)
+      await context.isAuth(context)
       context.isAdmin(context)
       const reports = await Report.find({})
       return reports
@@ -23,7 +23,7 @@ export default {
     },
     deleteReport: async (_, args, context) => {
       const { id } = args
-      context.isAuth(context)
+      await context.isAuth(context)
       context.isAdmin(context)
       const report = await Report.findById(id)
       if (!report) throw new Error('Rapor bulunamadı')
@@ -31,7 +31,7 @@ export default {
       return true
     },
     deleteAllReports: async (_, __, context) => {
-      context.isAuth(context)
+      await context.isAuth(context)
       context.isAdmin(context)
       await Report.deleteMany({})
       return true

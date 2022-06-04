@@ -51,7 +51,7 @@ export default {
       return true
     },
     deleteAllPetPosts: async (_, __, context) => {
-      context.isAuth(context)
+      await context.isAuth(context)
       context.isAdmin(context)
       await PetPost.deleteMany({})
       return true
