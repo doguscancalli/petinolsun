@@ -72,7 +72,7 @@ const UserName = ({ id, data, setSelectedField }) => {
         )
       )
     }
-  })
+  }, [error])
 
   const {
     register,
