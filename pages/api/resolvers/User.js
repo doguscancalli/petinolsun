@@ -99,18 +99,25 @@ export default {
     updateUser: async (_, args, context) => {
       const {
         id,
-        input: { name, email },
+        input: { name, email, isAdmin },
       } = args
-      const { id: authUserId, isAdmin } = await context.isAuth(context)
-      if (id !== authUserId && !isAdmin)
+      const { id: authUserId, isAdmin: isAuthUserAdmin } = await context.isAuth(
+        context
+      )
+      if (id !== authUserId && !isAuthUserAdmin)
         throw new Error('Sadece kendi hesabınızı güncelleyebilirsiniz')
       const isEmailExist = await User.findOne({ email })
       if (isEmailExist) throw new Error('Bu eposta kullanılıyor')
-      let user = await User.findByIdAndUpdate(
-        id,
-        { name, email },
-        { new: true }
-      )
+      let user
+      if (isAuthUserAdmin) {
+        user = await User.findByIdAndUpdate(
+          id,
+          { name, email, isAdmin },
+          { new: true }
+        )
+      } else {
+        user = await User.findByIdAndUpdate(id, { name, email }, { new: true })
+      }
       if (!user) throw new Error('Kullanıcı bulunamadı')
       const token = generateToken(user)
       user.token = token
