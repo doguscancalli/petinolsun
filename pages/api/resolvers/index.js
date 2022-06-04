@@ -12,6 +12,7 @@ const resolvers = [
   PetPostResolver,
   ReportResolver,
   PostResolver,
+  CommentResolver,
   CountsResolver,
 ]
 
