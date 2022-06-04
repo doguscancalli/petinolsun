@@ -1,7 +1,7 @@
 import { AdminLayout, StatsCards } from '@components/common'
 import { ClientOnly } from '@components/shared'
 
-const Dashboard = () => {
+const AdminDashboard = () => {
   return (
     <ClientOnly>
       <StatsCards />
@@ -9,5 +9,5 @@ const Dashboard = () => {
   )
 }
 
-Dashboard.Layout = AdminLayout
-export default Dashboard
+AdminDashboard.Layout = AdminLayout
+export default AdminDashboard

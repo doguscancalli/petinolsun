@@ -1,7 +1,7 @@
 import { AdminLayout, ReportDataTable } from '@components/common'
 import { ClientOnly } from '@components/shared'
 
-const Reports = () => {
+const AdminReports = () => {
   return (
     <ClientOnly>
       <ReportDataTable />
@@ -9,5 +9,5 @@ const Reports = () => {
   )
 }
 
-Reports.Layout = AdminLayout
-export default Reports
+AdminReports.Layout = AdminLayout
+export default AdminReports
