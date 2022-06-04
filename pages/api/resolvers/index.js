@@ -5,7 +5,7 @@ import PetPostResolver from './PetPost'
 import ReportResolver from './Report'
 import PostResolver from './Post'
 import CommentResolver from './Comment'
-import CountsResolver from './Counts'
+import AdminResolver from './Admin'
 
 const resolvers = [
   UserResolver,
@@ -13,7 +13,7 @@ const resolvers = [
   ReportResolver,
   PostResolver,
   CommentResolver,
-  CountsResolver,
+  AdminResolver,
 ]
 
 export default mergeResolvers(resolvers)
