@@ -1,11 +1,23 @@
+import { advancedFiltering } from '@utils'
 import Report from '../models/Report'
 
 export default {
   Query: {
-    reports: async (_, __, context) => {
+    reports: async (_, args, context) => {
+      const { input } = args
       await context.isAuth(context)
       context.isAdmin(context)
-      const reports = await Report.find({})
+      const populate = [
+        {
+          path: 'reportedBy',
+          select: 'name email',
+        },
+        {
+          path: 'reportedTopicId',
+          select: 'name title slug',
+        },
+      ]
+      const reports = await advancedFiltering(Report, input, populate)
       return reports
     },
   },

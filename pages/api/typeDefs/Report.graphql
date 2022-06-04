@@ -1,14 +1,25 @@
 # Scalar
 scalar Date
+scalar UserSchema
+scalar PostSchema
 
 # Type
 type Report {
   id: ID!
-  reportedBy: String!
+  reportedBy: UserSchema!
   reportedTopic: String!
-  reportedTopicId: String!
+  reportedTopicId: PostSchema!
   createdAt: Date!
   updatedAt: Date!
+}
+type Reports {
+  docs: [Report!]!
+  totalDocs: Int
+  limit: Int
+  totalPages: Int
+  page: Int
+  prevPage: Int
+  nextPage: Int
 }
 
 # Input
@@ -17,10 +28,17 @@ input CreateReportInput {
   reportedTopic: String!
   reportedTopicId: String!
 }
+input FilterReportsInput {
+  limit: String
+  page: String
+  createdAt: String
+  sort: String
+  user: UserSchema
+}
 
 # Query
 type Query {
-  reports: [Report!]!
+  reports(input: FilterReportsInput!): Reports!
 }
 
 # Mutation
