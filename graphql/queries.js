@@ -183,3 +183,14 @@ export const GET_ALL_REPORTS = gql`
     }
   }
 `
+
+export const GET_SEO_SETTINGS = gql`
+  query SeoSettings {
+    seoSettings {
+      id
+      title
+      description
+      keywords
+    }
+  }
+`

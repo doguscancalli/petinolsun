@@ -216,3 +216,14 @@ export const DELETE_USER = gql`
     deleteUser(id: $id)
   }
 `
+
+export const UPDATE_SEO_SETTINGS = gql`
+  mutation UpdateSeoSettings($input: SeoSettingsInput!) {
+    updateSeoSettings(input: $input) {
+      id
+      title
+      description
+      keywords
+    }
+  }
+`
