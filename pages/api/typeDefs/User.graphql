@@ -11,6 +11,15 @@ type User {
   createdAt: Date!
   updatedAt: Date!
 }
+type Users {
+  docs: [User!]!
+  totalDocs: Int
+  limit: Int
+  totalPages: Int
+  page: Int
+  prevPage: Int
+  nextPage: Int
+}
 
 # Input
 input RegisterInput {
@@ -26,10 +35,16 @@ input UpdateUserInput {
   name: String
   email: String
 }
+input FilterUsersInput {
+  limit: String
+  page: String
+  createdAt: String
+  sort: String
+}
 
 # Query
 type Query {
-  users: [User!]!
+  users(input: FilterUsersInput!): Users!
   user(id: ID!): User!
   me: User
 }

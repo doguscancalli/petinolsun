@@ -6,14 +6,16 @@ import {
   generateToken,
   validateRegisterInput,
   validateLoginInput,
+  advancedFiltering,
 } from '@utils'
 
 export default {
   Query: {
-    users: async (_, __, context) => {
+    users: async (_, args, context) => {
+      const { input } = args
       context.isAuth(context)
       context.isAdmin(context)
-      const users = await User.find({})
+      const users = await advancedFiltering(User, input)
       return users
     },
     user: async (_, args, context) => {
