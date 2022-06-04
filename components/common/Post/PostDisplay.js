@@ -8,6 +8,7 @@ import { useRouter } from 'next/router'
 import { isObjectEmpty } from '@utils'
 import { useSelector, useDispatch } from 'react-redux'
 import { setSearchData } from '@features/post/postSlice'
+import { sendToast } from '@features/ui/uiSlice'
 
 const PostDisplay = ({ className, filters, title, horizontal }) => {
   const [filter, setFilter] = useState('')
