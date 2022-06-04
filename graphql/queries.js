@@ -151,3 +151,14 @@ export const GET_ALL_USERS = gql`
     }
   }
 `
+
+export const GET_COUNTS = gql`
+  query Counts {
+    counts {
+      counts {
+        title
+        count
+      }
+    }
+  }
+`

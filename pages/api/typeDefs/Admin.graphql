@@ -1,0 +1,13 @@
+# Type
+type Count {
+  title: String!
+  count: Int!
+}
+type Counts {
+  counts: [Count!]!
+}
+
+# Query
+type Query {
+  counts: Counts!
+}
