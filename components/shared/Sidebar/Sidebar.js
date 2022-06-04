@@ -11,7 +11,7 @@ const Sidebar = () => {
 
   return (
     <aside
-      className={`flex flex-col h-screen py-6 px-8 fixed md:sticky top-0 -translate-x-full md:translate-x-0 transition ease-in-out duration-500 bg-black-50 md:bg-transparent ${
+      className={`flex flex-col h-screen py-6 px-8 fixed md:sticky top-0 -translate-x-full md:translate-x-0 transition ease-in-out duration-500 bg-black-50 md:bg-transparent z-50 ${
         isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
       }`}
     >
