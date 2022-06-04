@@ -1,33 +1,26 @@
 import { verify } from 'jsonwebtoken'
-
 export default (context) => {
   const authHeader = context.req.headers.authorization
   const authCookie = context.req.cookies.token
+  let token
+  let user
 
   if (authHeader) {
-    const token = authHeader.split('Bearer ')[1]
-    if (token) {
-      try {
-        const user = verify(token, process.env.JWT_SECRET)
-        context.req.user = user
-        return user
-      } catch (err) {
-        throw new Error('Invalid/Expired token')
-      }
-    }
-    throw new Error("Authentication token must be 'Bearer [token]")
+    token = authHeader.split('Bearer ')[1]
   }
   if (authCookie) {
-    const token = authCookie
-    if (token) {
-      try {
-        const user = verify(token, process.env.JWT_SECRET)
-        context.req.user = user
-        return user
-      } catch (err) {
-        throw new Error('Invalid/Expired token')
-      }
-    }
+    token = authCookie
   }
-  throw new Error('Authorization header must be provided')
+  if (token) {
+    try {
+      const tokenUser = verify(token, process.env.JWT_SECRET)
+      context.req.user = tokenUser
+      user = tokenUser
+    } catch (err) {
+      throw new Error('Invalid/Expired token')
+    }
+  } else {
+    throw new Error('Authorization header must be provided')
+  }
+  return user
 }
