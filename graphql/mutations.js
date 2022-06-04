@@ -122,6 +122,18 @@ export const CREATE_REPORT = gql`
   }
 `
 
+export const DELETE_REPORT = gql`
+  mutation DeleteReport($id: String!) {
+    deleteReport(id: $id)
+  }
+`
+
+export const DELETE_ALL_REPORTS = gql`
+  mutation Mutation {
+    deleteAllReports
+  }
+`
+
 export const CREATE_POST = gql`
   mutation CreatePost($input: CreatePostInput!) {
     createPost(input: $input) {

@@ -70,7 +70,7 @@ const PostView = ({ post }) => {
       variables: {
         input: {
           reportedBy: authUser?.id,
-          reportedTopic: 'post',
+          reportedTopic: 'Post',
           reportedTopicId: post?.id,
         },
       },

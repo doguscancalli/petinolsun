@@ -41,7 +41,13 @@ export const socialMediaLinks = [
   },
 ]
 
-import { FiGrid, FiUsers, FiColumns, FiSquare } from 'react-icons/fi'
+import {
+  FiGrid,
+  FiUsers,
+  FiColumns,
+  FiSquare,
+  FiClipboard,
+} from 'react-icons/fi'
 
 export const adminNavLinks = [
   {
@@ -63,5 +69,10 @@ export const adminNavLinks = [
     name: 'Kullanıcılar',
     url: '/admin/kullanici',
     icon: FiUsers,
+  },
+  {
+    name: 'Raporlar',
+    url: '/admin/rapor',
+    icon: FiClipboard,
   },
 ]

@@ -162,3 +162,24 @@ export const GET_COUNTS = gql`
     }
   }
 `
+
+export const GET_ALL_REPORTS = gql`
+  query Reports($input: FilterReportsInput!) {
+    reports(input: $input) {
+      docs {
+        id
+        reportedBy
+        reportedTopic
+        reportedTopicId
+        createdAt
+        updatedAt
+      }
+      totalDocs
+      limit
+      totalPages
+      page
+      prevPage
+      nextPage
+    }
+  }
+`

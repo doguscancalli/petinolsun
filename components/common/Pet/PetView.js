@@ -90,7 +90,7 @@ const PetView = ({ post }) => {
       variables: {
         input: {
           reportedBy: authUser?.id,
-          reportedTopic: 'petPost',
+          reportedTopic: 'PetPost',
           reportedTopicId: post?.id,
         },
       },
