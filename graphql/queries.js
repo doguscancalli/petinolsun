@@ -127,3 +127,27 @@ export const GET_ALL_COMMENTS = gql`
     }
   }
 `
+
+export const GET_ALL_USERS = gql`
+  query Users($input: FilterUsersInput!) {
+    users(input: $input) {
+      docs {
+        id
+        name
+        email
+        isAdmin
+        token
+        resetPasswordToken
+        resetPasswordExpire
+        createdAt
+        updatedAt
+      }
+      totalDocs
+      limit
+      totalPages
+      page
+      prevPage
+      nextPage
+    }
+  }
+`

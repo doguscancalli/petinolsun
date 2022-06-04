@@ -198,3 +198,9 @@ export const DELETE_ALL_COMMENTS = gql`
     deleteAllComments
   }
 `
+
+export const DELETE_USER = gql`
+  mutation Delete($id: ID!) {
+    deleteUser(id: $id)
+  }
+`
