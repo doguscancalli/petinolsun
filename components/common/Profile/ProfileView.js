@@ -2,7 +2,6 @@ import { FiSettings } from 'react-icons/fi'
 import { useSelector } from 'react-redux'
 import { Avatar, PetDisplay, PostDisplay } from '@components/common'
 import Link from 'next/link'
-import { PulseLoader } from 'react-spinners'
 
 const ProfileView = () => {
   const { user } = useSelector((state) => state.auth)
