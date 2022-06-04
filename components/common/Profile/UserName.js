@@ -84,7 +84,7 @@ const UserName = ({ id, data, setSelectedField }) => {
     <form className='flex flex-col gap-4' onSubmit={handleSubmit(onSubmit)}>
       <h2 className='text-lg md:text-2xl font-bold'>İsim</h2>
       <Input
-        placeholder='Can Simit'
+        placeholder='Ad Soyad'
         defaultValue={data}
         error={errors?.name}
         errorMessage={errors?.name?.message}
