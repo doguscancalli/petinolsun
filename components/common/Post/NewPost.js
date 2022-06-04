@@ -103,6 +103,7 @@ const NewPost = ({ setToggleModal }) => {
       />
       <Button loading={loading}>Paylaş</Button>
       <Button
+        type='button'
         variant='secondary'
         disabled={loading}
         onClick={() => setToggleModal(false)}

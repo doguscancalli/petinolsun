@@ -130,6 +130,7 @@ const PostPhotos = ({ id, data, setSelectedField }) => {
         Güncelle
       </Button>
       <Button
+        type='button'
         variant='secondary'
         disabled={loading || isImageUploading}
         onClick={() => setSelectedField('')}

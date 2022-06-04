@@ -167,6 +167,7 @@ const AdvancedFilter = ({ setToggleAdvancedFilter }) => {
         </div>
         <Button>Ara</Button>
         <Button
+          type='button'
           variant='secondary'
           onClick={() => setToggleAdvancedFilter(false)}
         >

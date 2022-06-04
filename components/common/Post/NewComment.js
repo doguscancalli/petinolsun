@@ -83,6 +83,7 @@ const NewComment = ({ setToggleModal, id }) => {
       />
       <Button loading={loading}>Paylaş</Button>
       <Button
+        type='button'
         variant='secondary'
         onClick={() => setToggleModal(false)}
         disabled={loading}

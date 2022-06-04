@@ -90,6 +90,7 @@ const PostTitle = ({ id, data, setSelectedField }) => {
       />
       <Button loading={loading}>Güncelle</Button>
       <Button
+        type='button'
         variant='secondary'
         disabled={loading}
         onClick={() => setSelectedField('')}

@@ -104,8 +104,8 @@ const UpdateForm = ({ data, setToggleModal, refetch }) => {
       />
       <Button loading={loading}>Güncelle</Button>
       <Button
-        variant='secondary'
         type='button'
+        variant='secondary'
         disabled={loading}
         onClick={() => setToggleModal(false)}
       >
