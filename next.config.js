@@ -4,6 +4,9 @@ const nextConfig = {
   images: {
     domains: ['ui-avatars.com', 'res.cloudinary.com'],
   },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
 }
 
 module.exports = nextConfig
