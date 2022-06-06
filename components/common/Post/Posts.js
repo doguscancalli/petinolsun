@@ -28,23 +28,25 @@ const HorizontalPost = ({ posts, horizontal }) => {
           <Post post={post} horizontal={horizontal} />
         </SwiperSlide>
       ))}
-      <SwiperSlide style={{ height: 'auto' }}>
-        <li
-          className='relative rounded-2xl cursor-pointer overflow-hidden h-full flex items-center justify-center'
-          onClick={() => router.push(`/gonderi`)}
-        >
-          <Image
-            src={'/images/alien-planet-illustration.jpg'}
-            alt=''
-            layout='fill'
-            objectFit='cover'
-            className='-z-10'
-          />
-          <h2 className='text-xl md:text-2xl font-bold z-0 text-white'>
-            Diğer gönderileri gör
-          </h2>
-        </li>
-      </SwiperSlide>
+      {posts?.length >= 3 && (
+        <SwiperSlide style={{ height: 'auto' }}>
+          <li
+            className='relative rounded-2xl cursor-pointer overflow-hidden h-full flex items-center justify-center'
+            onClick={() => router.push(`/gonderi`)}
+          >
+            <Image
+              src={'/images/alien-planet-illustration.jpg'}
+              alt=''
+              layout='fill'
+              objectFit='cover'
+              className='-z-10'
+            />
+            <h2 className='text-xl md:text-2xl font-bold z-0 text-white'>
+              Diğer gönderileri gör
+            </h2>
+          </li>
+        </SwiperSlide>
+      )}
     </Swiper>
   )
 }
