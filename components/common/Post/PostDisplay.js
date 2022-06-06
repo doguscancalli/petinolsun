@@ -67,6 +67,7 @@ const PostDisplay = ({ className, filters, title, horizontal }) => {
     })
   }
 
+  if (data?.posts?.docs?.length === 0) return null
   return (
     <div className={className}>
       {loading && <PulseLoader size={8} />}

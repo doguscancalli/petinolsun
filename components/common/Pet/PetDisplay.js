@@ -33,6 +33,7 @@ const PetDisplay = ({ className, title, infoType, filters }) => {
     }
   }, [error])
 
+  if (data?.petPosts?.docs?.length === 0) return null
   return (
     <div className={`${className}`}>
       {loading && <PulseLoader size={8} />}
