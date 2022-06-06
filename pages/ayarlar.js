@@ -4,10 +4,12 @@ import { Wrapper } from '@components/ui'
 import { ME } from '@graphql/queries'
 import { apolloClient } from '@utils'
 import { verify } from 'jsonwebtoken'
+import { NextSeo } from 'next-seo'
 
-const Settings = ({ data }) => {
+const Settings = () => {
   return (
     <Wrapper>
+      <NextSeo title='Ayarlar' />
       <ClientOnly>
         <SettingsView />
       </ClientOnly>

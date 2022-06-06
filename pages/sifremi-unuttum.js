@@ -7,6 +7,7 @@ import { sendToast } from '@features/ui/uiSlice'
 import { useMutation } from '@apollo/client'
 import { useEffect } from 'react'
 import { DefaultLayout } from '@components/common'
+import { NextSeo } from 'next-seo'
 
 const LostPassword = () => {
   const dispatch = useDispatch()
@@ -67,6 +68,7 @@ const LostPassword = () => {
 
   return (
     <Wrapper>
+      <NextSeo title='Şifremi Unuttum' />
       <div className='bg-white max-w-lg w-full mx-auto mt-16 rounded-2xl px-5 md:px-16 py-8'>
         <h2 className='text-2xl md:text-4xl font-bold text-center'>
           Şifreni sıfırla

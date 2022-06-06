@@ -12,10 +12,10 @@ export const navLinks = [
     name: 'Gönderiler',
     url: '/gonderi',
   },
-  {
-    name: 'Hakkımızda',
-    url: '/',
-  },
+  // {
+  //   name: 'Hakkımızda',
+  //   url: '/',
+  // },
   {
     name: 'Kaydol',
     url: '/kaydol',
@@ -47,6 +47,7 @@ import {
   FiColumns,
   FiSquare,
   FiClipboard,
+  FiSettings,
 } from 'react-icons/fi'
 
 export const adminNavLinks = [
@@ -74,5 +75,10 @@ export const adminNavLinks = [
     name: 'Raporlar',
     url: '/admin/rapor',
     icon: FiClipboard,
+  },
+  {
+    name: 'Ayarlar',
+    url: '/admin/ayarlar',
+    icon: FiSettings,
   },
 ]

@@ -44,9 +44,7 @@ export default {
         counts,
       }
     },
-    seoSettings: async (_, __, context) => {
-      await context.isAuth(context)
-      context.isAdmin(context)
+    seoSettings: async () => {
       const isSeoSettingsExists = await SeoSettings.count({})
       if (!isSeoSettingsExists) {
         await SeoSettings.create({

@@ -5,6 +5,7 @@ import { Wrapper } from '@components/ui'
 const Profile = () => {
   return (
     <Wrapper>
+      <NextSeo title='Profil' />
       <ClientOnly>
         <ProfileView />
       </ClientOnly>

@@ -4,10 +4,19 @@ import { GET_PET_POST } from '@graphql/queries'
 import { apolloClient } from '@utils'
 import { verify } from 'jsonwebtoken'
 import { ClientOnly } from '@components/shared'
+import { NextSeo } from 'next-seo'
+import { POST_TYPE } from '@data/constants'
 
 const EditPetPost = ({ data }) => {
+  const { name, postType } = data
+
   return (
     <Wrapper>
+      <NextSeo
+        title={`${name} adlı ${POST_TYPE[
+          postType
+        ].toLowerCase()} ilanınızı düzenleyin`}
+      />
       <ClientOnly>
         <PetEdit data={data} />
       </ClientOnly>

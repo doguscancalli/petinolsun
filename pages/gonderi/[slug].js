@@ -2,10 +2,14 @@ import { Wrapper } from '@components/ui'
 import { apolloClient } from '@utils'
 import { DefaultLayout, PostView } from '@components/common'
 import { GET_POST } from '@graphql/queries'
+import { NextSeo } from 'next-seo'
 
 const PostSlug = ({ post }) => {
+  const { title, description } = post
+
   return (
     <Wrapper>
+      <NextSeo title={title} description={`${description.slice(0, 157)}...`} />
       <PostView post={post} />
     </Wrapper>
   )

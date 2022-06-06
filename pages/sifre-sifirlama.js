@@ -8,6 +8,7 @@ import { useMutation } from '@apollo/client'
 import { useEffect } from 'react'
 import { RESET_PASSWORD } from '@graphql/mutations'
 import { DefaultLayout } from '@components/common'
+import { NextSeo } from 'next-seo'
 
 const ResetPassword = () => {
   const router = useRouter()
@@ -71,6 +72,7 @@ const ResetPassword = () => {
 
   return (
     <Wrapper>
+      <NextSeo title='Şifre Sıfırlama' />
       <div className='bg-white max-w-lg w-full mx-auto mt-16 rounded-2xl px-5 md:px-16 py-8'>
         <h2 className='text-2xl md:text-4xl font-bold text-center'>
           Yeni şifreni gir

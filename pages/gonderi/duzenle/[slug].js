@@ -4,10 +4,14 @@ import { apolloClient } from '@utils'
 import { verify } from 'jsonwebtoken'
 import { ClientOnly } from '@components/shared'
 import { GET_POST } from '@graphql/queries'
+import { NextSeo } from 'next-seo'
 
 const EditPost = ({ data }) => {
+  const { title } = data
+
   return (
     <Wrapper>
+      <NextSeo title={`${title} başlıklı gönderinizi düzenleyin`} />
       <ClientOnly>
         <PostEdit data={data} />
       </ClientOnly>

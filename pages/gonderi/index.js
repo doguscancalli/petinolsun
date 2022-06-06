@@ -2,12 +2,14 @@ import { Button, Modal, Wrapper } from '@components/ui'
 import { useState } from 'react'
 import { DefaultLayout, NewPost, PostDisplay } from '@components/common'
 import { ClientOnly } from '@components/shared'
+import { NextSeo } from 'next-seo'
 
 const PostPage = () => {
   const [toggleModal, setToggleModal] = useState(false)
 
   return (
     <Wrapper>
+      <NextSeo title='Gönderiler' />
       <div className='max-w-lg mx-auto mt-16'>
         {toggleModal && (
           <Modal>

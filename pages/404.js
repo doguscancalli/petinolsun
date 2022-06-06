@@ -1,9 +1,11 @@
 import { Button } from '@components/ui'
+import { NextSeo } from 'next-seo'
 import Image from 'next/image'
 
 const NotFound = () => {
   return (
     <div className='flex items-center justify-center flex-col h-screen'>
+      <NextSeo title='404' />
       <div
         className='relative max-w-xs sm:max-w-sm w-full'
         style={{ aspectRatio: '1/1' }}
@@ -11,8 +13,6 @@ const NotFound = () => {
         <Image
           src='/images/not-found-illustration.svg'
           alt='Sayfa Bulunamadı'
-          // width='100%'
-          // height='100%'
           layout='fill'
           objectFit='contain'
         />
