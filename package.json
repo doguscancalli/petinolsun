@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "postbuild": "next-sitemap"
   },
   "dependencies": {
     "@apollo/client": "^3.6.1",
@@ -31,6 +32,7 @@
     "nanoid": "^3.3.4",
     "next": "12.1.5",
     "next-seo": "^5.4.0",
+    "next-sitemap": "^3.0.5",
     "nextjs-google-analytics": "^1.2.0",
     "nodemailer": "^6.7.3",
     "react": "18.0.0",
