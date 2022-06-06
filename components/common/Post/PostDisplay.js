@@ -70,13 +70,13 @@ const PostDisplay = ({ className, filters, title, horizontal }) => {
   return (
     <div className={className}>
       {loading && <PulseLoader size={8} />}
-      {title && !loading && (
+      {title && !loading && !error && (
         <h1 className='text-2xl md:text-4xl font-bold mb-8'>{title}</h1>
       )}
-      {searchData?.docs && !loading && (
+      {searchData?.docs && !loading && !error && (
         <Posts posts={searchData.docs} horizontal={horizontal} />
       )}
-      {!horizontal && searchData?.totalPages > 1 && !loading && (
+      {!horizontal && searchData?.totalPages > 1 && !loading && !error && (
         <Pagination
           className='mt-4 justify-center'
           onPageChange={onPageChange}

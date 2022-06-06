@@ -76,9 +76,10 @@ const PetPostSearchView = () => {
       <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-8'>
         {searchData &&
           !loading &&
+          !error &&
           searchData?.docs?.map((post) => <Pet key={post.id} post={post} />)}
       </div>
-      {searchData?.totalPages > 1 && !loading && (
+      {searchData?.totalPages > 1 && !loading && !error && (
         <Pagination
           className='mt-8 justify-center'
           onPageChange={onPageChange}

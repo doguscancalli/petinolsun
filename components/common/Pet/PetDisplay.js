@@ -36,10 +36,10 @@ const PetDisplay = ({ className, title, infoType, filters }) => {
   return (
     <div className={`${className}`}>
       {loading && <PulseLoader size={8} />}
-      {title && !loading && (
+      {title && !loading && !error && (
         <h1 className='text-2xl md:text-4xl font-bold mb-8'>{title}</h1>
       )}
-      {data?.petPosts?.docs && !loading && (
+      {data?.petPosts?.docs && !loading && !error && (
         <Pets infoType={infoType} posts={data.petPosts} />
       )}
     </div>

@@ -81,10 +81,10 @@ const CommentDisplay = ({ className, id }) => {
         <Button onClick={() => setToggleModal(true)}>Yeni Yorum</Button>
       </div>
       {loading && <PulseLoader size={8} />}
-      {searchData && !loading && (
+      {searchData && !loading && !error && (
         <Comments className='mt-4' comments={searchData.docs} />
       )}
-      {searchData?.totalPages > 1 && !loading && (
+      {searchData?.totalPages > 1 && !loading && !error && (
         <Pagination
           className='mt-4 justify-center'
           onPageChange={onPageChange}
