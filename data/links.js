@@ -6,7 +6,6 @@ export const navLinks = [
   {
     name: 'Yeni İlan',
     url: '/ilan/yeni',
-    visibility: 'user',
   },
   {
     name: 'Gönderiler',
