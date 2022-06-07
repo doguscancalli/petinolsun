@@ -11,10 +11,10 @@ export const navLinks = [
     name: 'Gönderiler',
     url: '/gonderi',
   },
-  // {
-  //   name: 'Hakkımızda',
-  //   url: '/',
-  // },
+  {
+    name: 'Hakkımızda',
+    url: '/hakkimizda',
+  },
   {
     name: 'Kaydol',
     url: '/kaydol',
