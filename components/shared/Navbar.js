@@ -98,7 +98,7 @@ const Navbar = ({ className }) => {
               />
             )
           })}
-          <UserDisplay />
+          {auth?.user && <UserDisplay />}
         </ul>
       )}
     </div>
