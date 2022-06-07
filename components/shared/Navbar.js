@@ -31,16 +31,40 @@ const NavLinks = ({ link, isMobile, toggleMenu, setToggleMenu }) => {
   )
 }
 
-const Navbar = ({ className }) => {
-  const [toggleMenu, setToggleMenu] = useState(false)
-
+const UserDisplay = () => {
   const auth = useSelector((state) => state.auth)
   const dispatch = useDispatch()
 
   return (
-    <>
+    <div className='flex items-center'>
+      <Link href='/profil' passHref>
+        <a className='flex items-center gap-2 ml-8'>
+          <Avatar
+            url={`https://ui-avatars.com/api/?name=${auth?.user?.name.replace(
+              /\s+/g,
+              '-'
+            )}&background=000&color=fff`}
+          />
+          <p>{auth?.user?.name}</p>
+        </a>
+      </Link>
+      <FiLogOut
+        className='ml-4 cursor-pointer'
+        onClick={() => dispatch(logout())}
+      />
+    </div>
+  )
+}
+
+const Navbar = ({ className }) => {
+  const [toggleMenu, setToggleMenu] = useState(false)
+
+  const auth = useSelector((state) => state.auth)
+
+  return (
+    <div className='relative w-full'>
       <nav
-        className={`bg-white rounded-full flex grow items-center py-2 pl-4 pr-2 sm:py-3 sm:pl-6 sm:pr-3 mt-5 md:mt-8 ${className}`}
+        className={`bg-white rounded-full flex grow items-center py-2 pl-4 pr-2 sm:py-3 sm:pl-6 sm:pr-3 mt-5 md:mt-8 justify-between ${className}`}
       >
         <Link href='/'>
           <a className='font-bold'>petinolsun</a>
@@ -52,25 +76,7 @@ const Navbar = ({ className }) => {
             return <NavLinks link={link} key={index} />
           })}
         </ul>
-        {auth?.user && (
-          <>
-            <Link href='/profil' passHref>
-              <a className='flex items-center gap-2 ml-8'>
-                <Avatar
-                  url={`https://ui-avatars.com/api/?name=${auth?.user?.name.replace(
-                    /\s+/g,
-                    '-'
-                  )}&background=000&color=fff`}
-                />
-                <p>{auth?.user?.name}</p>
-              </a>
-            </Link>
-            <FiLogOut
-              className='ml-4 cursor-pointer'
-              onClick={() => dispatch(logout())}
-            />
-          </>
-        )}
+        <div className='hidden md:block'>{auth?.user && <UserDisplay />}</div>
         <button
           className='sm:hidden rounded-full bg-black p-[10px]'
           onClick={() => setToggleMenu(!toggleMenu)}
@@ -79,7 +85,7 @@ const Navbar = ({ className }) => {
         </button>
       </nav>
       {toggleMenu && (
-        <ul className='block sm:hidden bg-white mt-2 rounded-2xl text-center p-6'>
+        <ul className='block sm:hidden bg-black text-white mt-2 rounded-2xl text-center p-6 absolute right-0 left-0 z-50'>
           {navLinks.map((link, index) => {
             if (link.visibility === 'guest' && auth.user) return null
             return (
@@ -92,9 +98,10 @@ const Navbar = ({ className }) => {
               />
             )
           })}
+          <UserDisplay />
         </ul>
       )}
-    </>
+    </div>
   )
 }
 
