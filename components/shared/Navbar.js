@@ -31,7 +31,7 @@ const NavLinks = ({ link, isMobile, toggleMenu, setToggleMenu }) => {
   )
 }
 
-const Navbar = () => {
+const Navbar = ({ className }) => {
   const [toggleMenu, setToggleMenu] = useState(false)
 
   const auth = useSelector((state) => state.auth)
@@ -39,7 +39,9 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className='bg-white rounded-full flex grow items-center py-2 pl-4 pr-2 sm:py-3 sm:pl-6 sm:pr-3 mt-5 md:mt-8'>
+      <nav
+        className={`bg-white rounded-full flex grow items-center py-2 pl-4 pr-2 sm:py-3 sm:pl-6 sm:pr-3 mt-5 md:mt-8 ${className}`}
+      >
         <Link href='/'>
           <a className='font-bold'>petinolsun</a>
         </Link>
