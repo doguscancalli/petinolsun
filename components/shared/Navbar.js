@@ -85,7 +85,7 @@ const Navbar = ({ className }) => {
         </button>
       </nav>
       {toggleMenu && (
-        <ul className='flex flex-col items-center md:hidden bg-black text-white mt-2 rounded-2xl text-center p-6 absolute right-0 left-0 z-50'>
+        <ul className='flex flex-col items-center md:hidden bg-white shadow-lg mt-2 rounded-2xl text-center p-6 absolute right-0 left-0 z-50'>
           {navLinks.map((link, index) => {
             if (link.visibility === 'guest' && auth.user) return null
             return (
