@@ -8,7 +8,7 @@ const Navbar = dynamic(() => import('@components/shared/Navbar'), {
 const Hero = () => {
   return (
     <div className='h-[80vh] md:h-[70vh] p-2'>
-      <div className='bg-[url("/images/hero-bg.jpg")] bg-cover w-full h-full rounded-3xl overflow-auto'>
+      <div className='bg-[url("/images/hero-bg.jpg")] bg-cover w-full h-full rounded-3xl'>
         <Wrapper className='flex flex-col h-full items-center'>
           <Navbar className='w-full grow-0' />
           <div className='flex flex-col items-center my-auto'>
