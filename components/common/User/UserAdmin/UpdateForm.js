@@ -77,7 +77,7 @@ const UpdateForm = ({ data, setToggleModal, refetch }) => {
       <Input
         defaultValue={name}
         type='text'
-        placeholder='Ad soyad'
+        placeholder='Ad Soyad'
         error={errors?.name}
         errorMessage={errors?.name?.message}
         disabled={loading}

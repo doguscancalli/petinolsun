@@ -96,7 +96,7 @@ const RegisterForm = () => {
       >
         <h2 className='text-base md:text-xl font-bold'>İsim</h2>
         <Input
-          placeholder='Ad soyad'
+          placeholder='Ad Soyad'
           name='name'
           error={errors?.name || error}
           errorMessage={errors?.name?.message}
