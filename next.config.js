@@ -7,15 +7,6 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
-  module: {
-    rules: [
-      {
-        test: /\.graphqls$/,
-        exclude: /node_modules/,
-        use: ['webpack-graphql-loader'],
-      },
-    ],
-  },
 }
 
 module.exports = nextConfig
