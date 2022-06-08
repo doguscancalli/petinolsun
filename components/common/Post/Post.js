@@ -7,15 +7,22 @@ const Moment = dynamic(() => import('react-moment'), {
 })
 
 const HorizontalPost = ({ post }) => {
-  const { id, title, slug, description, user, createdAt } = post
+  const { slug, description, user, createdAt } = post
   const router = useRouter()
+
+  const handleDescription = () => {
+    if (description.length > 100) {
+      return `${description.substring(0, 100)}...`
+    }
+    return description
+  }
 
   return (
     <li
       className='flex flex-col items-start bg-white p-6 rounded-2xl cursor-pointer h-full justify-between'
       onClick={() => router.push(`/gonderi/${slug}`)}
     >
-      <p className='break-all'>{description.slice(0, 100)}...</p>
+      <p className='break-all'>{handleDescription()}</p>
       <div className='flex justify-between items-center w-full mt-8'>
         <div className='flex items-center gap-2'>
           <Avatar
@@ -37,7 +44,7 @@ const HorizontalPost = ({ post }) => {
 }
 
 const VerticalPost = ({ post }) => {
-  const { id, title, slug, description, user, createdAt } = post
+  const { title, slug, user, createdAt } = post
   const router = useRouter()
 
   return (
