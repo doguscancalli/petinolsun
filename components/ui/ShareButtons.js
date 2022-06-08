@@ -85,7 +85,7 @@ const ShareButtons = ({ type, postType }) => {
         {isOpen ? <FiX /> : <FiShare2 />}
       </ShareButton>
       {isOpen && (
-        <ul className='absolute mt-1 flex flex-col gap-1'>
+        <ul className='absolute mt-1 flex flex-col gap-1 z-40'>
           {platforms.map(({ value, icon }) => (
             <li key={value}>
               <ShareButton onClick={() => handleShare(value)}>
