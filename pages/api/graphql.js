@@ -5,6 +5,7 @@ import { connectDb, isAuth, isAdmin } from '@utils'
 import User from 'pages/api/models/User'
 
 const server = createServer({
+  graphiql: false,
   schema: {
     typeDefs,
     resolvers,
