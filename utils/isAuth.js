@@ -1,4 +1,6 @@
 import { verify } from 'jsonwebtoken'
+import { GraphQLYogaError } from '@graphql-yoga/node'
+
 export default async (context) => {
   const authHeader = context.req.headers.authorization
   const authCookie = context.req.cookies.token
@@ -17,12 +19,12 @@ export default async (context) => {
       context.req.user = tokenUser
       user = tokenUser
     } catch (err) {
-      throw new Error('Invalid/Expired token')
+      throw new GraphQLYogaError('Invalid/Expired token')
     }
   } else {
-    throw new Error('Authorization header must be provided')
+    throw new GraphQLYogaError('Authorization header must be provided')
   }
   const isUserExists = await context.User.exists({ _id: user.id })
-  if (!isUserExists) throw new Error('Kullanıcı bulunamadı')
+  if (!isUserExists) throw new GraphQLYogaError('Kullanıcı bulunamadı')
   return user
 }
