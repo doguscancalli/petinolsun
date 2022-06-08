@@ -28,7 +28,7 @@ const LostPassword = () => {
       dispatch(
         sendToast({
           type: 'success',
-          message: 'Şifre sıfırlama bağlantınız e-posta adresinize gönderildi',
+          message: 'Şifre sıfırlama bağlantınız eposta adresinize gönderildi',
         })
       )
       reset()
