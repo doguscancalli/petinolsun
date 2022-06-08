@@ -1,8 +1,15 @@
-import { loadFilesSync } from '@graphql-tools/load-files'
-import { mergeTypeDefs } from '@graphql-tools/merge'
+import AdminType from './Admin'
+import CommentType from './Comment'
+import PetPostType from './PetPost'
+import PostType from './Post'
+import ReportType from './Report'
+import UserType from './User'
 
-const typesArray = loadFilesSync('.', {
-  extensions: ['graphql'],
-})
-
-export default mergeTypeDefs(typesArray)
+export default [
+  AdminType,
+  CommentType,
+  PetPostType,
+  PostType,
+  ReportType,
+  UserType,
+]
