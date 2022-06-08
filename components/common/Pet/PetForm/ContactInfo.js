@@ -21,12 +21,16 @@ const ContactInfo = ({ photos }) => {
   const { data: petPostData } = useSelector((state) => state.petPost)
   const dispatch = useDispatch()
 
-  const [createPetPost, { data, loading, error }] = useMutation(
-    CREATE_PET_POST,
-    {
-      errorPolicy: 'all',
-    }
-  )
+  const [createPetPost, { data, loading }] = useMutation(CREATE_PET_POST, {
+    onError: (error) => {
+      dispatch(
+        sendToast({
+          type: 'error',
+          message: error.message,
+        })
+      )
+    },
+  })
 
   const {
     register,
@@ -58,20 +62,6 @@ const ContactInfo = ({ photos }) => {
       dispatch(clearData())
     }
   }, [data])
-
-  useEffect(() => {
-    if (error) {
-      console.log(error)
-      error.graphQLErrors.forEach((error) =>
-        dispatch(
-          sendToast({
-            type: 'error',
-            message: error?.extensions?.originalError?.message,
-          })
-        )
-      )
-    }
-  }, [error])
 
   const handleCreatePetPost = async () => {
     setIsImageUploading(true)

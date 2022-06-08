@@ -22,7 +22,7 @@ const PetPostSearchView = () => {
   const router = useRouter()
   const { query } = useRouter()
 
-  const { data, loading, error, refetch } = useQuery(GET_ALL_PET_POSTS, {
+  const { data, loading, refetch } = useQuery(GET_ALL_PET_POSTS, {
     variables: {
       input: {
         limit: '12',
@@ -30,8 +30,15 @@ const PetPostSearchView = () => {
         ...filter,
       },
     },
-    errorPolicy: 'all',
     fetchPolicy: 'no-cache',
+    onError: (error) => {
+      dispatch(
+        sendToast({
+          type: 'error',
+          message: error.message,
+        })
+      )
+    },
   })
 
   useEffect(() => {
@@ -39,19 +46,6 @@ const PetPostSearchView = () => {
       dispatch(setSearchData(data?.petPosts))
     }
   }, [data])
-
-  useEffect(() => {
-    if (error) {
-      error.graphQLErrors.forEach((error) =>
-        dispatch(
-          sendToast({
-            type: 'error',
-            message: error?.extensions?.originalError?.message,
-          })
-        )
-      )
-    }
-  }, [error])
 
   useEffect(() => {
     if (isObjectEmpty(query)) return
@@ -76,10 +70,9 @@ const PetPostSearchView = () => {
       <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-8'>
         {searchData &&
           !loading &&
-          !error &&
           searchData?.docs?.map((post) => <Pet key={post.id} post={post} />)}
       </div>
-      {searchData?.totalPages > 1 && !loading && !error && (
+      {searchData?.totalPages > 1 && !loading && (
         <Pagination
           className='mt-8 justify-center'
           onPageChange={onPageChange}

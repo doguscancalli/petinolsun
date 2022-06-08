@@ -18,10 +18,19 @@ const PostPhotos = ({ id, data, setSelectedField }) => {
 
   const dispatch = useDispatch()
 
-  const [updateFields, { data: updatedData, loading, error: uploadError }] =
-    useMutation(UPDATE_PET_POST, {
-      errorPolicy: 'all',
-    })
+  const [updateFields, { data: updatedData, loading }] = useMutation(
+    UPDATE_PET_POST,
+    {
+      onError: (error) => {
+        dispatch(
+          sendToast({
+            type: 'error',
+            message: error.message,
+          })
+        )
+      },
+    }
+  )
 
   useEffect(() => {
     if (updatedData) {
@@ -35,19 +44,6 @@ const PostPhotos = ({ id, data, setSelectedField }) => {
       setSelectedField('')
     }
   }, [updatedData])
-
-  useEffect(() => {
-    if (uploadError) {
-      uploadError.graphQLErrors.forEach((error) =>
-        dispatch(
-          sendToast({
-            type: 'error',
-            message: error?.extensions?.originalError?.message,
-          })
-        )
-      )
-    }
-  }, [uploadError])
 
   const handleRemove = (image) => {
     var result = confirm('Fotoğrafı silmek istediğinize emin misiniz?')

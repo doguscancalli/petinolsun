@@ -1,6 +1,7 @@
 import { advancedFiltering } from '@utils'
 import { validatePetPostInput } from '@utils/validators'
 import PetPost from '../models/PetPost'
+import { GraphQLYogaError } from '@graphql-yoga/node'
 
 export default {
   Query: {
@@ -15,7 +16,7 @@ export default {
         path: 'user',
         select: 'name',
       })
-      if (!petPost) throw new Error('İlan bulunamadı')
+      if (!petPost) throw new GraphQLYogaError('İlan bulunamadı')
       return petPost
     },
   },
@@ -24,7 +25,7 @@ export default {
       const { input } = args
       const { id } = await context.isAuth(context)
       const { valid, errors } = validatePetPostInput(input)
-      if (!valid) throw new Error(Object.values(errors))
+      if (!valid) throw new GraphQLYogaError(Object.values(errors))
       const petPost = await PetPost.create({ ...input, user: id })
       return petPost
     },
@@ -32,9 +33,11 @@ export default {
       const { id, input } = args
       const { id: authUserId, isAdmin } = await context.isAuth(context)
       const petPost = await PetPost.findById(id)
-      if (!petPost) throw new Error('İlan bulunamadı')
+      if (!petPost) throw new GraphQLYogaError('İlan bulunamadı')
       if (petPost.user.toString() !== authUserId && !isAdmin)
-        throw new Error('Sadece kendi ilanlarınızı güncelleyebilirsiniz')
+        throw new GraphQLYogaError(
+          'Sadece kendi ilanlarınızı güncelleyebilirsiniz'
+        )
       const updatedPetPost = await PetPost.findByIdAndUpdate(id, input, {
         new: true,
       })
@@ -44,9 +47,9 @@ export default {
       const { id } = args
       const { id: authUserId, isAdmin } = await context.isAuth(context)
       const petPost = await PetPost.findById(id)
-      if (!petPost) throw new Error('İlan bulunamadı')
+      if (!petPost) throw new GraphQLYogaError('İlan bulunamadı')
       if (petPost.user.toString() !== authUserId && !isAdmin)
-        throw new Error('Sadece kendi ilanlarınızı silebilirsiniz')
+        throw new GraphQLYogaError('Sadece kendi ilanlarınızı silebilirsiniz')
       await petPost.remove()
       return true
     },

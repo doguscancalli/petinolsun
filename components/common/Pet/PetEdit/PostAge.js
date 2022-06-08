@@ -19,10 +19,17 @@ const PostAge = ({ id, data, setSelectedField }) => {
     getValues,
   } = useForm()
 
-  const [updateFields, { data: updatedData, loading, error }] = useMutation(
+  const [updateFields, { data: updatedData, loading }] = useMutation(
     UPDATE_PET_POST,
     {
-      errorPolicy: 'all',
+      onError: (error) => {
+        dispatch(
+          sendToast({
+            type: 'error',
+            message: error.message,
+          })
+        )
+      },
     }
   )
 
@@ -38,19 +45,6 @@ const PostAge = ({ id, data, setSelectedField }) => {
       setSelectedField('')
     }
   }, [updatedData])
-
-  useEffect(() => {
-    if (error) {
-      error.graphQLErrors.forEach((error) =>
-        dispatch(
-          sendToast({
-            type: 'error',
-            message: error?.extensions?.originalError?.message,
-          })
-        )
-      )
-    }
-  }, [error])
 
   const onSubmit = async (fields) => {
     await updateFields({

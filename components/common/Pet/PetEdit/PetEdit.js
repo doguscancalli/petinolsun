@@ -20,10 +20,17 @@ const PetEdit = ({ data }) => {
 
   const router = useRouter()
 
-  const [deletePetPost, { data: deletedData, loading, error }] = useMutation(
+  const [deletePetPost, { data: deletedData, loading }] = useMutation(
     DELETE_PET_POST,
     {
-      errorPolicy: 'all',
+      onError: (error) => {
+        dispatch(
+          sendToast({
+            type: 'error',
+            message: error.message,
+          })
+        )
+      },
     }
   )
 
@@ -69,20 +76,6 @@ const PetEdit = ({ data }) => {
       router.push('/')
     }
   }, [deletedData])
-
-  useEffect(() => {
-    if (error) {
-      console.log(error)
-      error.graphQLErrors.forEach((error) =>
-        dispatch(
-          sendToast({
-            type: 'error',
-            message: error?.extensions?.originalError?.message,
-          })
-        )
-      )
-    }
-  }, [error])
 
   if (isObjectEmpty(editData)) return <PulseLoader size={8} />
 

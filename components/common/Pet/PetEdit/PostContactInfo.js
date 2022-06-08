@@ -19,10 +19,17 @@ const PostContactInfo = ({ id, data, setSelectedField }) => {
     control,
   } = useForm()
 
-  const [updateFields, { data: updatedData, loading, error }] = useMutation(
+  const [updateFields, { data: updatedData, loading }] = useMutation(
     UPDATE_PET_POST,
     {
-      errorPolicy: 'all',
+      onError: (error) => {
+        dispatch(
+          sendToast({
+            type: 'error',
+            message: error.message,
+          })
+        )
+      },
     }
   )
 
@@ -53,19 +60,6 @@ const PostContactInfo = ({ id, data, setSelectedField }) => {
       setSelectedField('')
     }
   }, [updatedData])
-
-  useEffect(() => {
-    if (error) {
-      error.graphQLErrors.forEach((error) =>
-        dispatch(
-          sendToast({
-            type: 'error',
-            message: error?.extensions?.originalError?.message,
-          })
-        )
-      )
-    }
-  }, [error])
 
   return (
     <form className='flex flex-col gap-4' onSubmit={handleSubmit(onSubmit)}>
