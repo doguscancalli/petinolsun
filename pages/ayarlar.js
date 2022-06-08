@@ -27,8 +27,10 @@ export async function getServerSideProps(context) {
       },
     },
     query: ME,
-    errorPolicy: 'all',
     fetchPolicy: 'no-cache',
+    onError: (error) => {
+      console.log(error)
+    },
   })
 
   if (!data?.me) {

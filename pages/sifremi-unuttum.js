@@ -12,12 +12,16 @@ import { NextSeo } from 'next-seo'
 const LostPassword = () => {
   const dispatch = useDispatch()
 
-  const [forgotPassword, { data, loading, error }] = useMutation(
-    FORGOT_PASSWORD,
-    {
-      errorPolicy: 'all',
-    }
-  )
+  const [forgotPassword, { data, loading }] = useMutation(FORGOT_PASSWORD, {
+    onError: (error) => {
+      dispatch(
+        sendToast({
+          type: 'error',
+          message: error.message,
+        })
+      )
+    },
+  })
 
   useEffect(() => {
     if (data) {
@@ -30,19 +34,6 @@ const LostPassword = () => {
       reset()
     }
   }, [data])
-
-  useEffect(() => {
-    if (error) {
-      error.graphQLErrors.forEach((error) =>
-        dispatch(
-          sendToast({
-            type: 'error',
-            message: error?.extensions?.originalError?.message,
-          })
-        )
-      )
-    }
-  }, [error])
 
   const {
     register,
@@ -81,7 +72,7 @@ const LostPassword = () => {
           <Input
             type='email'
             placeholder='mail@mail.com'
-            error={errors?.email || error}
+            error={errors?.email}
             errorMessage={errors?.email?.message}
             disabled={loading}
             {...register('email', { ...validations.email })}

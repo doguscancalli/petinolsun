@@ -12,10 +12,17 @@ import jwtDecode from 'jwt-decode'
 const UserEmail = ({ id, data, setSelectedField }) => {
   const dispatch = useDispatch()
 
-  const [updateFields, { data: updatedData, loading, error }] = useMutation(
+  const [updateFields, { data: updatedData, loading }] = useMutation(
     UPDATE_USER,
     {
-      errorPolicy: 'all',
+      onError: (error) => {
+        dispatch(
+          sendToast({
+            type: 'error',
+            message: error.message,
+          })
+        )
+      },
     }
   )
 
@@ -61,19 +68,6 @@ const UserEmail = ({ id, data, setSelectedField }) => {
       setSelectedField('')
     }
   }, [updatedData])
-
-  useEffect(() => {
-    if (error) {
-      error.graphQLErrors.forEach((error) =>
-        dispatch(
-          sendToast({
-            type: 'error',
-            message: error?.extensions?.originalError?.message,
-          })
-        )
-      )
-    }
-  })
 
   const {
     register,

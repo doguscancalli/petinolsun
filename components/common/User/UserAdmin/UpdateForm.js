@@ -13,7 +13,14 @@ const UpdateForm = ({ data, setToggleModal, refetch }) => {
   const [updateUser, { data: updateUserData, loading, error }] = useMutation(
     UPDATE_USER,
     {
-      errorPolicy: 'all',
+      onError: (error) => {
+        dispatch(
+          sendToast({
+            type: 'error',
+            message: error.message,
+          })
+        )
+      },
     }
   )
 
@@ -29,19 +36,6 @@ const UpdateForm = ({ data, setToggleModal, refetch }) => {
       setToggleModal(false)
     }
   }, [updateUserData])
-
-  useEffect(() => {
-    if (error) {
-      error.graphQLErrors.forEach((error) =>
-        dispatch(
-          sendToast({
-            type: 'error',
-            message: error?.extensions?.originalError?.message,
-          })
-        )
-      )
-    }
-  }, [error])
 
   const {
     register,

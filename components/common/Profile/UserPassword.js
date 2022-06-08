@@ -9,10 +9,17 @@ import { sendToast } from '@features/ui/uiSlice'
 const UserPassword = ({ id, data, setSelectedField }) => {
   const dispatch = useDispatch()
 
-  const [updateFields, { data: updatedData, loading, error }] = useMutation(
+  const [updateFields, { data: updatedData, loading }] = useMutation(
     UPDATE_PASSWORD,
     {
-      errorPolicy: 'all',
+      onError: (error) => {
+        dispatch(
+          sendToast({
+            type: 'error',
+            message: error.message,
+          })
+        )
+      },
     }
   )
 
@@ -52,19 +59,6 @@ const UserPassword = ({ id, data, setSelectedField }) => {
       setSelectedField('')
     }
   }, [updatedData])
-
-  useEffect(() => {
-    if (error) {
-      error.graphQLErrors.forEach((error) =>
-        dispatch(
-          sendToast({
-            type: 'error',
-            message: error?.extensions?.originalError?.message,
-          })
-        )
-      )
-    }
-  })
 
   const {
     register,

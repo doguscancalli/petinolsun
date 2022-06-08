@@ -27,7 +27,6 @@ const UserDataTable = () => {
   const {
     data: getAllUsersData,
     loading: getAllUsersLoading,
-    error: getAllUsersError,
     refetch,
   } = useQuery(GET_ALL_USERS, {
     variables: {
@@ -36,8 +35,15 @@ const UserDataTable = () => {
         ...filter,
       },
     },
-    errorPolicy: 'all',
     fetchPolicy: 'no-cache',
+    onError: (error) => {
+      dispatch(
+        sendToast({
+          type: 'error',
+          message: error.message,
+        })
+      )
+    },
   })
 
   useEffect(() => {
@@ -46,16 +52,17 @@ const UserDataTable = () => {
     }
   }, [getAllUsersData])
 
-  const [
-    deleteUser,
-    {
-      data: deleteUserData,
-      loading: deleteUserLoading,
-      error: deleteUserError,
-    },
-  ] = useMutation(DELETE_USER, {
-    errorPolicy: 'all',
-  })
+  const [deleteUser, { data: deleteUserData, loading: deleteUserLoading }] =
+    useMutation(DELETE_USER, {
+      onError: (error) => {
+        dispatch(
+          sendToast({
+            type: 'error',
+            message: error.message,
+          })
+        )
+      },
+    })
 
   useEffect(() => {
     if (deleteUserData?.deleteUser) {
@@ -67,22 +74,6 @@ const UserDataTable = () => {
       )
     }
   }, [deleteUserData])
-
-  useEffect(() => {
-    let error
-    if (getAllUsersError) error = getAllUsersError
-    if (deleteUserError) error = getAllUsersError
-    if (error) {
-      error.graphQLErrors.forEach((error) =>
-        dispatch(
-          sendToast({
-            type: 'error',
-            message: error?.extensions?.originalError?.message,
-          })
-        )
-      )
-    }
-  }, [getAllUsersError, deleteUserError])
 
   const columns = [
     {

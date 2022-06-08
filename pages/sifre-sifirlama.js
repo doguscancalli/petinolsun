@@ -16,12 +16,16 @@ const ResetPassword = () => {
 
   const dispatch = useDispatch()
 
-  const [resetPassword, { data, loading, error }] = useMutation(
-    RESET_PASSWORD,
-    {
-      errorPolicy: 'all',
-    }
-  )
+  const [resetPassword, { data, loading }] = useMutation(RESET_PASSWORD, {
+    onError: (error) => {
+      dispatch(
+        sendToast({
+          type: 'error',
+          message: error.message,
+        })
+      )
+    },
+  })
 
   useEffect(() => {
     if (data) {
@@ -35,19 +39,6 @@ const ResetPassword = () => {
       reset()
     }
   }, [data])
-
-  useEffect(() => {
-    if (error) {
-      error.graphQLErrors.forEach((error) =>
-        dispatch(
-          sendToast({
-            type: 'error',
-            message: error?.extensions?.originalError?.message,
-          })
-        )
-      )
-    }
-  }, [error])
 
   const {
     register,
@@ -85,7 +76,7 @@ const ResetPassword = () => {
           <Input
             placeholder='••••••••'
             type='password'
-            error={errors?.password || error}
+            error={errors?.password}
             errorMessage={errors?.password?.message}
             disabled={loading}
             {...register('password', { ...validations.password })}
