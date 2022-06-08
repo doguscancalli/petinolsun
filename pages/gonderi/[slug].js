@@ -23,8 +23,10 @@ export async function getServerSideProps(context) {
     variables: {
       slug,
     },
-    errorPolicy: 'all',
     fetchPolicy: 'no-cache',
+    onError: (error) => {
+      console.log(error)
+    },
   })
 
   if (!data) {

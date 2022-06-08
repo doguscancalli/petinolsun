@@ -19,7 +19,7 @@ const PostDisplay = ({ className, filters, title, horizontal }) => {
   const router = useRouter()
   const { query } = useRouter()
 
-  const { data, loading, error, refetch } = useQuery(GET_ALL_POSTS, {
+  const { data, loading, refetch } = useQuery(GET_ALL_POSTS, {
     variables: {
       input: {
         limit: '6',
@@ -27,8 +27,15 @@ const PostDisplay = ({ className, filters, title, horizontal }) => {
         ...filters,
       },
     },
-    errorPolicy: 'all',
     fetchPolicy: 'no-cache',
+    onError: (error) => {
+      dispatch(
+        sendToast({
+          type: 'error',
+          message: error.message,
+        })
+      )
+    },
   })
 
   useEffect(() => {
@@ -36,19 +43,6 @@ const PostDisplay = ({ className, filters, title, horizontal }) => {
       dispatch(setSearchData(data?.posts))
     }
   }, [data])
-
-  useEffect(() => {
-    if (error) {
-      error.graphQLErrors.forEach((error) =>
-        dispatch(
-          sendToast({
-            type: 'error',
-            message: error?.extensions?.originalError?.message,
-          })
-        )
-      )
-    }
-  }, [error])
 
   useEffect(() => {
     if (isObjectEmpty(query)) return
@@ -71,13 +65,13 @@ const PostDisplay = ({ className, filters, title, horizontal }) => {
   return (
     <div className={className}>
       {loading && <PulseLoader size={8} />}
-      {title && !loading && !error && (
+      {title && !loading && (
         <h1 className='text-2xl md:text-4xl font-bold mb-8'>{title}</h1>
       )}
-      {searchData?.docs && !loading && !error && (
+      {searchData?.docs && !loading && (
         <Posts posts={searchData.docs} horizontal={horizontal} />
       )}
-      {!horizontal && searchData?.totalPages > 1 && !loading && !error && (
+      {!horizontal && searchData?.totalPages > 1 && !loading && (
         <Pagination
           className='mt-4 justify-center'
           onPageChange={onPageChange}

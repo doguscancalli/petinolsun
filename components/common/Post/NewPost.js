@@ -13,8 +13,15 @@ const NewPost = ({ setToggleModal }) => {
 
   const router = useRouter()
 
-  const [createPost, { data, loading, error }] = useMutation(CREATE_POST, {
-    errorPolicy: 'all',
+  const [createPost, { data, loading }] = useMutation(CREATE_POST, {
+    onError: (error) => {
+      dispatch(
+        sendToast({
+          type: 'error',
+          message: error.message,
+        })
+      )
+    },
   })
 
   useEffect(() => {
@@ -31,20 +38,6 @@ const NewPost = ({ setToggleModal }) => {
       setToggleModal(false)
     }
   }, [data])
-
-  useEffect(() => {
-    if (error) {
-      console.log(error)
-      error.graphQLErrors.forEach((error) =>
-        dispatch(
-          sendToast({
-            type: 'error',
-            message: error?.extensions?.originalError?.message,
-          })
-        )
-      )
-    }
-  }, [error])
 
   const {
     register,

@@ -18,10 +18,17 @@ const PostEdit = ({ data }) => {
 
   const router = useRouter()
 
-  const [deletePost, { data: deletedData, loading, error }] = useMutation(
+  const [deletePost, { data: deletedData, loading }] = useMutation(
     DELETE_POST,
     {
-      errorPolicy: 'all',
+      onError: (error) => {
+        dispatch(
+          sendToast({
+            type: 'error',
+            message: error.message,
+          })
+        )
+      },
     }
   )
 
@@ -36,20 +43,6 @@ const PostEdit = ({ data }) => {
       router.push('/gonderi')
     }
   }, [deletedData])
-
-  useEffect(() => {
-    if (error) {
-      console.log(error)
-      error.graphQLErrors.forEach((error) =>
-        dispatch(
-          sendToast({
-            type: 'error',
-            message: error?.extensions?.originalError?.message,
-          })
-        )
-      )
-    }
-  }, [error])
 
   useEffect(() => {
     dispatch(setEditData(data))

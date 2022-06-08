@@ -1,6 +1,7 @@
 import { advancedFiltering } from '@utils'
 import { validatePostInput } from '@utils/validators'
 import Post from '../models/Post'
+import { GraphQLYogaError } from '@graphql-yoga/node'
 
 export default {
   Query: {
@@ -19,7 +20,7 @@ export default {
         path: 'user',
         select: 'name',
       })
-      if (!post) throw new Error('İlan bulunamadı')
+      if (!post) throw new GraphQLYogaError('İlan bulunamadı')
       return post
     },
   },
@@ -28,7 +29,7 @@ export default {
       const { input } = args
       const { id } = await context.isAuth(context)
       const { valid, errors } = validatePostInput(input)
-      if (!valid) throw new Error(Object.values(errors))
+      if (!valid) throw new GraphQLYogaError(Object.values(errors))
       let post = await Post.create({ ...input, user: id })
       post = await post.populate({
         path: 'user',
@@ -40,13 +41,15 @@ export default {
       const { id, input } = args
       const { id: authUserId, isAdmin } = await context.isAuth(context)
       const post = await Post.findById(id)
-      if (!post) throw new Error('Gönderi bulunamadı')
+      if (!post) throw new GraphQLYogaError('Gönderi bulunamadı')
       if (post.createdAt.getTime() + 1800000 < new Date().getTime() && !isAdmin)
-        throw new Error(
+        throw new GraphQLYogaError(
           'Gönderi paylaşıldıktan 30 dakika içinde düzenlenebilir'
         )
       if (post.user.toString() !== authUserId && !isAdmin)
-        throw new Error('Sadece kendi gönderinizi güncelleyebilirsiniz')
+        throw new GraphQLYogaError(
+          'Sadece kendi gönderinizi güncelleyebilirsiniz'
+        )
       const updatedPost = await Post.findByIdAndUpdate(id, input, {
         new: true,
       })
@@ -56,9 +59,9 @@ export default {
       const { id } = args
       const { id: authUserId, isAdmin } = await context.isAuth(context)
       const post = await Post.findById(id)
-      if (!post) throw new Error('Gönderi bulunamadı')
+      if (!post) throw new GraphQLYogaError('Gönderi bulunamadı')
       if (post.user.toString() !== authUserId && !isAdmin)
-        throw new Error('Sadece kendi gönderinizi silebilirsiniz')
+        throw new GraphQLYogaError('Sadece kendi gönderinizi silebilirsiniz')
       await post.remove()
       return true
     },
