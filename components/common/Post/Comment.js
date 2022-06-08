@@ -23,10 +23,17 @@ const Comment = ({ comment }) => {
     setIsCommentOwner(user?._id === authUser?.id || authUser?.isAdmin)
   }, [])
 
-  const [deleteComment, { data: deletedData, loading, error }] = useMutation(
+  const [deleteComment, { data: deletedData, loading }] = useMutation(
     DELETE_COMMENT,
     {
-      errorPolicy: 'all',
+      onError: (error) => {
+        dispatch(
+          sendToast({
+            type: 'error',
+            message: error.message,
+          })
+        )
+      },
     }
   )
 
@@ -41,20 +48,6 @@ const Comment = ({ comment }) => {
       dispatch(removeSearchData(id))
     }
   }, [deletedData])
-
-  useEffect(() => {
-    if (error) {
-      console.log(error)
-      error.graphQLErrors.forEach((error) =>
-        dispatch(
-          sendToast({
-            type: 'error',
-            message: error?.extensions?.originalError?.message,
-          })
-        )
-      )
-    }
-  }, [error])
 
   const handleDelete = () => {
     var result = confirm('Yorumunuzu silmek istediğinize emin misiniz?')

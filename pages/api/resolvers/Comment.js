@@ -1,6 +1,7 @@
 import { advancedFiltering } from '@utils'
 import { validateCommentInput } from '@utils/validators'
 import Comment from '../models/Comment'
+import { GraphQLYogaError } from '@graphql-yoga/node'
 
 export default {
   Query: {
@@ -19,7 +20,7 @@ export default {
       const { input } = args
       const { id } = await context.isAuth(context)
       const { valid, errors } = validateCommentInput(input)
-      if (!valid) throw new Error(Object.values(errors))
+      if (!valid) throw new GraphQLYogaError(Object.values(errors))
       let comment = await Comment.create({ ...input, user: id })
       comment = await comment.populate({
         path: 'user',
@@ -31,14 +32,18 @@ export default {
       const { id, input } = args
       const { id: authUserId, isAdmin } = await context.isAuth(context)
       const comment = await Comment.findById(id)
-      if (!comment) throw new Error('Yoruum bulunamadı')
+      if (!comment) throw new GraphQLYogaError('Yoruum bulunamadı')
       if (
         comment.createdAt.getTime() + 1800000 < new Date().getTime() &&
         !isAdmin
       )
-        throw new Error('Yorum paylaşıldıktan 30 dakika içinde düzenlenebilir')
+        throw new GraphQLYogaError(
+          'Yorum paylaşıldıktan 30 dakika içinde düzenlenebilir'
+        )
       if (comment.user.toString() !== authUserId && !isAdmin)
-        throw new Error('Sadece kendi yorumunuzu güncelleyebilirsiniz')
+        throw new GraphQLYogaError(
+          'Sadece kendi yorumunuzu güncelleyebilirsiniz'
+        )
       const updatedComment = await Comment.findByIdAndUpdate(id, input, {
         new: true,
       })
@@ -48,9 +53,9 @@ export default {
       const { id } = args
       const { id: authUserId, isAdmin } = await context.isAuth(context)
       const comment = await Comment.findById(id)
-      if (!comment) throw new Error('Yorum bulunamadı')
+      if (!comment) throw new GraphQLYogaError('Yorum bulunamadı')
       if (comment.user.toString() !== authUserId && !isAdmin)
-        throw new Error('Sadece kendi yorumunuzu silebilirsiniz')
+        throw new GraphQLYogaError('Sadece kendi yorumunuzu silebilirsiniz')
       await comment.remove()
       return true
     },

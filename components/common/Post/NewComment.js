@@ -34,12 +34,16 @@ const NewComment = ({ setToggleModal, id }) => {
     })
   }
 
-  const [createComment, { data, loading, error }] = useMutation(
-    CREATE_COMMENT,
-    {
-      errorPolicy: 'all',
-    }
-  )
+  const [createComment, { data, loading }] = useMutation(CREATE_COMMENT, {
+    onError: (error) => {
+      dispatch(
+        sendToast({
+          type: 'error',
+          message: error.message,
+        })
+      )
+    },
+  })
 
   useEffect(() => {
     if (data) {
@@ -54,20 +58,6 @@ const NewComment = ({ setToggleModal, id }) => {
       setToggleModal(false)
     }
   }, [data])
-
-  useEffect(() => {
-    if (error) {
-      console.log(error)
-      error.graphQLErrors.forEach((error) =>
-        dispatch(
-          sendToast({
-            type: 'error',
-            message: error?.extensions?.originalError?.message,
-          })
-        )
-      )
-    }
-  }, [error])
 
   return (
     <form className='flex flex-col gap-4' onSubmit={handleSubmit(onSubmit)}>

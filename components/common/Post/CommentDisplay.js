@@ -22,15 +22,22 @@ const CommentDisplay = ({ className, id }) => {
   const router = useRouter()
   const { query } = useRouter()
 
-  const { data, loading, error, refetch } = useQuery(GET_ALL_COMMENTS, {
+  const { data, loading, refetch } = useQuery(GET_ALL_COMMENTS, {
     variables: {
       input: {
         limit: '12',
         ...filter,
       },
     },
-    errorPolicy: 'all',
     fetchPolicy: 'no-cache',
+    onError: (error) => {
+      dispatch(
+        sendToast({
+          type: 'error',
+          message: error.message,
+        })
+      )
+    },
   })
 
   useEffect(() => {
@@ -38,19 +45,6 @@ const CommentDisplay = ({ className, id }) => {
       dispatch(setSearchData(data?.comments))
     }
   }, [data])
-
-  useEffect(() => {
-    if (error) {
-      error.graphQLErrors.forEach((error) =>
-        dispatch(
-          sendToast({
-            type: 'error',
-            message: error?.extensions?.originalError?.message,
-          })
-        )
-      )
-    }
-  }, [error])
 
   useEffect(() => {
     if (isObjectEmpty(query)) return
@@ -81,10 +75,10 @@ const CommentDisplay = ({ className, id }) => {
         <Button onClick={() => setToggleModal(true)}>Yeni Yorum</Button>
       </div>
       {loading && <PulseLoader size={8} />}
-      {searchData && !loading && !error && (
+      {searchData && !loading && (
         <Comments className='mt-4' comments={searchData.docs} />
       )}
-      {searchData?.totalPages > 1 && !loading && !error && (
+      {searchData?.totalPages > 1 && !loading && (
         <Pagination
           className='mt-4 justify-center'
           onPageChange={onPageChange}
