@@ -1,5 +1,6 @@
 import { advancedFiltering } from '@utils'
 import Report from '../models/Report'
+import { GraphQLYogaError } from '@graphql-yoga/node'
 
 export default {
   Query: {
@@ -29,7 +30,7 @@ export default {
         reportedTopic: input.reportedTopic,
         reportedTopicId: input.reportedTopicId,
       })
-      if (isDuplicate) throw new Error('Zaten rapor edilmiş')
+      if (isDuplicate) throw new GraphQLYogaError('Zaten rapor edilmiş')
       const report = await Report.create(input)
       return report
     },
@@ -38,7 +39,7 @@ export default {
       await context.isAuth(context)
       context.isAdmin(context)
       const report = await Report.findById(id)
-      if (!report) throw new Error('Rapor bulunamadı')
+      if (!report) throw new GraphQLYogaError('Rapor bulunamadı')
       await report.remove()
       return true
     },

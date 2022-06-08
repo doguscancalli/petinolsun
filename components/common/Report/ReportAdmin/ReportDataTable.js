@@ -24,7 +24,6 @@ const ReportDataTable = () => {
   const {
     data: getAllReportsData,
     loading: getAllReportsLoading,
-    error: getAllReportsError,
     refetch,
   } = useQuery(GET_ALL_REPORTS, {
     variables: {
@@ -33,8 +32,15 @@ const ReportDataTable = () => {
         ...filter,
       },
     },
-    errorPolicy: 'all',
     fetchPolicy: 'no-cache',
+    onError: (error) => {
+      dispatch(
+        sendToast({
+          type: 'error',
+          message: error.message,
+        })
+      )
+    },
   })
 
   useEffect(() => {
@@ -45,13 +51,16 @@ const ReportDataTable = () => {
 
   const [
     deleteReport,
-    {
-      data: deleteReportData,
-      loading: deleteReportLoading,
-      error: deleteReportError,
-    },
+    { data: deleteReportData, loading: deleteReportLoading },
   ] = useMutation(DELETE_REPORT, {
-    errorPolicy: 'all',
+    onError: (error) => {
+      dispatch(
+        sendToast({
+          type: 'error',
+          message: error.message,
+        })
+      )
+    },
   })
 
   useEffect(() => {
@@ -64,22 +73,6 @@ const ReportDataTable = () => {
       )
     }
   }, [deleteReportData])
-
-  useEffect(() => {
-    let error
-    if (getAllReportsError) error = getAllReportsError
-    if (deleteReportError) error = getAllUsersError
-    if (error) {
-      error.graphQLErrors.forEach((error) =>
-        dispatch(
-          sendToast({
-            type: 'error',
-            message: error?.extensions?.originalError?.message,
-          })
-        )
-      )
-    }
-  }, [getAllReportsError, deleteReportError])
 
   const columns = [
     {

@@ -37,8 +37,15 @@ const PetView = ({ post }) => {
   const router = useRouter()
   const { slug } = router.query
 
-  const [createReport, { data, loading, error }] = useMutation(CREATE_REPORT, {
-    errorPolicy: 'all',
+  const [createReport, { data, loading }] = useMutation(CREATE_REPORT, {
+    onError: (error) => {
+      dispatch(
+        sendToast({
+          type: 'error',
+          message: error.message,
+        })
+      )
+    },
   })
 
   const dispatch = useDispatch()
@@ -62,20 +69,6 @@ const PetView = ({ post }) => {
       )
     }
   }, [data])
-
-  useEffect(() => {
-    if (error) {
-      console.log(error)
-      error.graphQLErrors.forEach((error) =>
-        dispatch(
-          sendToast({
-            type: 'error',
-            message: error?.extensions?.originalError?.message,
-          })
-        )
-      )
-    }
-  }, [error])
 
   const handleReport = () => {
     if (!authUser) {

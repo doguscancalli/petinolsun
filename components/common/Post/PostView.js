@@ -28,8 +28,15 @@ const PostView = ({ post }) => {
     setIsPostOwner(user?._id === authUser?.id || authUser?.isAdmin)
   }, [authUser])
 
-  const [createReport, { data, loading, error }] = useMutation(CREATE_REPORT, {
-    errorPolicy: 'all',
+  const [createReport, { data, loading }] = useMutation(CREATE_REPORT, {
+    onError: (error) => {
+      dispatch(
+        sendToast({
+          type: 'error',
+          message: error.message,
+        })
+      )
+    },
   })
 
   useEffect(() => {
@@ -42,20 +49,6 @@ const PostView = ({ post }) => {
       )
     }
   }, [data])
-
-  useEffect(() => {
-    if (error) {
-      console.log(error)
-      error.graphQLErrors.forEach((error) =>
-        dispatch(
-          sendToast({
-            type: 'error',
-            message: error?.extensions?.originalError?.message,
-          })
-        )
-      )
-    }
-  }, [error])
 
   const handleReport = () => {
     if (!authUser) {
