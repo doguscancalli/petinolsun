@@ -27,13 +27,13 @@ const SearchNav = () => {
   }
 
   return (
-    <div className='flex items-center mt-8'>
+    <div className='flex items-center gap-2 mt-8'>
       {toggleAdvancedFilter && (
         <Modal>
           <AdvancedFilter setToggleAdvancedFilter={setToggleAdvancedFilter} />
         </Modal>
       )}
-      <div className='max-w-[150px] lg:max-w-[200px] w-full'>
+      <div className='max-w-[200px] w-full'>
         <Select
           options={options}
           onChange={handleType}
