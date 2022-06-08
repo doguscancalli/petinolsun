@@ -1,7 +1,7 @@
 import { AdminLayout, SeoSettings } from '@components/common'
 import { ClientOnly } from '@components/shared'
 import { GET_SEO_SETTINGS } from '@graphql/queries'
-import { apolloClient } from '@utils'
+import { apolloClient, getServerCookie } from '@utils'
 
 const AdminSettings = ({ data }) => {
   return (
@@ -12,7 +12,7 @@ const AdminSettings = ({ data }) => {
 }
 
 export async function getServerSideProps(context) {
-  const token = context?.req?.headers?.cookie?.split('token=')[1]
+  const token = getServerCookie(context, 'token')
 
   const { data } = await apolloClient.query({
     context: { headers: { authorization: `Bearer ${token}` } },

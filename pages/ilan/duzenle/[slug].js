@@ -1,7 +1,7 @@
 import { DefaultLayout, PetEdit } from '@components/common'
 import { Wrapper } from '@components/ui'
 import { GET_PET_POST } from '@graphql/queries'
-import { apolloClient } from '@utils'
+import { apolloClient, getServerCookie } from '@utils'
 import { verify } from 'jsonwebtoken'
 import { ClientOnly } from '@components/shared'
 import { NextSeo } from 'next-seo'
@@ -26,7 +26,7 @@ const EditPetPost = ({ data }) => {
 
 export async function getServerSideProps(context) {
   const { slug } = context.query
-  const token = context?.req?.headers?.cookie?.split('token=')[1]
+  const token = getServerCookie(context, 'token')
 
   const { data } = await apolloClient.query({
     context: { headers: { authorization: `Bearer ${token}` } },

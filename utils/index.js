@@ -9,6 +9,7 @@ import imageUpload from './imageUpload'
 import objectToArray from './objectToArray'
 import isObjectEmpty from './isObjectEmpty'
 import formatLocationOptions from './formatLocationOptions'
+import getServerCookie from './getServerCookie'
 
 export {
   connectDb,
@@ -23,4 +24,5 @@ export {
   objectToArray,
   isObjectEmpty,
   formatLocationOptions,
+  getServerCookie,
 }

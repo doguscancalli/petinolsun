@@ -1,10 +1,11 @@
 import { DefaultLayout, PostEdit } from '@components/common'
 import { Wrapper } from '@components/ui'
-import { apolloClient } from '@utils'
+import { apolloClient, getServerCookie } from '@utils'
 import { verify } from 'jsonwebtoken'
 import { ClientOnly } from '@components/shared'
 import { GET_POST } from '@graphql/queries'
 import { NextSeo } from 'next-seo'
+import { split } from '@apollo/client'
 
 const EditPost = ({ data }) => {
   const { title } = data
@@ -21,7 +22,7 @@ const EditPost = ({ data }) => {
 
 export async function getServerSideProps(context) {
   const { slug } = context.query
-  const token = context?.req?.headers?.cookie?.split('token=')[1]
+  const token = getServerCookie(context, 'token')
 
   const { data } = await apolloClient.query({
     context: { headers: { authorization: `Bearer ${token}` } },
