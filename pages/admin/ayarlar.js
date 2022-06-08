@@ -17,8 +17,10 @@ export async function getServerSideProps(context) {
   const { data } = await apolloClient.query({
     context: { headers: { authorization: `Bearer ${token}` } },
     query: GET_SEO_SETTINGS,
-    errorPolicy: 'all',
     fetchPolicy: 'no-cache',
+    onError: (error) => {
+      console.log(error)
+    },
   })
 
   if (!data) {

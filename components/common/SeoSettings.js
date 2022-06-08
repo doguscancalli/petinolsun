@@ -11,9 +11,16 @@ const SeoSettings = ({ data }) => {
 
   const dispatch = useDispatch()
 
-  const [updateSeoSettings, { data: updateSeoSettingsData, loading, error }] =
+  const [updateSeoSettings, { data: updateSeoSettingsData, loading }] =
     useMutation(UPDATE_SEO_SETTINGS, {
-      errorPolicy: 'all',
+      onError: (error) => {
+        dispatch(
+          sendToast({
+            type: 'error',
+            message: error.message,
+          })
+        )
+      },
     })
 
   useEffect(() => {
@@ -26,19 +33,6 @@ const SeoSettings = ({ data }) => {
       )
     }
   }, [updateSeoSettingsData])
-
-  useEffect(() => {
-    if (error) {
-      error.graphQLErrors.forEach((error) =>
-        dispatch(
-          sendToast({
-            type: 'error',
-            message: error?.extensions?.originalError?.message,
-          })
-        )
-      )
-    }
-  }, [error])
 
   const {
     register,

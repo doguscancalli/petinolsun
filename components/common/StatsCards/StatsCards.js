@@ -1,7 +1,6 @@
 import { useQuery } from '@apollo/client'
 import { sendToast } from '@features/ui/uiSlice'
 import { GET_COUNTS } from '@graphql/queries'
-import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { PulseLoader } from 'react-spinners'
 import StatsCard from './StatsCard'
@@ -9,23 +8,17 @@ import StatsCard from './StatsCard'
 const StatCards = () => {
   const dispatch = useDispatch()
 
-  const { data, loading, error } = useQuery(GET_COUNTS, {
-    errorPolicy: 'all',
+  const { data, loading } = useQuery(GET_COUNTS, {
     fetchPolicy: 'no-cache',
-  })
-
-  useEffect(() => {
-    if (error) {
-      error.graphQLErrors.forEach((error) =>
-        dispatch(
-          sendToast({
-            type: 'error',
-            message: error?.extensions?.originalError?.message,
-          })
-        )
+    onError: (error) => {
+      dispatch(
+        sendToast({
+          type: 'error',
+          message: error.message,
+        })
       )
-    }
-  }, [error])
+    },
+  })
 
   return (
     <ul className='flex gap-4 flex-wrap'>
