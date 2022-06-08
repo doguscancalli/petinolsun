@@ -75,5 +75,11 @@ const PetPostSchema = new mongoose.Schema(
   }
 )
 
+// Cascade delete reports when a pet post is deleted
+PetPostSchema.pre('remove', async function (next) {
+  await this.model('Report').deleteMany({ reportedTopicId: this._id })
+  next()
+})
+
 export default mongoose.models.PetPost ||
   mongoose.model('PetPost', PetPostSchema)
