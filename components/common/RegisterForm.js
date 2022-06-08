@@ -14,8 +14,15 @@ const RegisterForm = () => {
 
   const router = useRouter()
 
-  const [registerUser, { data, loading, error }] = useMutation(REGISTER_USER, {
-    errorPolicy: 'all',
+  const [registerUser, { data, loading }] = useMutation(REGISTER_USER, {
+    onError: (error) => {
+      dispatch(
+        sendToast({
+          type: 'error',
+          message: error.message,
+        })
+      )
+    },
   })
 
   const {
@@ -38,19 +45,6 @@ const RegisterForm = () => {
       router.push('/')
     }
   }, [data])
-
-  useEffect(() => {
-    if (error) {
-      error.graphQLErrors.forEach((error) =>
-        dispatch(
-          sendToast({
-            type: 'error',
-            message: error?.extensions?.originalError?.message,
-          })
-        )
-      )
-    }
-  }, [error])
 
   const onSubmit = async (fields) => {
     await registerUser({ variables: { input: fields } })
@@ -98,7 +92,7 @@ const RegisterForm = () => {
         <Input
           placeholder='Ad Soyad'
           name='name'
-          error={errors?.name || error}
+          error={errors?.name}
           errorMessage={errors?.name?.message}
           disabled={loading}
           {...register('name', { ...validations.name })}
@@ -107,7 +101,7 @@ const RegisterForm = () => {
         <Input
           type='email'
           placeholder='mail@mail.com'
-          error={errors?.email || error}
+          error={errors?.email}
           errorMessage={errors?.email?.message}
           disabled={loading}
           {...register('email', { ...validations.email })}
@@ -117,7 +111,7 @@ const RegisterForm = () => {
         <Input
           placeholder='••••••••'
           type='password'
-          error={errors?.password || error}
+          error={errors?.password}
           errorMessage={errors?.password?.message}
           disabled={loading}
           {...register('password', { ...validations.password })}

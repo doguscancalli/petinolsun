@@ -8,6 +8,7 @@ import {
   validateLoginInput,
   advancedFiltering,
 } from '@utils'
+import { GraphQLYogaError } from '@graphql-yoga/node'
 
 export default {
   Query: {
@@ -23,13 +24,13 @@ export default {
       context.isAuth(context)
       context.isAdmin(context)
       const user = await User.findById(id)
-      if (!user) throw new Error('Kullanıcı bulunamadı')
+      if (!user) throw new GraphQLYogaError('Kullanıcı bulunamadı')
       return user
     },
     me: async (_, __, context) => {
       const { id } = await context.isAuth(context)
       const user = await User.findById(id)
-      if (!user) throw new Error('Kullanıcı bulunamadı')
+      if (!user) throw new GraphQLYogaError('Kullanıcı bulunamadı')
       return user
     },
   },
@@ -40,9 +41,9 @@ export default {
       } = args
       {
         const { valid, errors } = validateRegisterInput(name, email, password)
-        if (!valid) throw new Error(Object.values(errors))
+        if (!valid) throw new GraphQLYogaError(Object.values(errors))
         const user = await User.findOne({ email })
-        if (user) throw new Error('Bu eposta kullanılıyor')
+        if (user) throw new GraphQLYogaError('Bu eposta kullanılıyor')
         const hashedPassword = await bcrypt.hash(password, 12)
         const newUser = new User({
           name,
@@ -63,16 +64,16 @@ export default {
         input: { email, password },
       } = args
       const { errors, valid } = validateLoginInput(email, password)
-      if (!valid) throw new Error(Object.values(errors))
+      if (!valid) throw new GraphQLYogaError(Object.values(errors))
       const user = await User.findOne({ email }).select('+password')
       if (!user) {
         errors.general = 'Kullanıcı bulunamadı'
-        throw new Error(Object.values(errors))
+        throw new GraphQLYogaError(Object.values(errors))
       }
       const match = await bcrypt.compare(password, user.password)
       if (!match) {
         errors.general = 'Kullanıcı bilgileri hatalı'
-        throw new Error(Object.values(errors))
+        throw new GraphQLYogaError(Object.values(errors))
       }
       const token = generateToken(user)
       return {
@@ -86,7 +87,7 @@ export default {
       await context.isAuth(context)
       context.isAdmin(context)
       const user = await User.findById(id)
-      if (!user) throw new Error('Kullanıcı bulunamadı')
+      if (!user) throw new GraphQLYogaError('Kullanıcı bulunamadı')
       await user.remove()
       return true
     },
@@ -105,9 +106,11 @@ export default {
         context
       )
       if (id !== authUserId && !isAuthUserAdmin)
-        throw new Error('Sadece kendi hesabınızı güncelleyebilirsiniz')
+        throw new GraphQLYogaError(
+          'Sadece kendi hesabınızı güncelleyebilirsiniz'
+        )
       const isEmailExist = await User.findOne({ email })
-      if (isEmailExist) throw new Error('Bu eposta kullanılıyor')
+      if (isEmailExist) throw new GraphQLYogaError('Bu eposta kullanılıyor')
       let user
       if (isAuthUserAdmin) {
         user = await User.findByIdAndUpdate(
@@ -118,7 +121,7 @@ export default {
       } else {
         user = await User.findByIdAndUpdate(id, { name, email }, { new: true })
       }
-      if (!user) throw new Error('Kullanıcı bulunamadı')
+      if (!user) throw new GraphQLYogaError('Kullanıcı bulunamadı')
       const token = generateToken(user)
       user.token = token
       return user
@@ -127,7 +130,7 @@ export default {
       const { email } = args
       mail.setApiKey(process.env.SENDGRID_API_KEY)
       const user = await User.findOne({ email })
-      if (!user) throw new Error('Kullanıcı bulunamadı')
+      if (!user) throw new GraphQLYogaError('Kullanıcı bulunamadı')
       const resetToken = nanoid(64)
       user.resetPasswordToken = resetToken
       user.resetPasswordExpire = Date.now() + 10 * 60 * 1000
@@ -143,7 +146,7 @@ export default {
       try {
         await mail.send(data)
       } catch (err) {
-        throw new Error(err)
+        throw new GraphQLYogaError(err)
       }
       return true
     },
@@ -153,7 +156,7 @@ export default {
         resetPasswordToken: token,
         resetPasswordExpire: { $gt: Date.now() },
       })
-      if (!user) throw new Error('Token geçersiz')
+      if (!user) throw new GraphQLYogaError('Token geçersiz')
       const hashedPassword = await bcrypt.hash(password, 12)
       user.password = hashedPassword
       user.resetPasswordToken = undefined
@@ -165,9 +168,9 @@ export default {
       const { password, newPassword } = args
       const { id } = await context.isAuth(context)
       const user = await User.findById(id).select('+password')
-      if (!user) throw new Error('Kullanıcı bulunamadı')
+      if (!user) throw new GraphQLYogaError('Kullanıcı bulunamadı')
       if (!(await bcrypt.compare(password, user.password)))
-        throw new Error('Şifre hatalı')
+        throw new GraphQLYogaError('Şifre hatalı')
       const hashedPassword = await bcrypt.hash(newPassword, 12)
       user.password = hashedPassword
       await user.save()

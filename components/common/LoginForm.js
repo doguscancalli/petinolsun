@@ -14,8 +14,15 @@ const LoginForm = () => {
 
   const router = useRouter()
 
-  const [loginUser, { data, loading, error }] = useMutation(LOGIN_USER, {
-    errorPolicy: 'all',
+  const [loginUser, { data, loading }] = useMutation(LOGIN_USER, {
+    onError: (error) => {
+      dispatch(
+        sendToast({
+          type: 'error',
+          message: error.message,
+        })
+      )
+    },
   })
 
   const {
@@ -38,19 +45,6 @@ const LoginForm = () => {
       router.push('/')
     }
   }, [data])
-
-  useEffect(() => {
-    if (error) {
-      error.graphQLErrors.forEach((error) =>
-        dispatch(
-          sendToast({
-            type: 'error',
-            message: error?.extensions?.originalError?.message,
-          })
-        )
-      )
-    }
-  }, [error])
 
   const validations = {
     email: {
@@ -76,7 +70,7 @@ const LoginForm = () => {
         <Input
           type='email'
           placeholder='mail@mail.com'
-          error={errors?.email || error}
+          error={errors?.email}
           errorMessage={errors?.email?.message}
           disabled={loading}
           {...register('email', { ...validations.email })}
@@ -85,7 +79,7 @@ const LoginForm = () => {
         <Input
           placeholder='••••••••'
           type='password'
-          error={errors?.password || error}
+          error={errors?.password}
           errorMessage={errors?.password?.message}
           disabled={loading}
           {...register('password', { ...validations.password })}
