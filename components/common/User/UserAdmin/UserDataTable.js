@@ -98,6 +98,12 @@ const UserDataTable = () => {
       format: (row) => (row.isAdmin ? 'Evet' : 'Hayır'),
     },
     {
+      name: 'Engellenmiş',
+      selector: (row) => row.isBanned,
+      sortable: true,
+      format: (row) => (row.isBanned ? 'Evet' : 'Hayır'),
+    },
+    {
       name: 'Oluşturulma Tarihi',
       selector: (row) => row.createdAt,
       sortable: true,

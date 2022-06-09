@@ -70,6 +70,10 @@ export default {
         errors.general = 'Kullanıcı bulunamadı'
         throw new GraphQLYogaError(Object.values(errors))
       }
+      if (user.isBanned) {
+        errors.general = 'Hesabınız engellenmiştir'
+        throw new GraphQLYogaError(Object.values(errors))
+      }
       const match = await bcrypt.compare(password, user.password)
       if (!match) {
         errors.general = 'Kullanıcı bilgileri hatalı'
@@ -100,7 +104,7 @@ export default {
     updateUser: async (_, args, context) => {
       const {
         id,
-        input: { name, email, isAdmin },
+        input: { name, email, isAdmin, isBanned },
       } = args
       const { id: authUserId, isAdmin: isAuthUserAdmin } = await context.isAuth(
         context
@@ -115,7 +119,7 @@ export default {
       if (isAuthUserAdmin) {
         user = await User.findByIdAndUpdate(
           id,
-          { name, email, isAdmin },
+          { name, email, isAdmin, isBanned },
           { new: true }
         )
       } else {

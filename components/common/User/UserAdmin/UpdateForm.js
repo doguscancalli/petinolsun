@@ -7,10 +7,10 @@ import { useForm } from 'react-hook-form'
 import { useDispatch } from 'react-redux'
 
 const UpdateForm = ({ data, setToggleModal, refetch }) => {
-  const { id, name, email, isAdmin } = data
+  const { id, name, email, isAdmin, isBanned } = data
   const dispatch = useDispatch()
 
-  const [updateUser, { data: updateUserData, loading, error }] = useMutation(
+  const [updateUser, { data: updateUserData, loading }] = useMutation(
     UPDATE_USER,
     {
       onError: (error) => {
@@ -60,6 +60,7 @@ const UpdateForm = ({ data, setToggleModal, refetch }) => {
           ...(fields.email !== email && { email: fields.email }),
           ...(fields.name !== name && { name: fields.name }),
           ...(fields.isAdmin !== isAdmin && { isAdmin: !!fields.isAdmin }),
+          ...(fields.isBanned !== isBanned && { isBanned: !!fields.isBanned }),
         },
       },
     })
@@ -95,6 +96,14 @@ const UpdateForm = ({ data, setToggleModal, refetch }) => {
         htmlFor='isAdmin'
         disabled={loading}
         {...register('isAdmin')}
+      />
+      <Checkbox
+        defaultValue={isBanned}
+        defaultChecked={isBanned}
+        label='Engellenmiş'
+        htmlFor='isBanned'
+        disabled={loading}
+        {...register('isBanned')}
       />
       <Button loading={loading}>Güncelle</Button>
       <Button

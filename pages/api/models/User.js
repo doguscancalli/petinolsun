@@ -6,6 +6,7 @@ const UserSchema = new mongoose.Schema(
     email: { type: String, trim: true, required: true, unique: true },
     password: { type: String, required: true, select: false },
     isAdmin: { type: Boolean, default: false, required: true },
+    isBanned: { type: Boolean, default: false, required: true },
     resetPasswordToken: String,
     resetPasswordExpire: Date,
   },

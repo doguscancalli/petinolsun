@@ -136,6 +136,7 @@ export const GET_ALL_USERS = gql`
         name
         email
         isAdmin
+        isBanned
         token
         resetPasswordToken
         resetPasswordExpire

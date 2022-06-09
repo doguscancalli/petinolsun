@@ -8,6 +8,7 @@ const UserType = gql`
     name: String!
     email: String!
     isAdmin: Boolean!
+    isBanned: Boolean
     token: String
     resetPasswordToken: String
     resetPasswordExpire: Date
@@ -38,6 +39,7 @@ const UserType = gql`
     name: String
     email: String
     isAdmin: Boolean
+    isBanned: Boolean
   }
   input FilterUsersInput {
     limit: String

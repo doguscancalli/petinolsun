@@ -30,6 +30,7 @@ export const UPDATE_USER = gql`
       name
       email
       isAdmin
+      isBanned
       token
       resetPasswordToken
       resetPasswordExpire

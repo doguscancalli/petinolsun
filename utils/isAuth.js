@@ -24,7 +24,8 @@ export default async (context) => {
   } else {
     throw new GraphQLYogaError('Authorization header must be provided')
   }
-  const isUserExists = await context.User.exists({ _id: user.id })
-  if (!isUserExists) throw new GraphQLYogaError('Kullanıcı bulunamadı')
+  const dbUser = await context.User.findById(user.id)
+  if (!dbUser) throw new GraphQLYogaError('Kullanıcı bulunamadı')
+  if (dbUser.isBanned) throw new GraphQLYogaError('Kullanıcı engellendi')
   return user
 }
