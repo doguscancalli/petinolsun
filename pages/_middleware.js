@@ -12,6 +12,7 @@ export default async function middleware(req) {
     '/admin/ilan',
     '/admin/gonderi',
     '/admin/kullanici',
+    '/admin/ayarlar'
   ]
 
   if (authRoutes.some((r) => url.includes(r))) {
