@@ -2,7 +2,7 @@ import { ClientOnly, Sidebar, Topbar } from '@components/shared'
 import { Wrapper } from '@components/ui'
 import { NextSeo } from 'next-seo'
 
-const DefaultLayout = ({ children }) => {
+const AdminLayout = ({ children }) => {
   return (
     <ClientOnly>
       <NextSeo noindex={true} />
@@ -17,4 +17,4 @@ const DefaultLayout = ({ children }) => {
   )
 }
 
-export default DefaultLayout
+export default AdminLayout
