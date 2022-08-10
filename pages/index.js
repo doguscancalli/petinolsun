@@ -3,7 +3,7 @@ import { ClientOnly } from '@components/shared'
 import { Wrapper } from '@components/ui'
 import { HomeLayout } from '@components/common'
 import { NextSeo } from 'next-seo'
-import Head from 'next/head'
+
 // import { GET_SEO_SETTINGS } from '@graphql/queries'
 // import { apolloClient } from '@utils'
 
@@ -11,12 +11,7 @@ const Home = () => {
   return (
     <ClientOnly>
       <NextSeo title='Anasayfa' />
-      <Head>
-        <meta
-          name='google-site-verification'
-          content='jbM4z371-TE5qzQwLvzSTfju_IIQ-o0dryQgQyUdDkw'
-        />
-      </Head>
+
       <Hero />
       <Wrapper className='flex flex-col gap-16 mt-16'>
         <PetDisplay
