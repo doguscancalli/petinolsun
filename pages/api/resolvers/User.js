@@ -36,10 +36,11 @@ export default {
   },
   Mutation: {
     registerUser: async (_, args) => {
-      const {
+      let {
         input: { name, email, password },
       } = args
       {
+        email = email.toLowerCase()
         const { valid, errors } = validateRegisterInput(name, email, password)
         if (!valid) throw new GraphQLYogaError(Object.values(errors))
         const user = await User.findOne({ email })
@@ -60,9 +61,10 @@ export default {
       }
     },
     loginUser: async (_, args) => {
-      const {
+      let {
         input: { email, password },
       } = args
+      email = email.toLowerCase()
       const { errors, valid } = validateLoginInput(email, password)
       if (!valid) throw new GraphQLYogaError(Object.values(errors))
       const user = await User.findOne({ email }).select('+password')
@@ -102,10 +104,11 @@ export default {
       return true
     },
     updateUser: async (_, args, context) => {
-      const {
+      let {
         id,
         input: { name, email, isAdmin, isBanned },
       } = args
+      email = email.toLowerCase()
       const { id: authUserId, isAdmin: isAuthUserAdmin } = await context.isAuth(
         context
       )
@@ -131,7 +134,8 @@ export default {
       return user
     },
     forgotPassword: async (_, args) => {
-      const { email } = args
+      let { email } = args
+      email = email.toLowerCase()
       mail.setApiKey(process.env.SENDGRID_API_KEY)
       const user = await User.findOne({ email })
       if (!user) throw new GraphQLYogaError('Kullanıcı bulunamadı')
