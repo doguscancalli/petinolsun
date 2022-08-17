@@ -9,6 +9,7 @@ import { isObjectEmpty } from '@utils'
 import { useSelector, useDispatch } from 'react-redux'
 import { setSearchData } from '@features/post/postSlice'
 import { sendToast } from '@features/ui/uiSlice'
+import PostDisplayEmptyState from './PostDisplayEmptyState'
 
 const PostDisplay = ({ className, filters, title, horizontal }) => {
   const [filter, setFilter] = useState('')
@@ -61,7 +62,8 @@ const PostDisplay = ({ className, filters, title, horizontal }) => {
     })
   }
 
-  if (data?.posts?.docs?.length === 0) return null
+  if (data?.posts?.docs?.length === 0)
+    return <PostDisplayEmptyState title={title} />
   return (
     <div className={className}>
       {loading && <PulseLoader size={8} />}

@@ -5,6 +5,7 @@ import { ClientOnly } from '@components/shared'
 import { NextSeo } from 'next-seo'
 import { useSelector } from 'react-redux'
 import { useRouter } from 'next/router'
+import { useEffect } from 'react'
 
 const PostPage = () => {
   const [toggleModal, setToggleModal] = useState(false)
@@ -17,6 +18,12 @@ const PostPage = () => {
     if (!user) return router.push('/giris')
     setToggleModal(true)
   }
+
+  useEffect(() => {
+    router.asPath.split('/gonderi').includes('#new') &&
+      user &&
+      setToggleModal(true)
+  }, [router, user])
 
   return (
     <Wrapper>

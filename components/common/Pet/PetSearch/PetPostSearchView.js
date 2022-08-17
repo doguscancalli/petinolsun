@@ -10,6 +10,7 @@ import { useEffect, useState } from 'react'
 import { PulseLoader } from 'react-spinners'
 import { useRouter } from 'next/router'
 import { isObjectEmpty } from '@utils'
+import PetPostSearchViewEmptyState from './PetPostSearchViewEmptyState'
 
 const PetPostSearchView = () => {
   const [filter, setFilter] = useState({
@@ -67,6 +68,9 @@ const PetPostSearchView = () => {
     <div>
       <SearchNav />
       {loading && <PulseLoader size={8} />}
+      {data?.petPosts?.docs?.length === 0 && !loading && (
+        <PetPostSearchViewEmptyState />
+      )}
       <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-8'>
         {searchData &&
           !loading &&

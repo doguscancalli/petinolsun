@@ -23,6 +23,7 @@ const About = () => {
               <a
                 href='https://www.freepik.com/vectors/magic-forest'
                 target='_blank'
+                rel='noopener noreferrer'
               >
                 Magic forest vector created by upklyak - www.freepik.com
               </a>
@@ -31,6 +32,7 @@ const About = () => {
               <a
                 href='https://www.freepik.com/vectors/cave-background'
                 target='_blank'
+                rel='noopener noreferrer'
               >
                 Cave background vector created by upklyak - www.freepik.com
               </a>
@@ -39,6 +41,7 @@ const About = () => {
               <a
                 href='https://www.freepik.com/vectors/mountain-hiking'
                 target='_blank'
+                rel='noopener noreferrer'
               >
                 Mountain hiking vector created by upklyak - www.freepik.com
               </a>
@@ -47,6 +50,7 @@ const About = () => {
               <a
                 href='https://www.freepik.com/vectors/alien-planet'
                 target='_blank'
+                rel='noopener noreferrer'
               >
                 Alien planet vector created by upklyak - www.freepik.com
               </a>
@@ -55,6 +59,7 @@ const About = () => {
               <a
                 href='https://www.freepik.com/vectors/waterfall-background'
                 target='_blank'
+                rel='noopener noreferrer'
               >
                 Waterfall background vector created by upklyak - www.freepik.com
               </a>
@@ -63,6 +68,7 @@ const About = () => {
               <a
                 href='https://www.freepik.com/vectors/morning-sun'
                 target='_blank'
+                rel='noopener noreferrer'
               >
                 Morning sun vector created by rawpixel.com - www.freepik.com
               </a>
@@ -71,8 +77,39 @@ const About = () => {
               <a
                 href='https://www.freepik.com/vectors/server-error'
                 target='_blank'
+                rel='noopener noreferrer'
               >
                 Server error vector created by storyset - www.freepik.com
+              </a>
+            </li>
+            <li>
+              <a href='https://www.freepik.com/vectors/pup'>
+                Pup vector created by catalyststuff - www.freepik.com
+              </a>
+            </li>
+            <li>
+              <a href='https://www.freepik.com/vectors/lazy-cat'>
+                Lazy cat vector created by catalyststuff - www.freepik.com
+              </a>
+            </li>
+            <li>
+              <a href='https://www.freepik.com/vectors/koala-bear'>
+                Koala bear vector created by catalyststuff - www.freepik.com
+              </a>
+            </li>
+            <li>
+              <a href='https://www.freepik.com/vectors/mascot-design'>
+                Mascot design vector created by catalyststuff - www.freepik.com
+              </a>
+            </li>
+            <li>
+              <a href='https://www.freepik.com/vectors/cartoon-sleep'>
+                Cartoon sleep vector created by catalyststuff - www.freepik.com
+              </a>
+            </li>
+            <li>
+              <a href='https://www.freepik.com/vectors/mascot-design'>
+                Mascot design vector created by catalyststuff - www.freepik.com
               </a>
             </li>
           </ul>

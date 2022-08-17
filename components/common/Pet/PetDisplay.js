@@ -4,6 +4,7 @@ import { GET_ALL_PET_POSTS } from '@graphql/queries'
 import { useDispatch } from 'react-redux'
 import PetDisplayLoading from './PetDisplayLoading'
 import Pets from './Pets'
+import PetDisplayEmptyState from './PetDisplayEmptyState'
 
 const PetDisplay = ({ className, title, infoType, filters }) => {
   const dispatch = useDispatch()
@@ -26,7 +27,9 @@ const PetDisplay = ({ className, title, infoType, filters }) => {
     },
   })
 
-  if (data?.petPosts?.docs?.length === 0) return null
+  if (data?.petPosts?.docs?.length === 0)
+    return <PetDisplayEmptyState title={title} infoType={infoType} />
+
   return (
     <div className={`${className}`}>
       {title && (
