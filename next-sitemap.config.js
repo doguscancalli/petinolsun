@@ -1,7 +1,8 @@
 /** @type {import('next-sitemap').IConfig} */
 const config = {
-  siteUrl: process.env.NEXT_PUBLIC_APP_BASE_URL,
+  siteUrl: 'http://petinolsun.com',
   generateRobotsTxt: true,
+  exclude: ['/404', '/admin', '/admin/*'],
 }
 
 module.exports = config

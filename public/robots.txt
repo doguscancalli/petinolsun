@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: http://petinolsun.com
+
+# Sitemaps
+Sitemap: http://petinolsun.com/sitemap.xml
