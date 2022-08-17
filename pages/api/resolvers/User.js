@@ -108,7 +108,7 @@ export default {
         id,
         input: { name, email, isAdmin, isBanned },
       } = args
-      email = email.toLowerCase()
+      email = email?.toLowerCase()
       const { id: authUserId, isAdmin: isAuthUserAdmin } = await context.isAuth(
         context
       )
