@@ -12,7 +12,7 @@ const PostDisplayEmptyState = ({ title }) => {
         style={{ aspectRatio: '1/.6' }}
       >
         <Image
-          src='/images/sleeping-koala.svg'
+          src='/images/sleeping-panda.svg'
           alt=''
           layout='fill'
           objectFit='contain'
