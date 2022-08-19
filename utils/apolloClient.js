@@ -19,7 +19,6 @@ const authLink = setContext((_, { headers }) => {
 })
 
 export default new ApolloClient({
-  connectToDevTools: isBrowser,
   ssrMode: !isBrowser,
   link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
