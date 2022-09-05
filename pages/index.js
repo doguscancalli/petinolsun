@@ -10,7 +10,7 @@ import { NextSeo } from 'next-seo'
 const Home = () => {
   return (
     <ClientOnly>
-      <NextSeo title='Anasayfa' />
+      <NextSeo title='Evcil hayvan ilanları - Yakınınızdaki köpek, kedi veya diğer hayvanları bulun. Aklınızdaki soruları diğer hayvan severlerle paylaşın.' />
 
       <Hero />
       <Wrapper className='flex flex-col gap-16 mt-16'>
