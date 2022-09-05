@@ -6,6 +6,7 @@ import postReducer from '@features/post/postSlice'
 import commentReducer from '@features/comment/commentSlice'
 
 export const store = configureStore({
+  devTools: process.env.NODE_ENV === 'development',
   reducer: {
     ui: uiReducer,
     auth: authReducer,
